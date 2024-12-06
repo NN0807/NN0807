@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba7f03ed17aa61c40bb8365b638d40b1
+guid: ae19ab3559eac1b428154d1525779c19
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,9 +33,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: offering_idle
-      takeName: offering_idle
-      internalID: -5299723317799980776
+      name: offeringbox_idle
+      takeName: offeringbox_idle
+      internalID: -1944188182482347198
       firstFrame: 1
       lastFrame: 91
       wrapMode: 0
@@ -62,9 +62,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: offering_walk
-      takeName: offering_walk
-      internalID: 4924996937534217483
+      name: offeringbox_walk
+      takeName: offeringbox_walk
+      internalID: 5245795303772167634
       firstFrame: 91
       lastFrame: 150
       wrapMode: 0
@@ -91,9 +91,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: offering_attack
-      takeName: offering_attack
-      internalID: -6152895373021082690
+      name: offeringbox_attack
+      takeName: offeringbox_attack
+      internalID: -5768487450595102871
       firstFrame: 151
       lastFrame: 290
       wrapMode: 0
@@ -120,9 +120,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: offering_hit
-      takeName: offering_hit
-      internalID: 2001119343281705742
+      name: offeringbox_hit
+      takeName: offeringbox_hit
+      internalID: -156727148654943798
       firstFrame: 290
       lastFrame: 320
       wrapMode: 0
