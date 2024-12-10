@@ -57,7 +57,7 @@ public class SlotManager : MonoBehaviour
 
 		// 各リールIDの初期化
 		for (int i = 0; i < 3; i++)
-			reelID[i] = transform.Find("Slots").GetChild(i).GetComponent<SelectSlot>().selectNum;
+			reelID[i] = 3;
 
 		// 各パーツモデルの更新
 		character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]];

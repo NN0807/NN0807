@@ -469,17 +469,17 @@ PrefabInstance:
     - target: {fileID: 562775629513680603, guid: 6c2163d9cdf266c4bb82d6296bf720e8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6
+      value: 0.525
       objectReference: {fileID: 0}
     - target: {fileID: 562775629513680603, guid: 6c2163d9cdf266c4bb82d6296bf720e8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: 562775629513680603, guid: 6c2163d9cdf266c4bb82d6296bf720e8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 562775629513680603, guid: 6c2163d9cdf266c4bb82d6296bf720e8,
         type: 3}
@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 971883015}
   - component: {fileID: 971883014}
   m_Layer: 5
-  m_Name: PunchSlot
+  m_Name: LegSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,14 +784,14 @@ MonoBehaviour:
   Upflg: 0
   Downflg: 0
   spawnSpriteObjectList:
-  - {fileID: 974773891623365169, guid: dce9888cebca1f044992cee6fcc979a3, type: 3}
-  - {fileID: 974773891623365169, guid: 293546d263ef22e4593250f15fb9f0ac, type: 3}
-  - {fileID: 974773891623365169, guid: a1ea491ea958be241a96fa9778648166, type: 3}
-  - {fileID: 974773891623365169, guid: d1899cb04ed8de041a341e14fe954477, type: 3}
-  - {fileID: 974773891623365169, guid: 51dc7b1434054d743a28b8856f77378f, type: 3}
-  - {fileID: 974773891623365169, guid: 4e0f0df645c6fc0468bfe518d1a0d99e, type: 3}
-  - {fileID: 974773891623365169, guid: e0f9421cf4f801d4280b5c68c66bc742, type: 3}
-  - {fileID: 974773891623365169, guid: bdb4c642390b8cc4eaf4386aba7323de, type: 3}
+  - {fileID: 974773891623365169, guid: 342cbba0b1499e645a5299d93dedc3f7, type: 3}
+  - {fileID: 974773891623365169, guid: 8f9d8865649e8e343a9792e15bc62e4e, type: 3}
+  - {fileID: 974773891623365169, guid: 76fab759e4873be4689164932acf3786, type: 3}
+  - {fileID: 974773891623365169, guid: f2cf8422a1635d145b31e5083abf23cb, type: 3}
+  - {fileID: 974773891623365169, guid: d74cdd7f5f97e2b42bec1490c7ca1d3b, type: 3}
+  - {fileID: 974773891623365169, guid: 1f70f3269a45029449feea35845279d3, type: 3}
+  - {fileID: 974773891623365169, guid: b1ca7283b4dc5f345b5f41bece6b87ff, type: 3}
+  - {fileID: 974773891623365169, guid: 9139ecdd7e0d5f646b4919aa1e622769, type: 3}
   SpriteObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 1473191883}
   - component: {fileID: 1473191882}
   m_Layer: 5
-  m_Name: LegSlot
+  m_Name: PunchSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1028,14 +1028,14 @@ MonoBehaviour:
   Upflg: 0
   Downflg: 0
   spawnSpriteObjectList:
-  - {fileID: 974773891623365169, guid: dce9888cebca1f044992cee6fcc979a3, type: 3}
-  - {fileID: 974773891623365169, guid: 293546d263ef22e4593250f15fb9f0ac, type: 3}
-  - {fileID: 974773891623365169, guid: a1ea491ea958be241a96fa9778648166, type: 3}
-  - {fileID: 974773891623365169, guid: d1899cb04ed8de041a341e14fe954477, type: 3}
-  - {fileID: 974773891623365169, guid: 51dc7b1434054d743a28b8856f77378f, type: 3}
-  - {fileID: 974773891623365169, guid: 4e0f0df645c6fc0468bfe518d1a0d99e, type: 3}
-  - {fileID: 974773891623365169, guid: e0f9421cf4f801d4280b5c68c66bc742, type: 3}
-  - {fileID: 974773891623365169, guid: bdb4c642390b8cc4eaf4386aba7323de, type: 3}
+  - {fileID: 974773891623365169, guid: 74776274b74cb5e479400bd3e237c944, type: 3}
+  - {fileID: 974773891623365169, guid: 8e5ed0fdc318a854aaba4849efcd10c7, type: 3}
+  - {fileID: 974773891623365169, guid: bc91b6ccecaad3f40a7947e4659a5d72, type: 3}
+  - {fileID: 974773891623365169, guid: 65003f144d06b3949a0dbbc388ea161c, type: 3}
+  - {fileID: 974773891623365169, guid: c8447aab2f634084ebf979bea2335310, type: 3}
+  - {fileID: 974773891623365169, guid: 38a7bad06135ae940aca792689ea4bef, type: 3}
+  - {fileID: 974773891623365169, guid: d8f50dd82e187474b87c0d42f875e4f4, type: 3}
+  - {fileID: 974773891623365169, guid: 5c1fa5cf1538308468a1bbc0cb34a93f, type: 3}
   SpriteObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -1293,8 +1293,8 @@ RectTransform:
   m_GameObject: {fileID: 1891781394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 662036834}
   - {fileID: 1112682685}
@@ -1304,7 +1304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -517, y: 0}
+  m_AnchoredPosition: {x: -570, y: 70}
   m_SizeDelta: {x: 530, y: 481.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891781396
