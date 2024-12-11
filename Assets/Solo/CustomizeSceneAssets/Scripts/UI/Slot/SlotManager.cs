@@ -4,13 +4,54 @@ using UnityEngine;
 
 public class SlotManager : MonoBehaviour
 {
+	///<summary>データ連携用のテキスト</summary>
+	private static readonly string[,] partsDataText =
+	{
+		// 体テキスト
+		{
+			"TCBody_Animation",
+			"WRBody_Animation",
+			"DBBody_Animation",
+			"TBBody_Animation",
+			"SBBody_Animation",
+			"OBBody_Animation",
+			"SHBody_Animation",
+			"DBody_Animation"
+		},
+
+		// 足テキスト
+		{
+			"TCFoot_Animation",
+			"WRFoot_Animation",
+			"DBFoot_Animation",
+			"TBFoot_Animation",
+			"SBFoot_Animation",
+			"OBFoot_Animation",
+			"SHFoot_Animation",
+			"DFoot_Animation"
+		},
+
+		// パンチテキスト
+		{
+			"TCPunch_Animation",
+			"WRPunch_Animation",
+			"DBPunch_Animation",
+			"TBPunch_Animation",
+			"SBPunch_Animation",
+			"OBPunch_Animation",
+			"SHPunch_Animation",
+			"DPunch_Animation"
+		}
+
+	};
+
 	///<summary>選択スロット</summary>
 	[SerializeField]
 	private SelectSlot selectSlot = default;
 
 	/// <summary>
-	/// 選択されている番号
-	/// 左から１・２・３です。
+	/// 選択されているリール番号
+	/// 左から０・１・２です。
 	/// </summary>
 	[SerializeField]
 	private int selectSlotNum = 0;
@@ -56,8 +97,7 @@ public class SlotManager : MonoBehaviour
 		oldSelectNumber = selectSlotNum;
 
 		// 各リールIDの初期化
-		for (int i = 0; i < 3; i++)
-			reelID[i] = 3;
+		for (int i = 0; i < 3; i++) reelID[i] = 3;
 
 		// 各パーツモデルの更新
 		character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]];
@@ -67,6 +107,13 @@ public class SlotManager : MonoBehaviour
 
 	private void Update()
 	{
+		// 仮にEnterキーでキャラ決定にする
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			// キャラ決定処理
+			SelectComplete();
+		}
+
 		// 選択されているスロットの更新処理
 		selectSlot.SlotItemUpdate();
 
@@ -83,8 +130,8 @@ public class SlotManager : MonoBehaviour
 				UpdateModelFlg = false;
 			}
 		}
-        else
-        {
+		else
+		{
 			UpdateModelFlg = true;
 		}
 
@@ -100,10 +147,9 @@ public class SlotManager : MonoBehaviour
 			// 選択
 			Select();
 		}
-
 	}
 
-	// 選択フレームの移動
+	///<summary>選択フレームの移動</summary> 
 	private void MoveSelectFream()
 	{
 		// 移動先の位置
@@ -125,7 +171,7 @@ public class SlotManager : MonoBehaviour
 		}
 	}
 
-	// 選択
+	///<summary>選択</summary> 
 	private void Select()
 	{
 		// 現在移動中なら受け付けない
@@ -145,7 +191,7 @@ public class SlotManager : MonoBehaviour
 		}
 	}
 
-	// 左側のスロットを選択
+	///<summary>左側のスロットを選択</summary> 
 	private void SelectLeftSlot()
 	{
 		// 一番左のリール選択中なら処理しない
@@ -155,7 +201,7 @@ public class SlotManager : MonoBehaviour
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
 	}
 
-	// 右側のスロット選択
+	///<summary>右側のスロット選択</summary> 
 	private void SelectRightSlot()
 	{
 		// 一番右のリール選択中なら処理しない
@@ -165,7 +211,7 @@ public class SlotManager : MonoBehaviour
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
 	}
 
-	// 各パーツモデルの更新
+	///<summary>各パーツモデルの更新</summary> 
 	private void UpdatePartsModel()
 	{
 		//各パーツの更新
@@ -190,8 +236,25 @@ public class SlotManager : MonoBehaviour
 
 		// パンチモデルを変更した場合は攻撃アニメーション再生
 		if(selectSlotNum == (int)reelType.punch)
-        {
+		{
 			character.StartAttackAnimation();
-        }
+		}
+	}
+
+	///<summary>キャラ決定</summary> 
+	private void SelectComplete()
+	{
+		// 選択されたパーツ文字列をデータに保存
+		SavePartsData();
+
+		// TODO:画面遷移処理（のちに追加）
+	}
+
+	///<summary>選択されたパーツ文字列をデータに保存</summary>
+	private void SavePartsData()
+	{
+		GameData.bodySelectPartsName = partsDataText[selectSlotNum,reelID[(int)reelType.body]];
+		GameData.legSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.leg]];
+		GameData.punchSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.punch]];
 	}
 }
