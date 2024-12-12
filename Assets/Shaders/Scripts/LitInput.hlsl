@@ -2,6 +2,7 @@
 #define CUSTOM_LIT_INPUT_INCLUDED
 
 TEXTURE2D(_BaseMap);
+TEXTURE2D(_AlphaMap);
 TEXTURE2D(_MetallicGlossMap);
 TEXTURE2D(_NormalMap);
 TEXTURE2D(_DetailNormalMap);
@@ -21,6 +22,8 @@ SAMPLER(sampler_DFGMultiScatteringLUT);
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseMap_ST)
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
+    UNITY_DEFINE_INSTANCED_PROP(float4, _Alpha)
+    UNITY_DEFINE_INSTANCED_PROP(float, _AlphaLevel)
     UNITY_DEFINE_INSTANCED_PROP(float, _Metallic)
     UNITY_DEFINE_INSTANCED_PROP(float, _Roughness)
     UNITY_DEFINE_INSTANCED_PROP(float, _ClearCoatStrength)
@@ -43,15 +46,31 @@ float4 GetBaseColor()
     return INPUT_PROP(_BaseColor);
 }
 
+float4 GetAlphaParam()
+{
+    return INPUT_PROP(_AlphaLevel);
+}
+
 float4 GetBase(float2 uv)
 {
     return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
+}
+
+float4 GetAlpha(float2 uv)
+{
+    return SAMPLE_TEXTURE2D(_AlphaMap, sampler_BaseMap, uv);
 }
 
 float2 TransformBaseUV(float2 baseUV)
 {
     float4 baseST = INPUT_PROP(_BaseMap_ST);
     return baseUV * baseST.xy + baseST.zw;
+}
+
+float2 TransformAlphaUV(float2 alphaUV)
+{
+    float4 AlphaST = INPUT_PROP(_Alpha);
+    return alphaUV * AlphaST.xy + AlphaST.zw;
 }
 
 float2 TransformDetailUV (float2 detailUV) {

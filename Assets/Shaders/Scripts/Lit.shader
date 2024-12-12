@@ -5,7 +5,9 @@ Shader "CustomPBR/Lit"
         [MainTexture] _BaseMap ("Albedo(RGB)", 2D) = "white" {}
         [MainColor]   _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
         
-    	
+        [AlphaTexture] _AlphaMap("Alpha(A)", 2D) = "white" {}
+        _AlphaLevel("Alpha Level", Range(0.0, 1.0)) = 0.5
+
     	[NoScaleOffset] _MetallicGlossMap ("Metallic(B) Roughness(G)", 2D) = "white" {}
         _Metallic ("Metallic", Range(0.0, 1.0)) = 1
         
@@ -79,17 +81,25 @@ Shader "CustomPBR/Lit"
         
         Tags 
         {
-        	"RenderType"="Opaque"
+            "Queue" = "Transparent"
+            "RenderType" = "Transparent"
+        	//"RenderType"="Opaque"
             "RenderPipeline"="UniversalPipeline"
         }
         
         Pass
         {
+            //Name "Lit"
+            //Tags { "LightMode"="UniversalForward" }
+            //
+            //Blend [_SrcBlend] [_DstBlend]
+            //ZWrite [_ZWrite]
+
             Name "Lit"
-            Tags { "LightMode"="UniversalForward" }
-            
-            Blend [_SrcBlend] [_DstBlend]
-            ZWrite [_ZWrite]
+            Tags { "LightMode" = "UniversalForward" }
+
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
             
             HLSLPROGRAM
             #pragma target 4.6

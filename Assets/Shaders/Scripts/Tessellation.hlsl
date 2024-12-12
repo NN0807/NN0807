@@ -9,6 +9,7 @@ struct TessellationControlPoint
 {
     float4 positionOS : INTERNALTESSPOS;
     float2 baseUV     : TEXCOORD0;
+    float2 alphaUV     : TEXCOORD1;
     float4 normalOS : NORMAL;
     float4 tangentOS : TANGENT;
     LIGHTMAP_UV_ATTRIBUTE
@@ -70,6 +71,7 @@ Varyings MyDomainProgram (TessellationFactors factors, OutputPatch<TessellationC
     Attributes data;
     MY_DOMAIN_PROGRAM_INTERPOLATE(positionOS);
     MY_DOMAIN_PROGRAM_INTERPOLATE(baseUV);
+    MY_DOMAIN_PROGRAM_INTERPOLATE(alphaUV);
     MY_DOMAIN_PROGRAM_INTERPOLATE(normalOS);
     MY_DOMAIN_PROGRAM_INTERPOLATE(tangentOS);
     #ifdef LIGHTMAP_ON
@@ -83,6 +85,7 @@ TessellationControlPoint MyTessellationVertexProgram (Attributes input) {
     TessellationControlPoint p;
     p.positionOS = input.positionOS;
     p.baseUV = input.baseUV;
+    p.alphaUV = input.alphaUV;
     p.normalOS = input.normalOS;
     p.tangentOS = input.tangentOS;
     TRANSFER_LIGHTMAP_DATA(input, p);

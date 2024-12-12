@@ -17,9 +17,10 @@
 struct Attributes
 {
     float4 positionOS : POSITION;
-    float2 baseUV     : TEXCOORD0;
+    float2 baseUV     : TEXCOORD01;
+    float2 alphaUV    : TEXCOORD02;
     float4 normalOS   : NORMAL;
-    float4 tangentOS : TANGENT;
+    float4 tangentOS  : TANGENT;
     LIGHTMAP_UV_ATTRIBUTE
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
@@ -28,11 +29,12 @@ struct Varyings
 {
     float4 positionCS  : SV_POSITION;
     float2 baseUV      : TEXCOORD0;
-    float2 detailUV    : TEXCOORD1;
-    float3 positionWS  : TEXCOORD2;
-    float3 normalWS    : TEXCOORD3;
-    float4 tangentWS   : TEXCOORD4;
-    float3 bitangentWS : TEXCOORD5;
+    float2 alphaUV     : TEXCOORD1;
+    float2 detailUV    : TEXCOORD2;
+    float3 positionWS  : TEXCOORD3;
+    float3 normalWS    : TEXCOORD4;
+    float4 tangentWS   : TEXCOORD5;
+    float3 bitangentWS : TEXCOORD6;
     LIGHTMAP_UV_VARYINGS
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
@@ -45,6 +47,7 @@ Varyings LitPassVertex(Attributes input)
     VertexPositionInputs positionInputs = GetVertexPositionInputs(input.positionOS.xyz);
     output.positionCS = positionInputs.positionCS;
     output.baseUV = TransformBaseUV(input.baseUV);
+    output.alphaUV = TransformAlphaUV(input.alphaUV);
     output.detailUV = TransformDetailUV(input.baseUV);
     output.positionWS = positionInputs.positionWS;
 
@@ -74,8 +77,12 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
         input.baseUV = ParallaxMapping(GetHeight(input.baseUV), viewDir);
     #endif
     
-    half4 baseMap = GetBase(input.baseUV);
-    float4 baseColor = baseMap * GetBaseColor();
+    half4  baseMap     = GetBase(input.baseUV);
+    float4 baseColor   = baseMap * GetBaseColor();
+
+    half4  AlphaMap    = GetAlpha(input.baseUV);
+    //float4 AlphaColor  = baseMap * GetAlphaParam();
+    float4 AlphaColor  = AlphaMap * GetAlphaParam();
 
     #if defined(_ALPHATEST_ON)
         clip(baseColor.a - GetCutoff());
@@ -115,7 +122,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
     luminance += surface.emission;
     
     // clamping brightness to 100 to avoid undesirable oversize blooming effect
-    return float4(clamp(luminance, 0.0, 100.0), 1.0);
+    return float4(clamp(luminance, 0.0, 100.0), AlphaColor.a);
 }
 
 #endif
