@@ -6,7 +6,7 @@ Shader "CustomPBR/Lit"
         [MainColor]   _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
         
         [AlphaTexture] _AlphaMap("Alpha(A)", 2D) = "white" {}
-        _AlphaLevel("Alpha Level", Range(0.0, 1.0)) = 0.5
+        _AlphaLevel("Alpha Level", Range(0.0, 2.0)) = 1.0
 
     	[NoScaleOffset] _MetallicGlossMap ("Metallic(B) Roughness(G)", 2D) = "white" {}
         _Metallic ("Metallic", Range(0.0, 1.0)) = 1
@@ -99,8 +99,9 @@ Shader "CustomPBR/Lit"
             Tags { "LightMode" = "UniversalForward" }
 
             Blend SrcAlpha OneMinusSrcAlpha
-            ZWrite Off
-            
+            //ZWrite Off
+            ZWrite[_ZWrite]
+
             HLSLPROGRAM
             #pragma target 4.6
             #pragma shader_feature _MULTISCATTERING

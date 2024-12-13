@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class PartsList : MonoBehaviour
 {
+    // リスト構造体
+    [System.Serializable]
+    public struct PartsListStruct
+    {
+        [OverwriteLabel("モデルプレハブ")]
+        public GameObject ModelPrefab;
+        [OverwriteLabel("パーツ名スプライト")]
+        public Sprite textNameSprite;
+    }
+
     ///<summary>体リスト</summary>
     [SerializeField]
-    public GameObject[] bodyList;
+    public PartsListStruct[] bodyList;
 
     ///<summary>足リスト</summary>
     [SerializeField]
-    public GameObject[] legList;
+    public PartsListStruct[] legList;
 
     ///<summary>パンチリスト</summary>
     [SerializeField]
-    public GameObject[] punchList;
+    public PartsListStruct[] punchList;
 }

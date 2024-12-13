@@ -54,7 +54,7 @@ public class SlotManager : MonoBehaviour
 	/// 左から０・１・２です。
 	/// </summary>
 	[SerializeField]
-	private int selectSlotNum = 0;
+	public int selectSlotNum = 0;
 
 	///<summary>古い選択番号</summary>
 	[SerializeField]
@@ -100,9 +100,9 @@ public class SlotManager : MonoBehaviour
 		for (int i = 0; i < 3; i++) reelID[i] = 3;
 
 		// 各パーツモデルの更新
-		character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]];
-		character.legPrefab = partsList.GetComponent<PartsList>().legList[reelID[selectSlotNum]];
-		character.punchPrefab = partsList.GetComponent<PartsList>().punchList[reelID[selectSlotNum]];
+		character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]].ModelPrefab;
+		character.legPrefab = partsList.GetComponent<PartsList>().legList[reelID[selectSlotNum]].ModelPrefab;
+		character.punchPrefab = partsList.GetComponent<PartsList>().punchList[reelID[selectSlotNum]].ModelPrefab;
 	}
 
 	private void Update()
@@ -218,17 +218,17 @@ public class SlotManager : MonoBehaviour
 		// 体
 		if (selectSlotNum == (int)reelType.body)
 		{
-			character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]];
+			character.bodyPrefab = partsList.GetComponent<PartsList>().bodyList[reelID[selectSlotNum]].ModelPrefab;
 		}
 		// 足
 		else if (selectSlotNum == (int)reelType.leg)
 		{
-			character.legPrefab = partsList.GetComponent<PartsList>().legList[reelID[selectSlotNum]];
+			character.legPrefab = partsList.GetComponent<PartsList>().legList[reelID[selectSlotNum]].ModelPrefab;
 		}
 		// パンチ
 		else if(selectSlotNum == (int)reelType.punch)
 		{
-			character.punchPrefab = partsList.GetComponent<PartsList>().punchList[reelID[selectSlotNum]];
+			character.punchPrefab = partsList.GetComponent<PartsList>().punchList[reelID[selectSlotNum]].ModelPrefab;
 		}
 
 		// モデル変更

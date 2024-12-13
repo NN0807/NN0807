@@ -6,11 +6,17 @@ public class Scroll : MonoBehaviour
 {
     ///<summary>生成するスクロール画像プレハブ</summary>
     [SerializeField]
+    [OverwriteLabel("スクロール画像プレハブ")]
     private GameObject ScrollPrefab = null;
 
     ///<summary>生成している画像オブジェクト</summary>
-    [SerializeField]
+    [HideInInspector]
     private GameObject[] ScrollObject = new GameObject[2];
+
+    ///<summary>スクロールスピード</summary>
+    [SerializeField]
+    [OverwriteLabel("スクロールスピード")]
+    private float scrollSpeed = 0f;
 
     private void Awake()
     {
@@ -37,7 +43,7 @@ public class Scroll : MonoBehaviour
         // 画像をスクロール
         for (int i = 0; i < 2; i++)
         {
-            ScrollObject[i].transform.localPosition -= new Vector3(2f, 0f, 0f);
+            ScrollObject[i].transform.localPosition -= new Vector3(1f * scrollSpeed, 0f, 0f);
         }
     }
 

@@ -20,17 +20,17 @@ public class Character : MonoBehaviour
 	[StartFolding("アニメーション")]
 	[OverwriteLabel("体アニメーション")]
 	[SerializeField]
-	public Animator bodyAnime;		// 体
+	public Animator bodyAnime;      // 体
 
 	[OverwriteLabel("足アニメーション")]
 	[SerializeField]
-	public Animator legAnime;		// 足
+	public Animator legAnime;       // 足
 
 	[EndFolding]
 	[OverwriteLabel("パンチアニメーション")]
 	[SerializeField]
-	public Animator punchAnime;		// パンチ
-	
+	public Animator punchAnime;     // パンチ
+
 	///<summary>同体(箱)プレハブ</summary>
 	[StartFolding("プレハブ")]
 	[OverwriteLabel("体プレハブ")]
@@ -85,6 +85,9 @@ public class Character : MonoBehaviour
 
 		// パンチモデルをアニメーションに合わせてスケーリング
 		PunchScaleByAnim();
+
+		// 攻撃アニメーション時にパンチモデルを視認しやすくするためスローにする処理
+		SlowAnimation();
 	}
 
 	///<summary>攻撃アニメーション再生</summary>
@@ -200,11 +203,11 @@ public class Character : MonoBehaviour
 	void DestroyAllParts()
 	{
 		// 子供がいなければ処理しない
-		if(gameObject.transform.childCount == 0)
+		if (gameObject.transform.childCount == 0)
 		{ return; }
 
 		// 子供オブジェクトの数を取得し、逆順に削除
-		for(int i = gameObject.transform.childCount - 1; i >= 0; i--)
+		for (int i = gameObject.transform.childCount - 1; i >= 0; i--)
 		{
 			Destroy(gameObject.transform.GetChild(i).gameObject);
 		}
@@ -252,6 +255,35 @@ public class Character : MonoBehaviour
 				{
 					punch.transform.localScale = new Vector3(0f, 0f, 0f);
 				}
+			}
+		}
+	}
+
+	///<summary>攻撃アニメーションをスローにする</summary>
+	void SlowAnimation()
+	{
+		// パンチモデルがある場合のみ処理
+		if (punch != null)
+		{
+			// アニメーションフラグ取得
+			AnimationFlg animeFlg = punch.transform.GetChild(0).GetComponent<AnimationFlg>();
+			// アニメーションフラグが立っていたら
+			if (animeFlg.startSlowAnimationFlg)
+			{
+				bodyAnime.speed *= 0.25f;
+				legAnime.speed *= 0.25f;
+				punchAnime.speed *= 0.25f;
+
+				animeFlg.startSlowAnimationFlg = false;
+			}
+			
+			if(animeFlg.endSlowAnimationFlg)
+			{
+				bodyAnime.speed *= 4f;
+				legAnime.speed *= 4f;
+				punchAnime.speed *= 4f;
+
+				animeFlg.endSlowAnimationFlg = false;
 			}
 		}
 	}
