@@ -253,8 +253,18 @@ public class SlotManager : MonoBehaviour
 	///<summary>選択されたパーツ文字列をデータに保存</summary>
 	private void SavePartsData()
 	{
-		GameData.bodySelectPartsName = partsDataText[selectSlotNum,reelID[(int)reelType.body]];
-		GameData.legSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.leg]];
-		GameData.punchSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.punch]];
+		// staticを使ったデータ受け渡し
+		//GameData.bodySelectPartsName = partsDataText[selectSlotNum,reelID[(int)reelType.body]];
+		//GameData.legSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.leg]];
+		//GameData.punchSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.punch]];
+
+		// PlayerPrefsを使ったデータ受け渡し
+		// キーと値をセット
+		PlayerPrefs.SetInt("body", reelID[(int)reelType.body]);
+		PlayerPrefs.SetInt("leg", reelID[(int)reelType.leg]);
+		PlayerPrefs.SetInt("punch", reelID[(int)reelType.punch]);
+
+		// 保存
+		PlayerPrefs.Save();
 	}
 }

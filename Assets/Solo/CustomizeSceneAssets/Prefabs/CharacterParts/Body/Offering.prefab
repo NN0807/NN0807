@@ -94,7 +94,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 56aa5f8686a759d4db4ae256641f52e9, type: 2}
+      objectReference: {fileID: 2100000, guid: 16695597af88fd44ca5c92a54ad8385a, type: 2}
     - target: {fileID: 919132149155446097, guid: ae19ab3559eac1b428154d1525779c19,
         type: 3}
       propertyPath: m_Name
@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationFlg: 0
+  startSlowAnimationFlg: 0
+  endSlowAnimationFlg: 0
 --- !u!95 &6228605051558633408
 Animator:
   serializedVersion: 5
