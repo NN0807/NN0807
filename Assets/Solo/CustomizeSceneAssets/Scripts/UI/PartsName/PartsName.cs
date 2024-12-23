@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class PartsName : MonoBehaviour
 {
-    ///<summary>表示するテキストイメージ</summary>
-    [SerializeField]
-    [OverwriteLabel("表示するテキストイメージ")]
-    private Image textImage = null;
+	///<summary>表示するテキストイメージ</summary>
+	[SerializeField]
+	[OverwriteLabel("表示するテキストイメージ")]
+	private Image textImage = null;
 
-    ///<summary>スロットマネージャー</summary>
-    [SerializeField]
-    [OverwriteLabel("スロットマネージャー")]
-    private SlotManager slotManager = null;
+	///<summary>スロットマネージャー</summary>
+	[SerializeField]
+	[OverwriteLabel("スロットマネージャー")]
+	private SlotManager slotManager = null;
 
-    private void Awake()
-    {
-        TryGetComponent(out textImage);
-    }
+	private void Awake()
+	{
+		TryGetComponent(out textImage);
+	}
 
-    private void Update()
-    {
+	private void Update()
+	{
 		// パーツごとの表示名更新
 		// 体
 		if (slotManager.selectSlotNum == (int)SlotManager.reelType.body)

@@ -34,8 +34,8 @@ public class SelectSlot : MonoBehaviour
 	[SerializeField]
 	public int selectNum = 0;
 
-    private void Awake()
-    {
+	private void Awake()
+	{
 		// 表示物の生成
 		SpawnSprite();
 
