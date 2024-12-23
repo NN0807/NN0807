@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class CustomizeCharacter : MonoBehaviour
 {
 	///<summary>足の付け根リグ名</summary>
 	public const string legRigName = "leg_All";

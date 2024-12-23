@@ -85,7 +85,7 @@ public class SlotManager : MonoBehaviour
 
 	///<summary>キャラクタースクリプト</summary> 
 	[SerializeField]
-	public Character character;
+	public CustomizeCharacter character;
 
 	///<summary>モデル更新フラグ</summary>>
 	[SerializeField]
