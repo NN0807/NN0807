@@ -155,7 +155,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: da127f871e14ad84ba53a3db1f287ade, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 39c0923581c05f740bf417be7f70ee9b, type: 2}
 --- !u!4 &55444475
 Transform:
   m_ObjectHideFlags: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 23f2d5b9ffa18e34aab7eab6d12f88d8, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}

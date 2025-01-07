@@ -80,10 +80,11 @@ Shader "Unlit/Water_Surface"
             }
 
             // 最終出力処理
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
                 // UVスクロール処理
                 float2 scroll = float2(_ScrollSpeedX, _ScrollSpeedY) * _Time;
+                //float2 scroll = float2(0.0f,0.0f);
 
                 // ノーマルマップから法線情報を取得する
                 float3 localNormal = UnpackNormalWithScale(tex2D(_BumpMap, i.uv + scroll), _BumpScale);

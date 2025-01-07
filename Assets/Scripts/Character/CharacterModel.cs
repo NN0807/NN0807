@@ -1,0 +1,176 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using Common;
+
+public class CharacterModel : MonoBehaviour
+{
+    // 全脚部パーツ
+    [SerializeField]
+    public GameObject[] LegModels    = new GameObject[CharacterConst.CONST_MODEL_NUM];
+
+    // 全体部パーツ
+    [SerializeField]
+    public GameObject[] BodyModels   = new GameObject[CharacterConst.CONST_MODEL_NUM];
+
+    // 全武器パーツ
+    [SerializeField]
+    public GameObject[] WeaponModels = new GameObject[CharacterConst.CONST_MODEL_NUM];
+
+    // 各パーツオブジェクト変数
+    private GameObject Leg    = default;
+    private GameObject Body   = default;
+    private GameObject Weapon = default;
+
+    // 各ジョイントの検索結果を保存しておく変数
+    private GameObject LegJoint    = default;
+    private GameObject BodyJoint1  = default;
+    private GameObject BodyJoint2  = default;
+    private GameObject WeaponJoint = default;
+
+    // 各部位を生成し、初期化
+    public void GenerateAndRegisterParts(CharacterManager manager)
+    {
+        // 脚部、体部、武器を 生成 & 登録
+        Leg    = Instantiate(LegModels[0],    new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
+        Body   = Instantiate(BodyModels[0],   new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
+        Weapon = Instantiate(WeaponModels[0], new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
+        Weapon.transform.localScale = new Vector3(0f, 0f, 0f);
+        manager.RegisterPart(Leg);
+        manager.RegisterPart(Body);
+        manager.RegisterPart(Weapon);
+    }
+
+    public void ModelUpdate(CharacterManager manager)
+    {
+        // モデルパーツ接続
+        ModelConnection();
+        // 武器の拡縮値更新
+        WeaponScaleUpdate(manager);
+    }
+
+    void ModelConnection()
+    {
+        // 体と足
+        {
+            // 子ノードをタグで検索  　　　検索済か？　　　　　　　　　検索                      保存データ
+            GameObject LegTargetNode  = LegJoint   == null ? FindChildWithTag(Leg, "LegJoint") : LegJoint;
+            GameObject BodyTargetNode = BodyJoint1 == null ? FindChildWithTag(Body,"LegJoint") : BodyJoint1;
+
+            if (LegTargetNode != null && BodyTargetNode != null)
+            {
+                // 何度も検索を行うと処理負荷につながる為、保存しておく。
+                LegJoint   = LegTargetNode;
+                BodyJoint1 = BodyTargetNode;
+
+                // 接続ボーンのワールド座標を取得
+                Vector3 worldPosition  = LegJoint.transform.position;
+                Vector3 worldPosition2 = BodyJoint1.transform.position;
+
+                // 2つの接続点のベクトルを算出する
+                Vector3 Vec = new Vector3(
+                    worldPosition.x - worldPosition2.x,
+                    worldPosition.y - worldPosition2.y,
+                    worldPosition.z - worldPosition2.z
+                );
+
+                // 接続
+                Body.transform.position = Body.transform.position + Vec;
+
+                // 回転
+                Body.transform.rotation = Leg.transform.rotation;
+            }
+            else
+            {
+                Debug.LogError("指定したタグの子ノードが見つかりませんでした");
+            }
+        }
+
+        // 体と武器
+        {
+            // 子ノードをタグで検索  　　　検索済か？　　　　　　　　　検索                               保存データ
+            GameObject BodyTargetNode   = BodyJoint2  == null ? FindChildWithTag(Body,  "WeaponJoint") : BodyJoint2;
+            GameObject WeaponTargetNode = WeaponJoint == null ? FindChildWithTag(Weapon,"WeaponJoint") : WeaponJoint;
+
+            if (WeaponTargetNode != null && BodyTargetNode != null)
+            {
+                // 何度も検索を行うと処理負荷につながる為、保存しておく。
+                BodyJoint2  = BodyTargetNode;
+                WeaponJoint = WeaponTargetNode;
+
+                // 接続ボーンのワールド座標を取得
+                Vector3 worldPosition  = BodyJoint2.transform.position;
+                Vector3 worldPosition2 = WeaponJoint.transform.position;
+
+                // 2つの接続点のベクトルを算出する
+                Vector3 Vec = new Vector3(
+                    worldPosition.x - worldPosition2.x,
+                    worldPosition.y - worldPosition2.y,
+                    worldPosition.z - worldPosition2.z
+                );
+
+                // 接続
+                Weapon.transform.position = Weapon.transform.position + Vec;
+
+                // 回転
+                Weapon.transform.rotation = Leg.transform.rotation;
+            }
+            else
+            {
+                Debug.LogError("指定したタグの子ノードが見つかりませんでした");
+            }
+        }
+    }
+
+    // 武器の拡縮値更新処理
+    void WeaponScaleUpdate(CharacterManager manager)
+    {
+        // アニメーションフラグが立っていたら
+        if (manager.GetAnimationEvent())
+        {
+            // ラープでスケールを徐々に大きく
+            Weapon.transform.localScale = Vector3.Lerp(Weapon.transform.localScale, new Vector3(3f, 3f, 3f), Time.deltaTime * 15f);
+        }
+        else
+        {
+            // ラープでスケールを徐々に小さく
+            if (Weapon.transform.localScale.x > 0.01f)
+            {
+                Weapon.transform.localScale = Vector3.Lerp(Weapon.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 15f);
+            }
+            else
+            {
+                Weapon.transform.localScale = new Vector3(0f, 0f, 0f);
+            }
+        }
+    }
+
+    // ギズモ
+    void OnDrawGizmos()
+    {
+        if (LegJoint != null)
+        {
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawWireSphere(LegJoint.transform.position, 0.02f);
+        }
+
+    }
+
+    // 子ノードをタグで再帰的に検索
+    GameObject FindChildWithTag(GameObject parent, string tag)
+    {
+        // 子オブジェクトを探索
+        foreach (Transform child in parent.transform)
+        {
+            if (child.CompareTag(tag)) return child.gameObject;
+
+            // 再帰的に探索
+            GameObject result = FindChildWithTag(child.gameObject, tag);
+            if (result != null)return result;
+        }
+
+        return null;
+    }
+}
