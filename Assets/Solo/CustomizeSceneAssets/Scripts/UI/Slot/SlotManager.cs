@@ -106,9 +106,30 @@ public class SlotManager : MonoBehaviour
 	}
 
 	private void Update()
-	{
-		// 仮にEnterキーでキャラ決定にする
-		if (Input.GetKeyDown(KeyCode.Return))
+    {
+		// 上下移動中ではなく
+        if (!selectSlot.Upflg && !selectSlot.Downflg)
+        {
+			// 仮にWキー
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+				// 上へ移動
+                selectSlot.Upflg = true;
+				// 矢印を光らせる
+				selectFream.transform.Find("UpArrow").GetComponent<BloomController>().triggerParam.trigger = true;
+            }
+			// 仮にSキー
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+				// 下へ移動
+                selectSlot.Downflg = true;
+				// 矢印を光らせる
+				selectFream.transform.Find("DownArrow").GetComponent<BloomController>().triggerParam.trigger = true;
+			}
+		}
+
+        // 仮にEnterキーでキャラ決定にする
+        if (Input.GetKeyDown(KeyCode.Return))
 		{
 			// キャラ決定処理
 			SelectComplete();

@@ -182,8 +182,7 @@ public class SelectSlot : MonoBehaviour
 		}
 		else
 		{
-			if (Input.GetKeyDown(KeyCode.W)) Upflg = true;
-			if (Input.GetKeyDown(KeyCode.S)) Downflg = true;
+
 		}
 	}
 }
