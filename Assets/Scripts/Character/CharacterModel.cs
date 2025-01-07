@@ -33,9 +33,9 @@ public class CharacterModel : MonoBehaviour
     public void GenerateAndRegisterParts(CharacterManager manager)
     {
         // ‹r•”A‘Ì•”A•Ší‚ğ ¶¬ & “o˜^
-        Leg    = Instantiate(LegModels[0],    new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
-        Body   = Instantiate(BodyModels[0],   new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
-        Weapon = Instantiate(WeaponModels[0], new Vector3(0.0f, 3.5f, 0.0f), Quaternion.identity, this.transform);
+        Leg    = Instantiate(LegModels[0],    new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, this.transform);
+        Body   = Instantiate(BodyModels[0],   new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, this.transform);
+        Weapon = Instantiate(WeaponModels[0], new Vector3(0.0f, 0.5f, 0.0f), Quaternion.identity, this.transform);
         Weapon.transform.localScale = new Vector3(0f, 0f, 0f);
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
