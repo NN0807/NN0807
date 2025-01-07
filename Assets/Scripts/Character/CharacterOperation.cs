@@ -1,66 +1,106 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // Input System関連のAPI
+using UnityEngine.InputSystem;
+
+using Common;
 
 public class CharacterOperation : MonoBehaviour
 {
-    private HakopanControls inputActions;
+    // 入力処理
+    [SerializeField]
+    private HakopanControls _InputActions;
 
-    Rigidbody rb;
-    float speed = 3.0f;
-    [SerializeField] float moveSpeed = 2f;
-    private float horizontalInput, verticalInput;
+    [SerializeField]
+    private float _HorizontalInput = 0.0f;
+    [SerializeField]
+    private float _VerticalInput   = 0.0f;
 
-    private const float RotateSpeed = 900f;
+    // コントローラー振動フラグ
+    [SerializeField]
+    private bool VibrationFlag = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        inputActions = new HakopanControls();
-        inputActions.Enable();
-
-        rb = GetComponent<Rigidbody>();
-
-        
+        _InputActions = new HakopanControls();
+        _InputActions.Enable();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OperationUpdate(CharacterManager manager)
     {
-        var inputMoveAxis = inputActions.Player.Move.ReadValue<Vector2>();
-        horizontalInput = inputMoveAxis.x;
-        verticalInput = inputMoveAxis.y;
-        if (inputActions.Player.Fire.triggered)
+        // 攻撃
+        if (_InputActions.Player.Fire.triggered)
         {
-            Debug.Log("ファイヤー");
+            manager.SetAnimations(AnimationType.Attack);
         }
 
-        if (inputActions.Player.Pause.triggered)
+        // 移動
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f)
         {
-            Debug.Log("ポーズ");
+            manager.SetAnimations(AnimationType.Idle);
         }
 
-
-        // カメラの方向から、X-Z平面の単位ベクトルを取得
-        Vector3 CameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-        // 方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = CameraForward * verticalInput + Camera.main.transform.right * horizontalInput;
-        // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
-        rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
-        // キャラクターの向きを進行方向に
-        if (moveForward != Vector3.zero)
+        // 移動
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f)
         {
-            Quaternion from = transform.rotation;
-            Quaternion to = Quaternion.LookRotation(moveForward);
-            transform.rotation = Quaternion.RotateTowards(from, to, RotateSpeed * Time.deltaTime);
+            manager.SetAnimations(AnimationType.Walk);
+        }
+
+        // ポーズ
+        if (_InputActions.Player.Pause.triggered)
+        {
 
         }
     }
 
-    // 当たった時に呼ばれる関数
-    void OnCollisionEnter(Collision collision)
+    // イベント登録をCharacterOperation内で行う
+    public void RegisterColliderEvent(CharacterCollider collider)
     {
-        Debug.Log("Hit"); // ログを表示する
+        // イベントに関数を登録
+        collider.CollisionEFKStayEvent += GamePadStartVibration;
+        collider.CollisionEFKExitEvent += GamePadEndVibration;
+    }
+
+    // ゲームパッドの振動開始
+    public void GamePadStartVibration()
+    {
+        // デバイスがゲームパッド(コントローラー)の時だけ処理
+        Gamepad gamepad = Gamepad.current;
+        if (gamepad != null && !VibrationFlag) 
+        {
+            gamepad.SetMotorSpeeds(1.0f, 1.0f);
+            VibrationFlag = true;
+        }
+    }
+
+    // ゲームパッドの振動終了
+    public void GamePadEndVibration()
+    {
+        // デバイスがゲームパッド(コントローラー)の時だけ処理
+        Gamepad gamepad = Gamepad.current;
+        if (gamepad != null && VibrationFlag) 
+        {
+            gamepad.SetMotorSpeeds(0.0f, 0.0f);
+            VibrationFlag = false;
+        }
+    }
+
+    // 十字キー又は左スティックの上下方向の入力値を取得
+    public float GetHorizontalInput()
+    {
+        // 十字キー又は左スティックの入力値を取得
+        var InputMoveAxis = _InputActions.Player.Move.ReadValue<Vector2>();
+        _HorizontalInput = InputMoveAxis.x;
+        return _HorizontalInput;
+    }
+
+    // 十字キー又は左スティックの左右方向の入力値を取得
+    public float GetVerticalInput()
+    {
+        // 十字キー又は左スティックの入力値を取得
+        var InputMoveAxis = _InputActions.Player.Move.ReadValue<Vector2>();
+        _VerticalInput = InputMoveAxis.y;
+        return _VerticalInput;
     }
 }

@@ -2,17 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMove : MonoBehaviour
+public class CharacterMove : MonoBehaviour,ICharacterPart
 {
-    // Start is called before the first frame update
-    void Start()
+    // データアセット
+    public CharacterParamAsset characterParamAsset;
+
+    // 前方方向
+    private Vector3 MoveForward;
+
+    // 剛体
+    [SerializeField]
+    private Rigidbody _rigidbody;
+
+    public void Initialize(CharacterManager manager)
     {
-        
+        Debug.Log("CharacterCollider 初期化");
+        _rigidbody = GetComponent<Rigidbody>();
+        characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
+
+        MoveForward = Vector3.zero;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdatePart(CharacterManager manager)
     {
-        
+        Debug.Log("CharacterCollider　更新処理");
+
+        // 移動
+        Move(manager);
+
+        // 旋回
+        Turn();
     }
+
+    // 移動処理
+    private void Move(CharacterManager manager)
+    {
+        // カメラの方向から、X-Z平面の単位ベクトルを取得
+        Vector3 CameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+
+        // 方向キーの入力値とカメラの向きから、移動方向を決定
+        MoveForward = CameraForward * manager.GetVerticalInput() +
+            Camera.main.transform.right * manager.GetHorizontalInput();
+
+        // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す
+        _rigidbody.velocity = MoveForward * characterParamAsset.MoveSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+    }
+
+    // 旋回処理
+    private void Turn()
+    {
+        // キャラクターの向きを進行方向に
+        if (MoveForward != Vector3.zero)
+        {
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.LookRotation(MoveForward);
+            transform.rotation = Quaternion.Lerp(from, to, characterParamAsset.RotateSpeed * Time.deltaTime);
+        }
+    }     
 }
