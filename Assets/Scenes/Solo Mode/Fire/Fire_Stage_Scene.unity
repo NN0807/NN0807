@@ -7599,6 +7599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 2134525912}
   _characterOperation: {fileID: 2134525914}
+  _characterNumber: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
