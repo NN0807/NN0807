@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e9b529cc47dc0f44d8033ef801068ea4
+guid: 01b872b4df4cfa5449dcdd4f7e99c690
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -96,6 +96,35 @@ ModelImporter:
       internalID: -2172318086761431700
       firstFrame: 151
       lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: treasurebox_hit
+      takeName: treasurebox_hit
+      internalID: 787813866478961927
+      firstFrame: 290
+      lastFrame: 320
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

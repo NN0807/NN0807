@@ -8,18 +8,30 @@ public class CharacterManager : MonoBehaviour
 {
     // モデルスクリプト
     [SerializeField]
+<<<<<<< HEAD
     public CharacterModel     _characterModel;
+=======
+    public CharacterModel _characterModel;
+>>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
     // 操作スクリプト
     [SerializeField]
     public CharacterOperation _characterOperation;
     // 移動スクリプト
+<<<<<<< HEAD
     private CharacterMove     _characterMove;
+=======
+    private CharacterMove _characterMove;
+>>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
 
     // 生成されたキャラクターパーツ登録用リスト
     private List<ICharacterPart> characterParts = new List<ICharacterPart>();
 
     // コライダー登録用リスト
+<<<<<<< HEAD
     private List<CharacterCollider>  colliders   = new List<CharacterCollider>(); 
+=======
+    private List<CharacterCollider> colliders = new List<CharacterCollider>();
+>>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
     // アニメーション登録用リスト
     private List<CharacterAnimation> animations  = new List<CharacterAnimation>();
 
@@ -33,7 +45,11 @@ public class CharacterManager : MonoBehaviour
     void Start()
     {
         // CharacterModelにパーツ生成を指示
+<<<<<<< HEAD
         _characterModel?.GenerateAndRegisterParts(this, _characterNumber);
+=======
+        _characterModel.GenerateAndRegisterParts(this, _characterNumber);
+>>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
 
         // コライダーイベントを設定
         RegisterCollidersEvent();
