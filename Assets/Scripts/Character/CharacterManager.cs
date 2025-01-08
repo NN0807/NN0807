@@ -6,59 +6,42 @@ using Common;
 
 public class CharacterManager : MonoBehaviour
 {
-    // ƒ‚ƒfƒ‹ƒXƒNƒŠƒvƒg
+    // ãƒ¢ãƒ‡ãƒ«ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     [SerializeField]
-<<<<<<< HEAD
     public CharacterModel     _characterModel;
-=======
-    public CharacterModel _characterModel;
->>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
-    // ‘€ìƒXƒNƒŠƒvƒg
+    // æ“ä½œã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     [SerializeField]
     public CharacterOperation _characterOperation;
-    // ˆÚ“®ƒXƒNƒŠƒvƒg
-<<<<<<< HEAD
+    // ç§»å‹•ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     private CharacterMove     _characterMove;
-=======
-    private CharacterMove _characterMove;
->>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
 
-    // ¶¬‚³‚ê‚½ƒLƒƒƒ‰ƒNƒ^[ƒp[ƒc“o˜^—pƒŠƒXƒg
-    private List<ICharacterPart> characterParts = new List<ICharacterPart>();
-
-    // ƒRƒ‰ƒCƒ_[“o˜^—pƒŠƒXƒg
-<<<<<<< HEAD
+    // ç”Ÿæˆã•ã‚ŒãŸã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãƒ‘ãƒ¼ãƒ„ç™»éŒ²ç”¨ãƒªã‚¹ãƒˆ
+    private List<ICharacterPart> characterParts  = new List<ICharacterPart>();
+    // ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ç™»éŒ²ç”¨ãƒªã‚¹ãƒˆ
     private List<CharacterCollider>  colliders   = new List<CharacterCollider>(); 
-=======
-    private List<CharacterCollider> colliders = new List<CharacterCollider>();
->>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
-    // ƒAƒjƒ[ƒVƒ‡ƒ““o˜^—pƒŠƒXƒg
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç™»éŒ²ç”¨ãƒªã‚¹ãƒˆ
     private List<CharacterAnimation> animations  = new List<CharacterAnimation>();
 
-    // ƒLƒƒƒ‰ƒNƒ^[”Ô†(Player‚Í"0" Enemy‚Í"1`3")
-    // ƒCƒ“ƒXƒyƒNƒ^[‘¤‚Åİ’è
-    // ¦¶¬ˆÊ’u‚ğŒˆ‚ß‚éˆ×‚Ég‚¤
+    // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ç•ªå·(Playerã¯"0" Enemyã¯"1ï½3")
+    // ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼å´ã§è¨­å®š
+    // â€»ç”Ÿæˆä½ç½®ã‚’æ±ºã‚ã‚‹ç‚ºã«ä½¿ã†
     [SerializeField]
     public int _characterNumber = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        // CharacterModel‚Éƒp[ƒc¶¬‚ğw¦
-<<<<<<< HEAD
+        // CharacterModelã«ãƒ‘ãƒ¼ãƒ„ç”Ÿæˆã‚’æŒ‡ç¤º
         _characterModel?.GenerateAndRegisterParts(this, _characterNumber);
-=======
-        _characterModel.GenerateAndRegisterParts(this, _characterNumber);
->>>>>>> 13eac9b5a4e511597ad99283e019505976c7e0ab
 
-        // ƒRƒ‰ƒCƒ_[ƒCƒxƒ“ƒg‚ğİ’è
+        // ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¨­å®š
         RegisterCollidersEvent();
     }
 
-    // ƒp[ƒc“o˜^
+    // ãƒ‘ãƒ¼ãƒ„ç™»éŒ²
     public void RegisterPart(GameObject part)
     {
-        // ‘SƒLƒƒƒ‰ƒNƒ^[ƒXƒNƒŠƒvƒg‚ğ‰Šú‰»
+        // å…¨ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’åˆæœŸåŒ–
         var characterPart = part.GetComponent<ICharacterPart>();
         if (characterPart != null)
         {
@@ -66,7 +49,7 @@ public class CharacterManager : MonoBehaviour
             characterPart.Initialize(this);
         }
 
-        // ŠeíƒLƒƒƒ‰ƒNƒ^[ƒXƒNƒŠƒvƒg‚ğæ“¾‚µ‚ÄƒŠƒXƒg‚É’Ç‰Á
+        // å„ç¨®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å–å¾—ã—ã¦ãƒªã‚¹ãƒˆã«è¿½åŠ 
         var collider  = part.GetComponent<CharacterCollider>();
         if (collider  != null)    colliders.Add(collider);
         var animation = part.GetComponent<CharacterAnimation>();
@@ -78,7 +61,7 @@ public class CharacterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // XV
+        // æ›´æ–°
         foreach (var part in characterParts)
         {
             part.UpdatePart(this);
@@ -88,29 +71,29 @@ public class CharacterManager : MonoBehaviour
         _characterOperation?.OperationUpdate(this);
     }
 
-    // Šeíƒp[ƒc‚ÌŒ»İ‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒXƒe[ƒg‚ğæ“¾‚·‚é
+    // å„ç¨®ãƒ‘ãƒ¼ãƒ„ã®ç¾åœ¨ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
     public string GetCurrentAnimations()
     {
-        // 0”Ô(‹r•”)‚ÌƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ğæ“¾
+        // 0ç•ª(è„šéƒ¨)ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åã‚’å–å¾—
         string _firstAnimation = animations[0].GetCurrentAnimation();
 
         foreach (var animator in animations)
         {
-            // ŠeAnimator‚ÌƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ğæ“¾
+            // å„Animatorã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åã‚’å–å¾—
             string _currentAnimation = animator.GetCurrentAnimation();
 
-            // ˆê“x‚Å‚àˆÙ‚È‚éƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ª‚ ‚ê‚Î "None" ‚ğ•Ô‚·
+            // ä¸€åº¦ã§ã‚‚ç•°ãªã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åãŒã‚ã‚Œã° "None" ã‚’è¿”ã™
             if (_currentAnimation != _firstAnimation)
             {
                 return "None";
             }
         }
 
-        // ‘Sˆõˆê’v‚µ‚½ê‡A‚»‚ÌƒAƒjƒ[ƒVƒ‡ƒ“–¼‚ğ•Ô‚·
+        // å…¨å“¡ä¸€è‡´ã—ãŸå ´åˆã€ãã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åã‚’è¿”ã™
         return _firstAnimation;
     }
 
-    // ŠeíƒXƒNƒŠƒvƒg‚ÉƒRƒ‰ƒCƒ_[‚ğ’Ê’m‚µ‚ÄƒCƒxƒ“ƒg‚ğ“o˜^
+    // å„ç¨®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’é€šçŸ¥ã—ã¦ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™»éŒ²
     private void RegisterCollidersEvent()
     {
         foreach (var collider in colliders)
@@ -120,7 +103,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“‹N“®
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³èµ·å‹•
     public void SetAnimations(AnimationType animationType)
     {
         foreach (var animation in animations)
