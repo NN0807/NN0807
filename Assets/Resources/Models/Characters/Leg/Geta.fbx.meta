@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ff665d3aa6987d469de6311ad4a647c
+guid: 278e8145a7db60f49af7bf036686332f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,9 +33,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: glassshoes_idle
-      takeName: glassshoes_idle
-      internalID: -6826629393296866186
+      name: geta_idle
+      takeName: geta_idle
+      internalID: -6010752815708787585
       firstFrame: 1
       lastFrame: 91
       wrapMode: 0
@@ -62,9 +62,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: glassshoes_walk
-      takeName: glassshoes_walk
-      internalID: 3158986044230117644
+      name: geta_walk
+      takeName: geta_walk
+      internalID: -3422574176185967695
       firstFrame: 91
       lastFrame: 150
       wrapMode: 0
@@ -91,9 +91,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: glassshoes_attack
-      takeName: glassshoes_attack
-      internalID: -4722932991237761521
+      name: geta_attack
+      takeName: geta_attack
+      internalID: 9026496378519570023
       firstFrame: 151
       lastFrame: 290
       wrapMode: 0
@@ -120,9 +120,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: glassshoes_hit
-      takeName: glassshoes_hit
-      internalID: -7924418427207142228
+      name: geta_hit
+      takeName: geta_hit
+      internalID: 8558131852460051919
       firstFrame: 290
       lastFrame: 320
       wrapMode: 0

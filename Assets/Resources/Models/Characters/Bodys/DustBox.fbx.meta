@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ff665d3aa6987d469de6311ad4a647c
+guid: 2691f8ee21d1e734a8a58d7c36dd2a29
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,9 +33,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: glassshoes_idle
-      takeName: glassshoes_idle
-      internalID: -6826629393296866186
+      name: dustbox_idle
+      takeName: dustbox_idle
+      internalID: -4072249226987062025
       firstFrame: 1
       lastFrame: 91
       wrapMode: 0
@@ -62,9 +62,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: glassshoes_walk
-      takeName: glassshoes_walk
-      internalID: 3158986044230117644
+      name: dustbox_walk
+      takeName: dustbox_walk
+      internalID: 7994896874050839206
       firstFrame: 91
       lastFrame: 150
       wrapMode: 0
@@ -91,9 +91,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: glassshoes_attack
-      takeName: glassshoes_attack
-      internalID: -4722932991237761521
+      name: dustbox_attack
+      takeName: dustbox_attack
+      internalID: 3723680839535617080
       firstFrame: 151
       lastFrame: 290
       wrapMode: 0
@@ -120,9 +120,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: glassshoes_hit
-      takeName: glassshoes_hit
-      internalID: -7924418427207142228
+      name: dustbox_hit
+      takeName: dustbox_hit
+      internalID: -2203073593660855024
       firstFrame: 290
       lastFrame: 320
       wrapMode: 0
