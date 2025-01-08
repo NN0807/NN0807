@@ -22,18 +22,23 @@ public class BloomController : MonoBehaviour
 	///<summary>ブルームの光らせ方種別</summary>
 	public enum BloomType
 	{
-		None = 0,	// 無し
+		Normal = 0,	// 無し
 		Flash,		// 点滅
 		Trigger,	// １度だけ
 	}
 	[SerializeField]
 	public BloomType bloomType = default;
 
-    // 点滅時のパラメーター
-    [System.Serializable]
+	// 通常時のパラメーター
+	[SerializeField]
 	[HideInInspector]
-    public class BaseParam
-    {
+	public float bloomIntensity = 0.0f;
+
+	// 点滅時のパラメーター
+	[System.Serializable]
+	[HideInInspector]
+	public class BaseParam
+	{
 		// 点滅速度
 		[HideInInspector]
 		public float speed = 1.0f;
@@ -43,7 +48,7 @@ public class BloomController : MonoBehaviour
 		// 点滅の最大
 		[HideInInspector]
 		public float factorMax = 0.5f;
-    }
+	}
 	[SerializeField]
 	[HideInInspector]
 	public BaseParam baseParam = new BaseParam();
@@ -52,7 +57,7 @@ public class BloomController : MonoBehaviour
 	[System.Serializable]
 	[HideInInspector]
 	public class TriggerParam : BaseParam
-    {
+	{
 		[HideInInspector]
 		public bool trigger = false;
 
@@ -77,6 +82,10 @@ public class BloomController : MonoBehaviour
 		// 処理分岐
 		switch(bloomType)
 		{
+			// 通常
+			case BloomType.Normal:
+				Normal();
+			break;
 			// 点滅
 			case BloomType.Flash:
 				Flash();
@@ -90,8 +99,14 @@ public class BloomController : MonoBehaviour
 		ImageGlow.EmissionColor = new Color(emission.r * factor, emission.g * factor, emission.b * factor);
 	}
 
+	// 通常処理
+	private void Normal()
+	{
+		factor = bloomIntensity;
+	}
+
 	// 点滅処理
-	void Flash()
+	private void Flash()
 	{
 		// 点滅速度が０を下回らないように制御
 		if (baseParam.speed < 0f) baseParam.speed = 0f;
@@ -108,19 +123,19 @@ public class BloomController : MonoBehaviour
 		factor = value;
 	}
 
-    // １回だけ点灯
-    private void Trigger()
-    {
+	// １回だけ点灯
+	private void Trigger()
+	{
 		// フラグが立っていないなら処理しない
-        if(triggerParam.trigger == false) return;
+		if(triggerParam.trigger == false) return;
 
 		// 反転制御
 		if(triggerParam.flip == false)
-        {
+		{
 			factor += Time.deltaTime * triggerParam.speed;
-        }
+		}
 		else if(triggerParam.flip)
-        {
+		{
 			factor -= Time.deltaTime * triggerParam.speed;
 		}
 
@@ -136,4 +151,7 @@ public class BloomController : MonoBehaviour
 			factor = 0f;
 		}
 	}
+
+	// パラメーター全初期化
+
 }

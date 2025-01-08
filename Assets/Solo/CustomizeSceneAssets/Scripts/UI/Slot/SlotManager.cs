@@ -1,9 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SlotManager : MonoBehaviour
 {
+	///<summary>入力処理</summary>
+	[SerializeField]
+	private CustomizeSceneController inputActions;
+
 	///<summary>データ連携用のテキスト</summary>
 	private static readonly string[,] partsDataText =
 	{
@@ -91,8 +96,22 @@ public class SlotManager : MonoBehaviour
 	[SerializeField]
 	public bool UpdateModelFlg = false;
 
+	/// <summary>
+	/// ゲームパッド振動
+	/// </summary>
+	[SerializeField]
+	public GamepadVibration gamepadVibration;
+
 	private void Awake()
 	{
+		// ゲームパッド振動スクリプト取得
+		TryGetComponent<GamepadVibration>(out gamepadVibration);
+
+		// 入力処理初期化
+		inputActions = new CustomizeSceneController();
+		inputActions.Enable();
+
+		// 選択されているスロットを取得
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
 		oldSelectNumber = selectSlotNum;
 
@@ -106,33 +125,34 @@ public class SlotManager : MonoBehaviour
 	}
 
 	private void Update()
-    {
+	{
 		// 上下移動中ではなく
-        if (!selectSlot.Upflg && !selectSlot.Downflg)
-        {
-			// 仮にWキー
-            if (Input.GetKeyDown(KeyCode.W))
-            {
+		if (!selectSlot.Upflg && !selectSlot.Downflg)
+		{
+			if (inputActions.UI.Move.ReadValue<Vector2>().y > 0.5f)
+			{
 				// 上へ移動
-                selectSlot.Upflg = true;
+				selectSlot.Upflg = true;
 				// 矢印を光らせる
 				selectFream.transform.Find("UpArrow").GetComponent<BloomController>().triggerParam.trigger = true;
-            }
-			// 仮にSキー
-            if (Input.GetKeyDown(KeyCode.S))
-            {
+			}
+			if (inputActions.UI.Move.ReadValue<Vector2>().y < -0.5f)
+			{
 				// 下へ移動
-                selectSlot.Downflg = true;
+				selectSlot.Downflg = true;
 				// 矢印を光らせる
 				selectFream.transform.Find("DownArrow").GetComponent<BloomController>().triggerParam.trigger = true;
 			}
 		}
 
-        // 仮にEnterキーでキャラ決定にする
-        if (Input.GetKeyDown(KeyCode.Return))
+		// 決定・戻る処理
+		if(inputActions.UI.Decision.triggered)
 		{
-			// キャラ決定処理
 			SelectComplete();
+		}
+		if(inputActions.UI.Back.triggered)
+		{
+			BackScene();
 		}
 
 		// 選択されているスロットの更新処理
@@ -196,17 +216,17 @@ public class SlotManager : MonoBehaviour
 	private void Select()
 	{
 		// 現在移動中なら受け付けない
-		if (selectSlot.Upflg) return;
+		if (selectSlot.Upflg) return; 
 		if (selectSlot.Downflg) return;
 
 		// 右に移動
-		if (Input.GetKeyDown(KeyCode.D))
+		if (inputActions.UI.Move.ReadValue<Vector2>().x > 0.5f)
 		{
 			SelectRightSlot();
 		}
 
 		// 左に移動
-		if(Input.GetKeyDown(KeyCode.A))
+		if(inputActions.UI.Move.ReadValue<Vector2>().x < -0.5f)
 		{
 			SelectLeftSlot();
 		}
@@ -262,11 +282,21 @@ public class SlotManager : MonoBehaviour
 		}
 	}
 
-	///<summary>キャラ決定</summary> 
-	private void SelectComplete()
+	///<summary>戻る</summary>
+	public void BackScene()
 	{
+		// デバッグ
+		Debug.Log("ひとつ前のシーンに戻る");
+	}
+
+	///<summary>キャラ決定</summary> 
+	public void SelectComplete()
+	{
+		// デバッグ表示
+		Debug.Log("キャラ決定");
+
 		// 選択されたパーツ文字列をデータに保存
-		SavePartsData();
+		// SavePartsData();
 
 		// TODO:画面遷移処理（のちに追加）
 	}
