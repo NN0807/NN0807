@@ -11,6 +11,7 @@ public class CharacterOperation : MonoBehaviour
     [SerializeField]
     private HakopanControls _InputActions;
 
+    // 入力方向数値
     [SerializeField]
     private float _HorizontalInput = 0.0f;
     [SerializeField]
@@ -18,7 +19,12 @@ public class CharacterOperation : MonoBehaviour
 
     // コントローラー振動フラグ
     [SerializeField]
-    private bool VibrationFlag = false;
+    private bool _vibrationFlag = false;
+
+    // 攻撃フラグ
+    // ※攻撃ボタンを何度も押すのを防ぐ＆攻撃中に移動するのを防ぐ
+    [SerializeField]
+    public bool _attackFlag    = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,21 +36,25 @@ public class CharacterOperation : MonoBehaviour
     public void OperationUpdate(CharacterManager manager)
     {
         // 攻撃
-        if (_InputActions.Player.Fire.triggered)
+        if (_InputActions.Player.Fire.triggered && (manager.GetCurrentAnimations() == "Walk"
+            || manager.GetCurrentAnimations() == "Idle"))  
         {
             manager.SetAnimations(AnimationType.Attack);
+            //_attackFlag = true;
         }
 
-        // 移動
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f)
+        // 待機
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && manager.GetCurrentAnimations() != "None") 
         {
             manager.SetAnimations(AnimationType.Idle);
+            //_attackFlag = false;
         }
 
         // 移動
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f)
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f  && manager.GetCurrentAnimations() != "None") 
         {
             manager.SetAnimations(AnimationType.Walk);
+           // _attackFlag = false;
         }
 
         // ポーズ
@@ -67,10 +77,10 @@ public class CharacterOperation : MonoBehaviour
     {
         // デバイスがゲームパッド(コントローラー)の時だけ処理
         Gamepad gamepad = Gamepad.current;
-        if (gamepad != null && !VibrationFlag) 
+        if (gamepad != null && !_vibrationFlag) 
         {
             gamepad.SetMotorSpeeds(1.0f, 1.0f);
-            VibrationFlag = true;
+            _vibrationFlag = true;
         }
     }
 
@@ -79,10 +89,10 @@ public class CharacterOperation : MonoBehaviour
     {
         // デバイスがゲームパッド(コントローラー)の時だけ処理
         Gamepad gamepad = Gamepad.current;
-        if (gamepad != null && VibrationFlag) 
+        if (gamepad != null && _vibrationFlag) 
         {
             gamepad.SetMotorSpeeds(0.0f, 0.0f);
-            VibrationFlag = false;
+            _vibrationFlag = false;
         }
     }
 

@@ -5,21 +5,53 @@ using System;
 
 public class CharacterCollider : MonoBehaviour, ICharacterPart
 {
+    // データアセット
+    public CharacterParamAsset characterParamAsset;
+
+    // マネージャー
+    private CharacterManager _characterManager;
+
+    // CharacterMoveから前方方向を取得し、保存する変数
+    private Vector3 MoveForward;
+
     // 衝突中(Effect)イベント
     public event Action CollisionEFKStayEvent;
     // 衝突終(Effect)イベント
     public event Action CollisionEFKExitEvent;
+    // 衝突中(攻撃)  イベント
+    public event Action<Vector3, float> CollisionAttackEnterEvent;
 
     public void Initialize(CharacterManager manager)
     {
         Debug.Log("CharacterCollider 初期化");
+        // マネージャー登録
+        _characterManager = manager;
+        // データアセット設定
+       characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
+        // 変数初期化
+        MoveForward = Vector3.zero;
     }
 
     public void UpdatePart(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider　更新処理");
+        Debug.Log("CharacterCollider 更新処理");
+
+        // 自身の前方方向を取得
+        MoveForward = manager.GetMoveForward();
     }
 
+    // 当たった時に呼ばれる関数
+    void OnCollisionEnter(Collision collision)
+    {
+        // 武器と衝突したら
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Debug.Log("攻撃を受けました");
+
+            // イベント発火
+            CollisionEFKStayEvent?.Invoke();
+        }
+    }
 
     // 当たっている間に呼ばれる関数
     void OnCollisionStay(Collision collision)
@@ -44,6 +76,18 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
 
             // イベント発火
             CollisionEFKExitEvent?.Invoke();
+        }
+    }
+
+    // 当たった時に呼ばれる関数(Trigger版)
+    void OnTriggerEnter(Collider collision)
+    {
+        // Enemy(Player)と衝突したら
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) 
+        {
+            Debug.Log("攻撃が衝突しました");
+            // イベント発火
+            CollisionAttackEnterEvent?.Invoke(MoveForward,characterParamAsset.Attack);
         }
     }
 }

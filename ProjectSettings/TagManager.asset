@@ -8,6 +8,8 @@ TagManager:
   - WeaponJoint
   - Effect
   - BodyJoint
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

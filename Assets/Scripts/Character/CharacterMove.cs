@@ -17,9 +17,12 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     public void Initialize(CharacterManager manager)
     {
         Debug.Log("CharacterCollider 初期化");
+
+        // データ設定
         _rigidbody = GetComponent<Rigidbody>();
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
+        // 変数初期化
         MoveForward = Vector3.zero;
     }
 
@@ -58,5 +61,22 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
             Quaternion to = Quaternion.LookRotation(MoveForward);
             transform.rotation = Quaternion.Lerp(from, to, characterParamAsset.RotateSpeed * Time.deltaTime);
         }
-    }     
+    }
+
+    // 衝撃処理
+    private void Impulse(Vector3 forward, float attack)
+    {
+        // 吹っ飛ばす
+        _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
+    }
+
+    // イベント登録をCharacterMove内で行う
+    public void RegisterColliderEvent(CharacterCollider collider)
+    {
+        // イベントに関数を登録
+        collider.CollisionAttackEnterEvent += Impulse;
+    }
+
+    // 前方方向取得関数
+    public Vector3 GetMoveForward() { return MoveForward; }
 }

@@ -17,6 +17,10 @@ public class CharacterParamAsset : ScriptableObject
     // ‰ñ“]‘¬“x
     [SerializeField]
     public float RotateSpeed;
+
+    // UŒ‚—Í
+    [SerializeField]
+    public float Attack;
 }
 
 [System.Serializable]
