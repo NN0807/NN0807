@@ -6,148 +6,149 @@ using Common;
 
 public class CharacterModel : MonoBehaviour
 {
-    // ‘S‹r•”ƒp[ƒc
+    // å…¨è„šéƒ¨ãƒ‘ãƒ¼ãƒ„
     [SerializeField]
     public GameObject[] LegModels    = new GameObject[CharacterConst.CONST_MODEL_NUM];
 
-    // ‘S‘Ì•”ƒp[ƒc
+    // å…¨ä½“éƒ¨ãƒ‘ãƒ¼ãƒ„
     [SerializeField]
     public GameObject[] BodyModels   = new GameObject[CharacterConst.CONST_MODEL_NUM];
 
-    // ‘S•Šíƒp[ƒc
+    // å…¨æ­¦å™¨ãƒ‘ãƒ¼ãƒ„
     [SerializeField]
     public GameObject[] WeaponModels = new GameObject[CharacterConst.CONST_MODEL_NUM];
 
-    // Šeƒp[ƒcƒIƒuƒWƒFƒNƒg•Ï”
+    // å„ãƒ‘ãƒ¼ãƒ„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå¤‰æ•°
     private GameObject Leg    = default;
     private GameObject Body   = default;
     private GameObject Weapon = default;
 
-    // ŠeƒWƒ‡ƒCƒ“ƒg‚ÌŒŸõŒ‹‰Ê‚ğ•Û‘¶‚µ‚Ä‚¨‚­•Ï”
+    // å„ã‚¸ãƒ§ã‚¤ãƒ³ãƒˆã®æ¤œç´¢çµæœã‚’ä¿å­˜ã—ã¦ãŠãå¤‰æ•°
     private GameObject LegJoint    = default;
     private GameObject BodyJoint1  = default;
     private GameObject BodyJoint2  = default;
     private GameObject WeaponJoint = default;
 
-    // Še•”ˆÊ‚ğ¶¬‚µA‰Šú‰»
+    // å„éƒ¨ä½ã‚’ç”Ÿæˆã—ã€åˆæœŸåŒ–
     public void GenerateAndRegisterParts(CharacterManager manager, int characterNumber)
     {
-        // ƒJƒXƒ^ƒ}ƒCƒYƒV[ƒ“‚Å‘I‘ğ‚µ‚½Šeƒp[ƒc”Ô†‚ğ“Ç‚İ‚Ş
-        // ƒL[–¼ubody,leg,punchv‚Ì’l‚ğƒ[ƒh‚·‚éBƒf[ƒ^‚ª‘¶İ‚µ‚È‚¢ê‡u0v‚ğ•Ô‚·
-        // ¦ƒZ[ƒuˆ—@SlotManager.cs 284s–Ú
-        // ƒL[–¼‚ÌŒã‚Åw’è‚µ‚Ä‚¢‚é‚Ì‚ÍAƒf[ƒ^‚ª‘¶İ‚µ‚È‚©‚Á‚½ê‡‚ÌƒfƒtƒHƒ‹ƒg’l
+        // ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã‚·ãƒ¼ãƒ³ã§é¸æŠã—ãŸå„ãƒ‘ãƒ¼ãƒ„ç•ªå·ã‚’èª­ã¿è¾¼ã‚€
+        // ã‚­ãƒ¼åã€Œbody,leg,punchã€ã®å€¤ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã€‚ãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã—ãªã„å ´åˆã€Œ0ã€ã‚’è¿”ã™
+        // â€»ã‚»ãƒ¼ãƒ–å‡¦ç†ã€€SlotManager.cs 284è¡Œç›®
+        // ã‚­ãƒ¼åã®å¾Œã§æŒ‡å®šã—ã¦ã„ã‚‹ã®ã¯ã€ãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã—ãªã‹ã£ãŸå ´åˆã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
         var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
         var _legNumber    = PlayerPrefs.GetInt("leg",   0);
         var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
 
 
-        // ‹r•”A‘Ì•”A•Ší‚ğ ¶¬ & “o˜^
+        // è„šéƒ¨ã€ä½“éƒ¨ã€æ­¦å™¨ã‚’ ç”Ÿæˆ & ç™»éŒ²
         GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
         Leg    = Instantiate(LegModels[0],    _mt.Position, _mt.Rotation, this.transform);
         Body   = Instantiate(BodyModels[0],   _mt.Position, _mt.Rotation, this.transform);
         Weapon = Instantiate(WeaponModels[0], _mt.Position, _mt.Rotation, this.transform);
         Leg.   transform.localScale = _mt.Scale;
         Body.  transform.localScale = _mt.Scale;
-        // •Ší‚Í‘Ì•”‚ÉŠi”[‚µ‚Ä‚¨‚­ˆ×AŠgk’l‚ğ"0"‚É‚µ‚Ä‚¨‚­
+        // æ­¦å™¨ã¯ä½“éƒ¨ã«æ ¼ç´ã—ã¦ãŠãç‚ºã€æ‹¡ç¸®å€¤ã‚’"0"ã«ã—ã¦ãŠã
         Weapon.transform.localScale = new Vector3(0f, 0f, 0f);
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
         manager.RegisterPart(Weapon);
     }
 
-    public void ModelUpdate(CharacterManager manager)
+    public void ModelUpdate(CharacterManager manager, int _characterNumber)
     {
-        // ƒ‚ƒfƒ‹ƒp[ƒcÚ‘±
+        // ãƒ¢ãƒ‡ãƒ«ãƒ‘ãƒ¼ãƒ„æ¥ç¶š
         ModelConnection();
-        // •Ší‚ÌŠgk’lXV
-        WeaponScaleUpdate(manager);
+        // æ­¦å™¨ã®æ‹¡ç¸®å€¤æ›´æ–°
+        WeaponScaleUpdate(manager, _characterNumber);
     }
 
     void ModelConnection()
     {
-        // ‘Ì‚Æ‘«
+        // ä½“ã¨è¶³
         {
-            // qƒm[ƒh‚ğƒ^ƒO‚ÅŒŸõ  @@@ŒŸõÏ‚©H@@@@@@@@@ŒŸõ                      •Û‘¶ƒf[ƒ^
+            // å­ãƒãƒ¼ãƒ‰ã‚’ã‚¿ã‚°ã§æ¤œç´¢  ã€€ã€€ã€€æ¤œç´¢æ¸ˆã‹ï¼Ÿã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æ¤œç´¢                      ä¿å­˜ãƒ‡ãƒ¼ã‚¿
             GameObject LegTargetNode  = LegJoint   == null ? FindChildWithTag(Leg, "LegJoint") : LegJoint;
             GameObject BodyTargetNode = BodyJoint1 == null ? FindChildWithTag(Body,"LegJoint") : BodyJoint1;
 
             if (LegTargetNode != null && BodyTargetNode != null)
             {
-                // ‰½“x‚àŒŸõ‚ğs‚¤‚Æˆ—•‰‰×‚É‚Â‚È‚ª‚éˆ×A•Û‘¶‚µ‚Ä‚¨‚­B
+                // ä½•åº¦ã‚‚æ¤œç´¢ã‚’è¡Œã†ã¨å‡¦ç†è² è·ã«ã¤ãªãŒã‚‹ç‚ºã€ä¿å­˜ã—ã¦ãŠãã€‚
                 LegJoint   = LegTargetNode;
                 BodyJoint1 = BodyTargetNode;
 
-                // Ú‘±ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhÀ•W‚ğæ“¾
+                // æ¥ç¶šãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—
                 Vector3 worldPosition  = LegJoint.transform.position;
                 Vector3 worldPosition2 = BodyJoint1.transform.position;
 
-                // 2‚Â‚ÌÚ‘±“_‚ÌƒxƒNƒgƒ‹‚ğZo‚·‚é
+                // 2ã¤ã®æ¥ç¶šç‚¹ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç®—å‡ºã™ã‚‹
                 Vector3 Vec = new Vector3(
                     worldPosition.x - worldPosition2.x,
                     worldPosition.y - worldPosition2.y,
                     worldPosition.z - worldPosition2.z
                 );
 
-                // Ú‘±
+                // æ¥ç¶š
                 Body.transform.position = Body.transform.position + Vec;
 
-                // ‰ñ“]
+                // å›è»¢
                 Body.transform.rotation = Leg.transform.rotation;
             }
             else
             {
-                Debug.LogError("w’è‚µ‚½ƒ^ƒO‚Ìqƒm[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+                Debug.LogError("æŒ‡å®šã—ãŸã‚¿ã‚°ã®å­ãƒãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
             }
         }
 
-        // ‘Ì‚Æ•Ší
+        // ä½“ã¨æ­¦å™¨
         {
-            // qƒm[ƒh‚ğƒ^ƒO‚ÅŒŸõ  @@@ŒŸõÏ‚©H@@@@@@@@@ŒŸõ                               •Û‘¶ƒf[ƒ^
+            // å­ãƒãƒ¼ãƒ‰ã‚’ã‚¿ã‚°ã§æ¤œç´¢  ã€€ã€€ã€€æ¤œç´¢æ¸ˆã‹ï¼Ÿã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æ¤œç´¢                               ä¿å­˜ãƒ‡ãƒ¼ã‚¿
             GameObject BodyTargetNode   = BodyJoint2  == null ? FindChildWithTag(Body,  "WeaponJoint") : BodyJoint2;
             GameObject WeaponTargetNode = WeaponJoint == null ? FindChildWithTag(Weapon,"WeaponJoint") : WeaponJoint;
 
             if (WeaponTargetNode != null && BodyTargetNode != null)
             {
-                // ‰½“x‚àŒŸõ‚ğs‚¤‚Æˆ—•‰‰×‚É‚Â‚È‚ª‚éˆ×A•Û‘¶‚µ‚Ä‚¨‚­B
+                // ä½•åº¦ã‚‚æ¤œç´¢ã‚’è¡Œã†ã¨å‡¦ç†è² è·ã«ã¤ãªãŒã‚‹ç‚ºã€ä¿å­˜ã—ã¦ãŠãã€‚
                 BodyJoint2  = BodyTargetNode;
                 WeaponJoint = WeaponTargetNode;
 
-                // Ú‘±ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhÀ•W‚ğæ“¾
+                // æ¥ç¶šãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—
                 Vector3 worldPosition  = BodyJoint2.transform.position;
                 Vector3 worldPosition2 = WeaponJoint.transform.position;
 
-                // 2‚Â‚ÌÚ‘±“_‚ÌƒxƒNƒgƒ‹‚ğZo‚·‚é
+                // 2ã¤ã®æ¥ç¶šç‚¹ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç®—å‡ºã™ã‚‹
                 Vector3 Vec = new Vector3(
                     worldPosition.x - worldPosition2.x,
                     worldPosition.y - worldPosition2.y,
                     worldPosition.z - worldPosition2.z
                 );
 
-                // Ú‘±
+                // æ¥ç¶š
                 Weapon.transform.position = Weapon.transform.position + Vec;
 
-                // ‰ñ“]
+                // å›è»¢
                 Weapon.transform.rotation = Leg.transform.rotation;
             }
             else
             {
-                Debug.LogError("w’è‚µ‚½ƒ^ƒO‚Ìqƒm[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+                Debug.LogError("æŒ‡å®šã—ãŸã‚¿ã‚°ã®å­ãƒãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
             }
         }
     }
 
-    // •Ší‚ÌŠgk’lXVˆ—
-    void WeaponScaleUpdate(CharacterManager manager)
+    // æ­¦å™¨ã®æ‹¡ç¸®å€¤æ›´æ–°å‡¦ç†
+    void WeaponScaleUpdate(CharacterManager manager, int _characterNumber)
     {
-        // ƒAƒjƒ[ƒVƒ‡ƒ“ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚½‚ç
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ãŸã‚‰
         if (manager.GetAnimationEvent())
         {
-            // ƒ‰[ƒv‚ÅƒXƒP[ƒ‹‚ğ™X‚É‘å‚«‚­
-            Weapon.transform.localScale = Vector3.Lerp(Weapon.transform.localScale, new Vector3(3f, 3f, 3f), Time.deltaTime * 15f);
+            GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
+            // ãƒ©ãƒ¼ãƒ—ã§ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¾ã€…ã«å¤§ãã
+            Weapon.transform.localScale = Vector3.Lerp(Weapon.transform.localScale, _mt.Scale, Time.deltaTime * 15f);
         }
         else
         {
-            // ƒ‰[ƒv‚ÅƒXƒP[ƒ‹‚ğ™X‚É¬‚³‚­
+            // ãƒ©ãƒ¼ãƒ—ã§ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å¾ã€…ã«å°ã•ã
             if (Weapon.transform.localScale.x > 0.01f)
             {
                 Weapon.transform.localScale = Vector3.Lerp(Weapon.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 15f);
@@ -159,7 +160,7 @@ public class CharacterModel : MonoBehaviour
         }
     }
 
-    // ƒMƒYƒ‚
+    // ã‚®ã‚ºãƒ¢
     void OnDrawGizmos()
     {
         if (LegJoint != null)
@@ -171,15 +172,15 @@ public class CharacterModel : MonoBehaviour
 
     }
 
-    // qƒm[ƒh‚ğƒ^ƒO‚ÅÄ‹A“I‚ÉŒŸõ
+    // å­ãƒãƒ¼ãƒ‰ã‚’ã‚¿ã‚°ã§å†å¸°çš„ã«æ¤œç´¢
     GameObject FindChildWithTag(GameObject parent, string tag)
     {
-        // qƒIƒuƒWƒFƒNƒg‚ğ’Tõ
+        // å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¢ç´¢
         foreach (Transform child in parent.transform)
         {
             if (child.CompareTag(tag)) return child.gameObject;
 
-            // Ä‹A“I‚É’Tõ
+            // å†å¸°çš„ã«æ¢ç´¢
             GameObject result = FindChildWithTag(child.gameObject, tag);
             if (result != null)return result;
         }

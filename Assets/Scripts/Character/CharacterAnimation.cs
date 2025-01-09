@@ -5,33 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour,ICharacterPart
 {
-    // ƒAƒjƒ[ƒ^[
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
     [SerializeField]
     private Animator _animator;
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgƒtƒ‰ƒO
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆãƒ•ãƒ©ã‚°
     private bool _animationFlag;
 
     public void Initialize(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider ‰Šú‰»");
+        Debug.Log("CharacterCollider åˆæœŸåŒ–");
         _animator = GetComponent<Animator>();
     }
 
     public void UpdatePart(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider XVˆ—");
+        Debug.Log("CharacterCollider æ›´æ–°å‡¦ç†");
     }
 
     public string GetCurrentAnimation() 
     {
-        // Œ»İ‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒXƒe[ƒg‚ğæ“¾
+        // ç¾åœ¨ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—
         AnimatorStateInfo _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
-        // ƒXƒe[ƒg–¼‚ğæ“¾‚µ‚Ä•Ô‚·
+        // ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’å–å¾—ã—ã¦è¿”ã™
         return _stateInfo.IsName("Idle")   ? "Idle"   :
                _stateInfo.IsName("Walk")   ? "Walk"   :
-               _stateInfo.IsName("Hit")    ? "Idle"   :
+               _stateInfo.IsName("Hit")    ? "Hit"    :
                _stateInfo.IsName("Attack") ? "Attack" : "None";
     }
 
@@ -39,11 +39,11 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
 
     public void AnimationEvent()     { _animationFlag = !_animationFlag; }
 
-    public void SetWalkAnimation()   { _animator.SetTrigger("Walk"); _animator.ResetTrigger("Idle"); }
+    public void SetWalkAnimation()   { _animator.SetTrigger("Walk"); _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Attack"); }
 
-    public void SetIdleAnimation()   { _animator.SetTrigger("Idle"); _animator.ResetTrigger("Walk"); }
+    public void SetIdleAnimation()   { _animator.SetTrigger("Idle"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Attack"); }
 
-    public void SetAttackAnimation() { _animator.SetTrigger("Attack"); }
+    public void SetAttackAnimation() { _animator.SetTrigger("Attack"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Idle"); }
 
     public void SetHitAnimation()    { _animator.SetTrigger("Hit");    }
 }

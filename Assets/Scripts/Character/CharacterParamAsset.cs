@@ -7,20 +7,32 @@ public class CharacterParamAsset : ScriptableObject
 {
     //public List<CharacterParam> CharacterParamList = new List<CharacterParam>();
 
-    // –¼‘O(String•Ï”‚Íã‚É‘‚¢‚½•û‚ª—Ç‚¢)
+    // åå‰(Stringå¤‰æ•°ã¯ä¸Šã«æ›¸ã„ãŸæ–¹ãŒè‰¯ã„)
     public string CharacterName = "Temp";
 
-    // ˆÚ“®‘¬“x
+    // ç§»å‹•é€Ÿåº¦
     [SerializeField]
     public float MoveSpeed;
 
-    // ‰ñ“]‘¬“x
+    // å›è»¢é€Ÿåº¦
     [SerializeField]
     public float RotateSpeed;
 
-    // UŒ‚—Í
+    // æ”»æ’ƒåŠ›
     [SerializeField]
     public float Attack;
+
+    // åŠ é€ŸåŠ›
+    [SerializeField]
+    public float Acceleration;
+
+    // æœ€å¤§ãƒ€ãƒƒã‚·ãƒ¥é€Ÿåº¦
+    [SerializeField]
+    public float MaxDashSpeed;  
+
+    // æœ€å¤§ã‚¹ã‚¿ãƒŸãƒŠé‡
+    [SerializeField]
+    public float MaxStamina;
 }
 
 [System.Serializable]

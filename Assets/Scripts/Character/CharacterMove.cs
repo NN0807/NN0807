@@ -4,57 +4,100 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour,ICharacterPart
 {
-    // ƒf[ƒ^ƒAƒZƒbƒg
+    // ãƒ‡ãƒ¼ã‚¿ã‚¢ã‚»ãƒƒãƒˆ
     public CharacterParamAsset characterParamAsset;
 
-    // ‘O•û•ûŒü
+    // å‰æ–¹æ–¹å‘
     private Vector3 MoveForward;
 
-    // „‘Ì
+    // å‰›ä½“
     [SerializeField]
     private Rigidbody _rigidbody;
 
+
+
+    public float DashDuration = 1.0f;  // ãƒ€ãƒƒã‚·ãƒ¥ã®æŒç¶šæ™‚é–“
+    public float dashCooldown = 1f;  // ãƒ€ãƒƒã‚·ãƒ¥ã®ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³
+    private bool IsDashing; // ãƒ€ãƒƒã‚·ãƒ¥ãƒ•ãƒ©ã‚°
+
+    private float _currentSpeed;
+    private float DashGauge; // 
+    private float lastDashTime;
+
     public void Initialize(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider ‰Šú‰»");
+        Debug.Log("CharacterCollider åˆæœŸåŒ–");
 
-        // ƒf[ƒ^İ’è
+        // ãƒ‡ãƒ¼ã‚¿è¨­å®š
         _rigidbody = GetComponent<Rigidbody>();
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
-        // •Ï”‰Šú‰»
-        MoveForward = Vector3.zero;
+        // å¤‰æ•°åˆæœŸåŒ–
+        MoveForward   = Vector3.zero;
+        _currentSpeed = 0.0f;
     }
 
     public void UpdatePart(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider@XVˆ—");
+        Debug.Log("CharacterColliderã€€æ›´æ–°å‡¦ç†");
 
-        // ˆÚ“®
+        // ç§»å‹•
         Move(manager);
 
-        // ù‰ñ
+        // æ—‹å›
         Turn();
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
+        {
+            //StartDash();
+        }
     }
 
-    // ˆÚ“®ˆ—
+    // ã‚¹ã‚¿ãƒ¼ãƒˆãƒ€ãƒƒã‚·ãƒ¥
+    public void StartDash()
+    {
+        IsDashing = true;
+        DashGauge = DashDuration;
+        //LastDashTime = Time.time;
+    }
+
+    void FixedUpdate()
+    {
+        //if (isDashing)
+        //{
+        //    if (dashTime > 0)
+        //    {
+        //        currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.fixedDeltaTime, maxDashSpeed);
+        //        _rigidbody.velocity = transform.forward * currentSpeed;
+        //        dashTime -= Time.fixedDeltaTime;
+        //    }
+        //    else
+        //    {
+        //        isDashing = false;
+        //        currentSpeed = 0f;  // ãƒ€ãƒƒã‚·ãƒ¥çµ‚äº†å¾Œã«é€Ÿåº¦ã‚’ãƒªã‚»ãƒƒãƒˆ
+        //    }
+        //}
+    }
+
+    // ç§»å‹•å‡¦ç†
     private void Move(CharacterManager manager)
     {
-        // ƒJƒƒ‰‚Ì•ûŒü‚©‚çAX-Z•½–Ê‚Ì’PˆÊƒxƒNƒgƒ‹‚ğæ“¾
+        // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã‹ã‚‰ã€X-Zå¹³é¢ã®å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
         Vector3 CameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
-        // •ûŒüƒL[‚Ì“ü—Í’l‚ÆƒJƒƒ‰‚ÌŒü‚«‚©‚çAˆÚ“®•ûŒü‚ğŒˆ’è
+        // æ–¹å‘ã‚­ãƒ¼ã®å…¥åŠ›å€¤ã¨ã‚«ãƒ¡ãƒ©ã®å‘ãã‹ã‚‰ã€ç§»å‹•æ–¹å‘ã‚’æ±ºå®š
         MoveForward = CameraForward * manager.GetVerticalInput() +
             Camera.main.transform.right * manager.GetHorizontalInput();
 
-        // ˆÚ“®•ûŒü‚ÉƒXƒs[ƒh‚ğŠ|‚¯‚éBƒWƒƒƒ“ƒv‚â—‰º‚ª‚ ‚éê‡‚ÍA•Ê“rY²•ûŒü‚Ì‘¬“xƒxƒNƒgƒ‹‚ğ‘«‚·
-        _rigidbody.velocity = MoveForward * characterParamAsset.MoveSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+        // ç§»å‹•æ–¹å‘ã«ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’æ›ã‘ã‚‹ã€‚ã‚¸ãƒ£ãƒ³ãƒ—ã‚„è½ä¸‹ãŒã‚ã‚‹å ´åˆã¯ã€åˆ¥é€”Yè»¸æ–¹å‘ã®é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¶³ã™
+        if (!IsDashing) _rigidbody.velocity = MoveForward * (characterParamAsset.MoveSpeed) + new Vector3(0, _rigidbody.velocity.y, 0);
     }
 
-    // ù‰ñˆ—
+    // æ—‹å›å‡¦ç†
     private void Turn()
     {
-        // ƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«‚ğis•ûŒü‚É
+        // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®å‘ãã‚’é€²è¡Œæ–¹å‘ã«
         if (MoveForward != Vector3.zero)
         {
             Quaternion from = transform.rotation;
@@ -63,20 +106,48 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         }
     }
 
-    // ÕŒ‚ˆ—
+    // ãƒ€ãƒƒã‚·ãƒ¥å‡¦ç†
+    private void ActivateDash()
+    {
+        // ãƒ€ãƒƒã‚·ãƒ¥ãƒ•ãƒ©ã‚°ON
+        IsDashing = true;
+
+        // æœ€å¤§ãƒ€ãƒƒã‚·ãƒ¥é€Ÿåº¦ã‚’è¶Šãˆãªã„ã‚ˆã†ã«ã€ç¾åœ¨ã®é€Ÿåº¦ã‚’ç®—å‡ºã™ã‚‹
+        _currentSpeed = Mathf.Min(_currentSpeed + characterParamAsset.Acceleration * Time.deltaTime, characterParamAsset.MaxDashSpeed);
+
+        // ç§»å‹•æ–¹å‘ã«ãƒ€ãƒƒã‚·ãƒ¥ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’æ›ã‘ã‚‹
+        _rigidbody.velocity = MoveForward * _currentSpeed;
+    }
+
+    // ãƒ€ãƒƒã‚·ãƒ¥çµ‚äº†å‡¦ç†
+    private void DeactivateDash()
+    {
+        // ãƒ€ãƒƒã‚·ãƒ¥ãƒ•ãƒ©ã‚°OFF
+        IsDashing = false;
+    }
+
+    // è¡æ’ƒå‡¦ç†
     private void Impulse(Vector3 forward, float attack)
     {
-        // ‚Á”ò‚Î‚·
+        // å¹ã£é£›ã°ã™
         _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
     }
 
-    // ƒCƒxƒ“ƒg“o˜^‚ğCharacterMove“à‚Ås‚¤
+    // ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²ã‚’CharacterMoveå†…ã§è¡Œã†
     public void RegisterColliderEvent(CharacterCollider collider)
     {
-        // ƒCƒxƒ“ƒg‚ÉŠÖ”‚ğ“o˜^
+        // ã‚¤ãƒ™ãƒ³ãƒˆã«é–¢æ•°ã‚’ç™»éŒ²
         collider.CollisionAttackEnterEvent += Impulse;
     }
 
-    // ‘O•û•ûŒüæ“¾ŠÖ”
+    // ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²ã‚’CharacterMoveå†…ã§è¡Œã†
+    public void RegisterOperationEvent(CharacterOperation operation)
+    {
+        // ã‚¤ãƒ™ãƒ³ãƒˆã«é–¢æ•°ã‚’ç™»éŒ²
+        operation.ActivateDashEvent   += ActivateDash;
+        operation.DeactivateDashEvent += DeactivateDash;
+    }
+
+    // å‰æ–¹æ–¹å‘å–å¾—é–¢æ•°
     public Vector3 GetMoveForward() { return MoveForward; }
 }

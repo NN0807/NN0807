@@ -5,88 +5,88 @@ using System;
 
 public class CharacterCollider : MonoBehaviour, ICharacterPart
 {
-    // ƒf[ƒ^ƒAƒZƒbƒg
+    // ãƒ‡ãƒ¼ã‚¿ã‚¢ã‚»ãƒƒãƒˆ
     public CharacterParamAsset characterParamAsset;
 
-    // ƒ}ƒl[ƒWƒƒ[
+    // ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
     private CharacterManager _characterManager;
 
-    // CharacterMove‚©‚ç‘O•û•ûŒü‚ğæ“¾‚µA•Û‘¶‚·‚é•Ï”
+    // CharacterMoveã‹ã‚‰å‰æ–¹æ–¹å‘ã‚’å–å¾—ã—ã€ä¿å­˜ã™ã‚‹å¤‰æ•°
     private Vector3 MoveForward;
 
-    // Õ“Ë’†(Effect)ƒCƒxƒ“ƒg
+    // è¡çªä¸­(Effect)ã‚¤ãƒ™ãƒ³ãƒˆ
     public event Action CollisionEFKStayEvent;
-    // Õ“ËI(Effect)ƒCƒxƒ“ƒg
+    // è¡çªçµ‚(Effect)ã‚¤ãƒ™ãƒ³ãƒˆ
     public event Action CollisionEFKExitEvent;
-    // Õ“Ë’†(UŒ‚)  ƒCƒxƒ“ƒg
+    // è¡çªä¸­(æ”»æ’ƒ)  ã‚¤ãƒ™ãƒ³ãƒˆ
     public event Action<Vector3, float> CollisionAttackEnterEvent;
 
     public void Initialize(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider ‰Šú‰»");
-        // ƒ}ƒl[ƒWƒƒ[“o˜^
+        Debug.Log("CharacterCollider åˆæœŸåŒ–");
+        // ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ç™»éŒ²
         _characterManager = manager;
-        // ƒf[ƒ^ƒAƒZƒbƒgİ’è
-       characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
-        // •Ï”‰Šú‰»
+        // ãƒ‡ãƒ¼ã‚¿ã‚¢ã‚»ãƒƒãƒˆè¨­å®š
+        characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
+        // å¤‰æ•°åˆæœŸåŒ–
         MoveForward = Vector3.zero;
     }
 
     public void UpdatePart(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider XVˆ—");
+        Debug.Log("CharacterCollider æ›´æ–°å‡¦ç†");
 
-        // ©g‚Ì‘O•û•ûŒü‚ğæ“¾
+        // è‡ªèº«ã®å‰æ–¹æ–¹å‘ã‚’å–å¾—
         MoveForward = manager.GetMoveForward();
     }
 
-    // “–‚½‚Á‚½‚ÉŒÄ‚Î‚ê‚éŠÖ”
+    // å½“ãŸã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
     void OnCollisionEnter(Collision collision)
     {
-        // •Ší‚ÆÕ“Ë‚µ‚½‚ç
+        // æ­¦å™¨ã¨è¡çªã—ãŸã‚‰
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            Debug.Log("UŒ‚‚ğó‚¯‚Ü‚µ‚½");
+            Debug.Log("æ”»æ’ƒã‚’å—ã‘ã¾ã—ãŸ");
 
-            // ƒCƒxƒ“ƒg”­‰Î
+            // ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«
             CollisionEFKStayEvent?.Invoke();
         }
     }
 
-    // “–‚½‚Á‚Ä‚¢‚éŠÔ‚ÉŒÄ‚Î‚ê‚éŠÖ”
+    // å½“ãŸã£ã¦ã„ã‚‹é–“ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°
     void OnCollisionStay(Collision collision)
     {
-        // Effect‚ÆÕ“Ë‚µ‚½‚ç
+        // Effectã¨è¡çªã—ãŸã‚‰
         if (collision.gameObject.CompareTag("Effect"))
         {
-            Debug.Log("Effectƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ÉÕ“Ë‚µ‚Ü‚µ‚½");
+            Debug.Log("Effectã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¡çªã—ã¾ã—ãŸ");
 
-            // ƒCƒxƒ“ƒg”­‰Î
+            // ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«
             CollisionEFKStayEvent?.Invoke();
         }
     }
 
-    // —£‚ê‚½‚çŒÄ‚Î‚ê‚éŠÖ”
+    // é›¢ã‚ŒãŸã‚‰å‘¼ã°ã‚Œã‚‹é–¢æ•°
     void OnCollisionExit(Collision collision)
     {
-        // Effect‚Æ‚ÌÕ“Ë‚©‚ç—£‚ê‚½‚ç
+        // Effectã¨ã®è¡çªã‹ã‚‰é›¢ã‚ŒãŸã‚‰
         if (collision.gameObject.CompareTag("Effect"))
         {
-            Debug.Log("Effectƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚©‚ç—£‚ê‚Ü‚µ‚½");
+            Debug.Log("Effectã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰é›¢ã‚Œã¾ã—ãŸ");
 
-            // ƒCƒxƒ“ƒg”­‰Î
+            // ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«
             CollisionEFKExitEvent?.Invoke();
         }
     }
 
-    // “–‚½‚Á‚½‚ÉŒÄ‚Î‚ê‚éŠÖ”(Trigger”Å)
+    // å½“ãŸã£ãŸæ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°(Triggerç‰ˆ)
     void OnTriggerEnter(Collider collision)
     {
-        // Enemy(Player)‚ÆÕ“Ë‚µ‚½‚ç
+        // Enemy(Player)ã¨è¡çªã—ãŸã‚‰
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) 
         {
-            Debug.Log("UŒ‚‚ªÕ“Ë‚µ‚Ü‚µ‚½");
-            // ƒCƒxƒ“ƒg”­‰Î
+            Debug.Log("æ”»æ’ƒãŒè¡çªã—ã¾ã—ãŸ");
+            // ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«
             CollisionAttackEnterEvent?.Invoke(MoveForward,characterParamAsset.Attack);
         }
     }

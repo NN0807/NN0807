@@ -14,6 +14,9 @@ public class CharacterManager : MonoBehaviour
     public CharacterOperation _characterOperation;
     // 移動スクリプト
     private CharacterMove     _characterMove;
+    // UIスクリプト
+    [SerializeField]
+    public CharacterUI        _characterUI;
 
     // 生成されたキャラクターパーツ登録用リスト
     private List<ICharacterPart> characterParts  = new List<ICharacterPart>();
@@ -28,6 +31,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     public int _characterNumber = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,9 @@ public class CharacterManager : MonoBehaviour
 
         // コライダーイベントを設定
         RegisterCollidersEvent();
+
+        // ダッシュイベントを設定
+        RegisterDashEvent();
     }
 
     // パーツ登録
@@ -56,6 +63,8 @@ public class CharacterManager : MonoBehaviour
         if (animation != null)  animations.Add(animation);
         var move      = part.GetComponent<CharacterMove>();
         if (move      != null) _characterMove = move;
+        var ui        = part.GetComponent<CharacterUI>();
+        if (ui        != null) _characterUI = ui;
     }
 
     // Update is called once per frame
@@ -67,30 +76,24 @@ public class CharacterManager : MonoBehaviour
             part.UpdatePart(this);
         }
 
-        _characterModel?.ModelUpdate(this);
+        _characterModel?.ModelUpdate(this, _characterNumber);
         _characterOperation?.OperationUpdate(this);
     }
 
     // 各種パーツの現在のアニメーションステートを取得する
     public string GetCurrentAnimations()
     {
-        // 0番(脚部)のアニメーション名を取得
-        string _firstAnimation = animations[0].GetCurrentAnimation();
+        // 武器以外のアニメーション名を取得
+        // ※武器の攻撃アニメーション以外のアニメーションステートが
+        // 全て「EmptyState」の為、アニメーション名が他のパーツと異なる
+        string _legAnimation  = animations[0].GetCurrentAnimation();
+        string _bodyAnimation = animations[1].GetCurrentAnimation();
 
-        foreach (var animator in animations)
-        {
-            // 各Animatorのアニメーション名を取得
-            string _currentAnimation = animator.GetCurrentAnimation();
+        // 異なるアニメーション名があれば "None" を返す
+        if (_legAnimation != _bodyAnimation) return "None";
 
-            // 一度でも異なるアニメーション名があれば "None" を返す
-            if (_currentAnimation != _firstAnimation)
-            {
-                return "None";
-            }
-        }
-
-        // 全員一致した場合、そのアニメーション名を返す
-        return _firstAnimation;
+        // 一致した場合、そのアニメーション名を返す
+        return _legAnimation;
     }
 
     // 各種スクリプトにコライダーを通知してイベントを登録
@@ -101,6 +104,13 @@ public class CharacterManager : MonoBehaviour
             _characterOperation?.RegisterColliderEvent(collider);
             _characterMove?.RegisterColliderEvent(collider);
         }
+    }
+
+    // ダッシュイベントを登録する関数
+    private void RegisterDashEvent()
+    {
+        _characterUI?.  RegisterOperationEvent(_characterOperation);
+        _characterMove?.RegisterOperationEvent(_characterOperation);
     }
 
     // アニメーション起動

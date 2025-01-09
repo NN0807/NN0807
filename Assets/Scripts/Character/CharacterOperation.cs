@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System;
 using Common;
 
 public class CharacterOperation : MonoBehaviour
@@ -26,6 +26,11 @@ public class CharacterOperation : MonoBehaviour
     [SerializeField]
     public bool _attackFlag    = false;
 
+    // ダッシュ中イベント
+    public event Action ActivateDashEvent;
+    // ダッシュ(解除)イベント
+    public event Action DeactivateDashEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,26 +40,38 @@ public class CharacterOperation : MonoBehaviour
 
     public void OperationUpdate(CharacterManager manager)
     {
+        // フラグ更新
+        _attackFlag = manager.GetCurrentAnimations() != "Attack" ? false : true;
+
         // 攻撃
-        if (_InputActions.Player.Fire.triggered && (manager.GetCurrentAnimations() == "Walk"
-            || manager.GetCurrentAnimations() == "Idle"))  
+        if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack") 
         {
+            _attackFlag = true;
             manager.SetAnimations(AnimationType.Attack);
-            //_attackFlag = true;
         }
 
         // 待機
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && manager.GetCurrentAnimations() != "None") 
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && !_attackFlag) 
         {
             manager.SetAnimations(AnimationType.Idle);
-            //_attackFlag = false;
         }
 
         // 移動
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f  && manager.GetCurrentAnimations() != "None") 
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f && !_attackFlag) 
         {
             manager.SetAnimations(AnimationType.Walk);
-           // _attackFlag = false;
+        }
+
+        // ダッシュ
+        if (_InputActions.Player.Dash.ReadValue<float>() > 0)
+        {
+            // 押されている間の処理を発火
+            ActivateDashEvent?.Invoke();
+        }
+        else
+        {
+            // 押されていない間の処理を発火
+            DeactivateDashEvent?.Invoke();
         }
 
         // ポーズ

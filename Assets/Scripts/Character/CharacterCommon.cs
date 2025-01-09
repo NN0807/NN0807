@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace Common
 {
-    // ’è”
+    // å®šæ•°
     public static class CharacterConst
     {
         public const int CONST_MODEL_NUM = 8;
     }
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìí—Ş
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ç¨®é¡
     public enum AnimationType
     {
-        Walk,
         Idle,
+        Walk,
         Attack,
         Hit
     }
 
-    // ‰Šú¶¬s—ñ
+    // åˆæœŸç”Ÿæˆè¡Œåˆ—
     public struct GenerateTransform
     {
         public Vector3    Position { get; set; }
@@ -34,7 +34,7 @@ namespace Common
         }
     }
 
-    // s—ñî•ñ‚ğŠi”[‚·‚éƒNƒ‰ƒX
+    // è¡Œåˆ—æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹
     public static class TransformInfo
     {
         public static readonly GenerateTransform[] _generateTransforms = new GenerateTransform[]

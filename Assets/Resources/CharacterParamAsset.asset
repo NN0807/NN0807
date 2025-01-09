@@ -15,3 +15,7 @@ MonoBehaviour:
   CharacterName: Temp
   MoveSpeed: 3
   RotateSpeed: 5
+  Attack: 0
+  Acceleration: 10
+  MaxDashSpeed: 6
+  MaxStamina: 5
