@@ -520,7 +520,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 540, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457418463
 MonoBehaviour:
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1fe2fbd61ca6fa248b170a888e6f691a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ec7962c0184d1146a9568492ea18bb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -775,8 +775,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 0, y: 130}
+  m_SizeDelta: {x: 540, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &598573988
 MonoBehaviour:
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 82f092c09adb4c94caacc9858d56b2c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 693713e17755c5f458c250ed95f5d7d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1721,8 +1721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 0, y: -130}
+  m_SizeDelta: {x: 540, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561132698
 MonoBehaviour:
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90702c28f16d0694483106e6346ce0a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 721180ebc6a33d1489493281ffb604cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   BodyModels:
-  - {fileID: 3163931568424895700, guid: 7c5c1cc3e590bb545a1c39526c7aad3e, type: 3}
+  - {fileID: 2761141713090984456, guid: 7c5c1cc3e590bb545a1c39526c7aad3e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1981,6 +1981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 1760212898}
   _characterOperation: {fileID: 1760212897}
+  _characterUI: {fileID: 0}
   _characterNumber: 0
 --- !u!4 &1760212900
 Transform:

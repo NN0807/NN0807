@@ -27,6 +27,9 @@ public class PauseManager : MonoBehaviour
     // メニューがアクティブか
     private bool isPaused = false;
 
+    // ポーズがアクティブかどうかを外部から読み取り可能に
+    public bool IsPaused => isPaused;
+
 
     // Start is called before the first frame update
     void Start()
