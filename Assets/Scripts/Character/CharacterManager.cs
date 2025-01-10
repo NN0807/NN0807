@@ -35,6 +35,9 @@ public class CharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 操作スクリプトを設定
+        TryGetComponent(out _characterOperation);
+
         // CharacterModelにパーツ生成を指示
         _characterModel?.GenerateAndRegisterParts(this, _characterNumber);
 
@@ -109,7 +112,7 @@ public class CharacterManager : MonoBehaviour
     // ダッシュイベントを登録する関数
     private void RegisterDashEvent()
     {
-        _characterUI?.  RegisterOperationEvent(_characterOperation);
+        _characterUI?  .RegisterOperationEvent(_characterOperation);
         _characterMove?.RegisterOperationEvent(_characterOperation);
     }
 
@@ -125,11 +128,11 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public bool    GetAnimationEvent()  { return animations[2].GetAnimationFlag();         }
+    public bool    GetAnimationEvent()  { return animations[2].GetAnimationFlag();                                       }
 
-    public float   GetHorizontalInput() { return _characterOperation.GetHorizontalInput(); }
+    public float   GetHorizontalInput() { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f; }
 
-    public float   GetVerticalInput()   { return _characterOperation.GetVerticalInput();   }
+    public float   GetVerticalInput()   { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f; }
 
-    public Vector3 GetMoveForward()     { return _characterMove.GetMoveForward();          }
+    public Vector3 GetMoveForward()     { return _characterMove.GetMoveForward();                                        }
 }

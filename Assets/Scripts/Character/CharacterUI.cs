@@ -54,8 +54,9 @@ public class CharacterUI : MonoBehaviour
     // イベント登録をCharacterUI内で行う
     public void RegisterOperationEvent(CharacterOperation operation)
     {
+        if (!operation) return;
         // イベントに関数を登録
-        operation.ActivateDashEvent += ActivateDash;
+        operation.ActivateDashEvent   += ActivateDash;
         operation.DeactivateDashEvent += DeactivateDash;
     }
 }

@@ -143,6 +143,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     // イベント登録をCharacterMove内で行う
     public void RegisterOperationEvent(CharacterOperation operation)
     {
+        if (!operation) return;
         // イベントに関数を登録
         operation.ActivateDashEvent   += ActivateDash;
         operation.DeactivateDashEvent += DeactivateDash;
