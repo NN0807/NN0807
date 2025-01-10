@@ -5,35 +5,35 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private string currentInputDevice = "Gamepad"; // ‰Šú’l‚ğƒQ[ƒ€ƒpƒbƒh‚Éİ’è
+    private string currentInputDevice = "Gamepad"; // åˆæœŸå€¤ã‚’ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã«è¨­å®š
 
     private void OnEnable()
     {
-        // ƒfƒoƒCƒX‚ÌÚ‘±/Ø’f‚ÌƒCƒxƒ“ƒg‚Éˆ—“o˜^
+        // ãƒ‡ãƒã‚¤ã‚¹ã®æ¥ç¶š/åˆ‡æ–­ã®ã‚¤ãƒ™ãƒ³ãƒˆã«å‡¦ç†ç™»éŒ²
         InputSystem.onDeviceChange += OnDeviceChange;
         InputSystem.onActionChange += OnActionChange;
 
-        // Œ»İ‚Ì“ü—ÍƒfƒoƒCƒX‚ğŠm”F
+        // ç¾åœ¨ã®å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹ã‚’ç¢ºèª
         CheckInitialInputDevice();
     }
 
     private void OnDisable()
     {
-        // ƒfƒoƒCƒX‚ÌÚ‘±/Ø’f‚ÌƒCƒxƒ“ƒg‚Ìˆ—‰ğœ
+        // ãƒ‡ãƒã‚¤ã‚¹ã®æ¥ç¶š/åˆ‡æ–­ã®ã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†è§£é™¤
         InputSystem.onDeviceChange -= OnDeviceChange;
         InputSystem.onActionChange -= OnActionChange;
     }
 
-    // ƒfƒoƒCƒX‚Ì•ÏX‚ª‚ ‚Á‚½ê‡‚Ìˆ—
+    // ãƒ‡ãƒã‚¤ã‚¹ã®å¤‰æ›´ãŒã‚ã£ãŸå ´åˆã®å‡¦ç†
     private void OnDeviceChange(InputDevice device, InputDeviceChange change)
     {
         if (device is Gamepad || device is Keyboard)
         {
-            Debug.Log($"ƒfƒoƒCƒX‚Ì•ÏXŒŸo: {device.displayName}, í—Ş: {device.GetType().Name}");
+            Debug.Log($"ãƒ‡ãƒã‚¤ã‚¹ã®å¤‰æ›´æ¤œå‡º: {device.displayName}, ç¨®é¡: {device.GetType().Name}");
         }
     }
 
-    // “ü—ÍƒAƒNƒVƒ‡ƒ“‚Ì•ÏX‚ğŠÄ‹
+    // å…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®å¤‰æ›´ã‚’ç›£è¦–
     private void OnActionChange(object obj, InputActionChange change)
     {
         if (change == InputActionChange.ActionPerformed)
@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    // ‰Šú‚Ì“ü—ÍƒfƒoƒCƒX‚ğŠm”F
+    // åˆæœŸã®å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹ã‚’ç¢ºèª
     private void CheckInitialInputDevice()
     {
         foreach (var device in InputSystem.devices)
@@ -67,13 +67,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    // Œ»İ‚Ì“ü—ÍƒfƒoƒCƒX‚ğİ’è
+    // ç¾åœ¨ã®å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹ã‚’è¨­å®š
     private void SetCurrentInputDevice(string deviceType)
     {
         if (currentInputDevice != deviceType)
         {
             currentInputDevice = deviceType;
-            Debug.Log($"Œ»İ‚Ì“ü—ÍƒfƒoƒCƒX: {currentInputDevice}");
+            Debug.Log($"ç¾åœ¨ã®å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹: {currentInputDevice}");
         }
     }
 }

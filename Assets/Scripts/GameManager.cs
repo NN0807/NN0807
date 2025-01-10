@@ -4,49 +4,59 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    /// <summary> ƒQ[ƒ€I—¹ƒtƒ‰ƒO </summary>
+    /// <summary> ã‚²ãƒ¼ãƒ çµ‚äº†ãƒ•ãƒ©ã‚° </summary>
     [ReadOnly]
     public bool gameFinishFLg = false;
 
-    /// <summary> ƒ|[ƒYƒtƒ‰ƒO </summary>
+    /// <summary> ãƒãƒ¼ã‚ºãƒ•ãƒ©ã‚° </summary>
     [ReadOnly]
     public bool pauseFLg = false;
 
-    // XVˆ—
-    private void Update()
-    {
-        // ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚¢‚½‚ç
-        // ƒQ[ƒ€I—¹ˆ—
-        if (gameFinishFLg) { GameFinish(); }
+    // å…¥åŠ›å‡¦ç†
+    [SerializeField]
+    private HakopanControls _InputActions;
 
-        // ƒ|[ƒYˆ—
-        Pause();
+    private void Start()
+    {
+        _InputActions = new HakopanControls();
+        _InputActions.Enable();
     }
 
-    /// <summary> ƒQ[ƒ€I—¹ˆ— </summary>
+    // æ›´æ–°å‡¦ç†
+    private void Update()
+    {
+        // ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ã¦ã„ãŸã‚‰
+        // ã‚²ãƒ¼ãƒ çµ‚äº†å‡¦ç†
+        if (gameFinishFLg) { GameFinish(); }
+
+        // ãƒãƒ¼ã‚ºå‡¦ç†
+        //Pause();
+    }
+
+    /// <summary> ã‚²ãƒ¼ãƒ çµ‚äº†å‡¦ç† </summary>
     void GameFinish()
     {
-        // ƒV[ƒ“‘JˆÚ
-        // Œ»İ‚ÍƒQ[ƒ€‚ğ—‚Æ‚·
+        // ã‚·ãƒ¼ãƒ³é·ç§»
+        // ç¾åœ¨ã¯ã‚²ãƒ¼ãƒ ã‚’è½ã¨ã™
         Application.Quit();
     }
 
-    // ƒ|[ƒY(‰¼)
-    void Pause()
-    {
-        // ‰¼‚ÉPƒL[‚Åƒ|[ƒY•‰ğœ
-        if (Input.GetKeyDown(KeyCode.P)) { pauseFLg = !pauseFLg; }
+    // ãƒãƒ¼ã‚º(ä»®)
+    //void Pause()
+    //{
+    //    // ä»®ã«Pã‚­ãƒ¼ã§ãƒãƒ¼ã‚ºï¼†è§£é™¤
+    //    if (_InputActions.Player.Pause.triggered) { pauseFLg = !pauseFLg; }
 
-        // ƒ^ƒCƒ€ƒXƒP[ƒ‹•ÏXˆ—
-        if(pauseFLg && Time.timeScale != 0f) 
-        { 
-            Time.timeScale = 0f; 
-            Debug.Log("ƒ|[ƒY‚µ‚Ü‚µ‚½"); 
-        }
-        if(!pauseFLg && Time.timeScale == 0f) 
-        { 
-            Time.timeScale = 1f;
-            Debug.Log("ƒ|[ƒY‰ğœ");
-        }        
-    }
+    //    // ã‚¿ã‚¤ãƒ ã‚¹ã‚±ãƒ¼ãƒ«å¤‰æ›´å‡¦ç†
+    //    if(pauseFLg && Time.timeScale != 0f) 
+    //    { 
+    //        Time.timeScale = 0f; 
+    //        Debug.Log("ãƒãƒ¼ã‚ºã—ã¾ã—ãŸ"); 
+    //    }
+    //    if(!pauseFLg && Time.timeScale == 0f) 
+    //    { 
+    //        Time.timeScale = 1f;
+    //        Debug.Log("ãƒãƒ¼ã‚ºè§£é™¤");
+    //    }        
+    //}
 }
