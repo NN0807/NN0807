@@ -129,6 +129,7 @@ public class SlotManager : MonoBehaviour
 		// 上下移動中ではなく
 		if (!selectSlot.Upflg && !selectSlot.Downflg)
 		{
+			// 入力があったら
 			if (inputActions.UI.Move.ReadValue<Vector2>().y > 0.5f)
 			{
 				// 上へ移動
@@ -159,16 +160,20 @@ public class SlotManager : MonoBehaviour
 		selectSlot.SlotItemUpdate();
 
 		// 各リールの選択ID取得
-		if(!(selectSlot.Downflg || selectSlot.Upflg))
+		if (!(selectSlot.Downflg || selectSlot.Upflg))
 		{
-			reelID[selectSlotNum] = selectSlot.selectNum;
-
-			// 各パーツモデルの更新
-			if (UpdateModelFlg)
+			// 入力がない場合のみモデル更新するように
+			if (!(Mathf.Abs(inputActions.UI.Move.ReadValue<Vector2>().y) > 0.5f))
 			{
-				UpdatePartsModel();
-				// フラグ初期化
-				UpdateModelFlg = false;
+				reelID[selectSlotNum] = selectSlot.selectNum;
+
+				// 各パーツモデルの更新
+				if (UpdateModelFlg)
+				{
+					UpdatePartsModel();
+					// フラグ初期化
+					UpdateModelFlg = false;
+				}
 			}
 		}
 		else

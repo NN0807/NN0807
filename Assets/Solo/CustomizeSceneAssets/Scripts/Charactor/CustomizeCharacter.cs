@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -93,6 +93,7 @@ public class CustomizeCharacter : MonoBehaviour
 	///<summary>攻撃アニメーション再生</summary>
 	public void StartAttackAnimation()
 	{
+		// 各アニメーションが設定されていなかった場合は処理しない
 		if (bodyAnime != null)
 		{
 			bodyAnime.SetTrigger("Attack");
@@ -116,6 +117,7 @@ public class CustomizeCharacter : MonoBehaviour
 		float bodyAnimeNormalizedTime = 0f;
 		float legAnimeNormalizedTime = 0f;
 
+		// アニメーションが設定されていなかった場合は取得フレームを０に
 		if (bodyAnime != null) bodyAnimeNormalizedTime = bodyAnime.GetCurrentAnimatorStateInfo(0).normalizedTime;
 		if (legAnime != null) legAnimeNormalizedTime = legAnime.GetCurrentAnimatorStateInfo(0).normalizedTime;
 

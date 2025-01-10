@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -15,25 +15,25 @@ public class BloomControllerEditor : Editor
 		switch(instance.bloomType)
 		{
 			case BloomController.BloomType.Normal:
-				instance.bloomIntensity = EditorGUILayout.FloatField("‹­“x", instance.bloomIntensity);
+				instance.bloomIntensity = EditorGUILayout.FloatField("å¼·åº¦", instance.bloomIntensity);
 			break;
 
 			case BloomController.BloomType.Flash:
-				instance.baseParam.speed = EditorGUILayout.FloatField("“_–Å‘¬“x", instance.baseParam.speed);
-				instance.baseParam.factorMin = EditorGUILayout.FloatField("Å¬‹­“x", instance.baseParam.factorMin);
-				instance.baseParam.factorMax = EditorGUILayout.FloatField("Å‘å‹­“x", instance.baseParam.factorMax);
+				instance.baseParam.speed = EditorGUILayout.FloatField("ç‚¹æ»…é€Ÿåº¦", instance.baseParam.speed);
+				instance.baseParam.factorMin = EditorGUILayout.FloatField("æœ€å°å¼·åº¦", instance.baseParam.factorMin);
+				instance.baseParam.factorMax = EditorGUILayout.FloatField("æœ€å¤§å¼·åº¦", instance.baseParam.factorMax);
 			break;
 
 			case BloomController.BloomType.Trigger:
-				instance.triggerParam.trigger = EditorGUILayout.Toggle("ƒgƒŠƒK[", instance.triggerParam.trigger);
-				instance.triggerParam.speed = EditorGUILayout.FloatField("“_“”‘¬“x", instance.triggerParam.speed);
-				instance.triggerParam.factorMin = EditorGUILayout.FloatField("Å¬‹­“x", instance.triggerParam.factorMin);
-				instance.triggerParam.factorMax = EditorGUILayout.FloatField("Å‘å‹­“x", instance.triggerParam.factorMax);
+				instance.triggerParam.trigger = EditorGUILayout.Toggle("ãƒˆãƒªã‚¬ãƒ¼", instance.triggerParam.trigger);
+				instance.triggerParam.speed = EditorGUILayout.FloatField("ç‚¹ç¯é€Ÿåº¦", instance.triggerParam.speed);
+				instance.triggerParam.factorMin = EditorGUILayout.FloatField("æœ€å°å¼·åº¦", instance.triggerParam.factorMin);
+				instance.triggerParam.factorMax = EditorGUILayout.FloatField("æœ€å¤§å¼·åº¦", instance.triggerParam.factorMax);
 			break;
 		}
 
 		if(GUILayout.Button("All Status Clear"))
-        {
+		{
 			instance.bloomIntensity = 0f;
 
 			instance.baseParam.speed = 0f;

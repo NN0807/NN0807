@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AnimationFlg : MonoBehaviour
 {
+	/// <summary>
+	/// アニメーションフラグ
+	/// </summary>
 	public bool animationFlg;
 
+	/// <summary>
+	/// パンチアニメーションのスロー再生開始＆終了フラグ
+	/// </summary>
 	public bool startSlowAnimationFlg;
 	public bool endSlowAnimationFlg;
 

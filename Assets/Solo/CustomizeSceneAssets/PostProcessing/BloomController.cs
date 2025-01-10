@@ -4,48 +4,48 @@ using UnityEngine;
 
 public class BloomController : MonoBehaviour
 {
-	///<summary>ƒuƒ‹[ƒ€ƒXƒNƒŠƒvƒg</summary>
+	///<summary>ãƒ–ãƒ«ãƒ¼ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆ</summary>
 	[SerializeField]
 	[ReadOnly]
 	private ImageGlow ImageGlow;
 
-	///<summary>‰ŠúƒGƒ~ƒbƒVƒ‡ƒ“ƒJƒ‰[</summary>
+	///<summary>åˆæœŸã‚¨ãƒŸãƒƒã‚·ãƒ§ãƒ³ã‚«ãƒ©ãƒ¼</summary>
 	[SerializeField]
 	[ReadOnly]
 	private Color emission = default;
 
-	///<summary>‹­“x</summary>
+	///<summary>å¼·åº¦</summary>
 	[SerializeField]
 	[ReadOnly]
 	private float factor = 0f;
 
-	///<summary>ƒuƒ‹[ƒ€‚ÌŒõ‚ç‚¹•ûí•Ê</summary>
+	///<summary>ãƒ–ãƒ«ãƒ¼ãƒ ã®å…‰ã‚‰ã›æ–¹ç¨®åˆ¥</summary>
 	public enum BloomType
 	{
-		Normal = 0,	// –³‚µ
-		Flash,		// “_–Å
-		Trigger,	// ‚P“x‚¾‚¯
+		Normal = 0,	// ç„¡ã—
+		Flash,		// ç‚¹æ»…
+		Trigger,	// ï¼‘åº¦ã ã‘
 	}
 	[SerializeField]
 	public BloomType bloomType = default;
 
-	// ’Êí‚Ìƒpƒ‰ƒ[ƒ^[
+	// é€šå¸¸æ™‚ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
 	[SerializeField]
 	[HideInInspector]
 	public float bloomIntensity = 0.0f;
 
-	// “_–Å‚Ìƒpƒ‰ƒ[ƒ^[
+	// ç‚¹æ»…æ™‚ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
 	[System.Serializable]
 	[HideInInspector]
 	public class BaseParam
 	{
-		// “_–Å‘¬“x
+		// ç‚¹æ»…é€Ÿåº¦
 		[HideInInspector]
 		public float speed = 1.0f;
-		// “_–Å‚ÌÅ­
+		// ç‚¹æ»…ã®æœ€å°‘
 		[HideInInspector]
 		public float factorMin = 0f;
-		// “_–Å‚ÌÅ‘å
+		// ç‚¹æ»…ã®æœ€å¤§
 		[HideInInspector]
 		public float factorMax = 0.5f;
 	}
@@ -53,7 +53,7 @@ public class BloomController : MonoBehaviour
 	[HideInInspector]
 	public BaseParam baseParam = new BaseParam();
 
-	// ‚P‰ñ‚¾‚¯“_“”‚Ìƒpƒ‰ƒ[ƒ^[
+	// ï¼‘å›ã ã‘ç‚¹ç¯æ™‚ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
 	[System.Serializable]
 	[HideInInspector]
 	public class TriggerParam : BaseParam
@@ -71,22 +71,22 @@ public class BloomController : MonoBehaviour
 
 	private void Awake()
 	{
-		// ‚Ú‚©‚µ‚Ä‚¢‚éƒXƒNƒŠƒvƒgæ“¾
+		// ã¼ã‹ã—ã¦ã„ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆå–å¾—
 		TryGetComponent(out ImageGlow);
-		// İ’è‚³‚ê‚Ä‚¢‚é‰ŠúƒJƒ‰[æ“¾(‚±‚ÌF‚ğŠî€‚ÉŒõ‚ç‚¹‚é)
+		// è¨­å®šã•ã‚Œã¦ã„ã‚‹åˆæœŸã‚«ãƒ©ãƒ¼å–å¾—(ã“ã®è‰²ã‚’åŸºæº–ã«å…‰ã‚‰ã›ã‚‹)
 		emission = ImageGlow.EmissionColor;
 	}
 
 	void Update()
 	{
-		// ˆ—•ªŠò
+		// å‡¦ç†åˆ†å²
 		switch(bloomType)
 		{
-			// ’Êí
+			// é€šå¸¸
 			case BloomType.Normal:
 				Normal();
 			break;
-			// “_–Å
+			// ç‚¹æ»…
 			case BloomType.Flash:
 				Flash();
 			break;
@@ -95,41 +95,41 @@ public class BloomController : MonoBehaviour
 			break;
 		}
 
-		// ƒuƒ‹[ƒ€‚Ì–¾“x‚ğ”½‰f
+		// ãƒ–ãƒ«ãƒ¼ãƒ ã®æ˜åº¦ã‚’åæ˜ 
 		ImageGlow.EmissionColor = new Color(emission.r * factor, emission.g * factor, emission.b * factor);
 	}
 
-	// ’Êíˆ—
+	// é€šå¸¸å‡¦ç†
 	private void Normal()
 	{
 		factor = bloomIntensity;
 	}
 
-	// “_–Åˆ—
+	// ç‚¹æ»…å‡¦ç†
 	private void Flash()
 	{
-		// “_–Å‘¬“x‚ª‚O‚ğ‰º‰ñ‚ç‚È‚¢‚æ‚¤‚É§Œä
+		// ç‚¹æ»…é€Ÿåº¦ãŒï¼ã‚’ä¸‹å›ã‚‰ãªã„ã‚ˆã†ã«åˆ¶å¾¡
 		if (baseParam.speed < 0f) baseParam.speed = 0f;
 			
-		// ³Œ·”g‚ğŒvZ (-1‚©‚ç1‚Ì”ÍˆÍ)
+		// æ­£å¼¦æ³¢ã‚’è¨ˆç®— (-1ã‹ã‚‰1ã®ç¯„å›²)
 		float sinValue = Mathf.Sin((Time.time * baseParam.speed / 3f) * Mathf.PI * 2.0f);
 
-		// -1‚©‚ç1‚ğ0‚©‚ç1‚Ì”ÍˆÍ‚É•ÏŠ·
+		// -1ã‹ã‚‰1ã‚’0ã‹ã‚‰1ã®ç¯„å›²ã«å¤‰æ›
 		float normalizedSin = (sinValue + 1.0f) / 2.0f;
 
-		// Å¬’l‚©‚çÅ‘å’l‚É•ÏŠ·
+		// æœ€å°å€¤ã‹ã‚‰æœ€å¤§å€¤ã«å¤‰æ›
 		float value = Mathf.Lerp(baseParam.factorMin, baseParam.factorMax, normalizedSin);
 
 		factor = value;
 	}
 
-	// ‚P‰ñ‚¾‚¯“_“”
+	// ï¼‘å›ã ã‘ç‚¹ç¯
 	private void Trigger()
 	{
-		// ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚È‚¢‚È‚çˆ—‚µ‚È‚¢
+		// ãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ãªã„ãªã‚‰å‡¦ç†ã—ãªã„
 		if(triggerParam.trigger == false) return;
 
-		// ”½“]§Œä
+		// åè»¢åˆ¶å¾¡
 		if(triggerParam.flip == false)
 		{
 			factor += Time.deltaTime * triggerParam.speed;
@@ -139,19 +139,22 @@ public class BloomController : MonoBehaviour
 			factor -= Time.deltaTime * triggerParam.speed;
 		}
 
-		// Å‘å’l‚É’B‚µ‚½
+		// æœ€å¤§å€¤ã«é”ã—ãŸ
 		if (factor > triggerParam.factorMax - 0.01f) triggerParam.flip = true;
 
-		// value ‚Ì’l‚Å”»’è
+		// value ã®å€¤ã§åˆ¤å®š
 		if (factor < (triggerParam.factorMin + 0.01f) && triggerParam.flip)
 		{
-			// Å¬’l‚É“’B‚µ‚½ -> 1‰•œŠ®—¹
+			// æœ€å°å€¤ã«åˆ°é”ã—ãŸ -> 1å¾€å¾©å®Œäº†
 			triggerParam.trigger = false;
 			triggerParam.flip = false;
 			factor = 0f;
 		}
 	}
 
-	// ƒpƒ‰ƒ[ƒ^[‘S‰Šú‰»
-
+	// ç‚¹ç¯é–‹å§‹
+	public void StartTrigger()
+    {
+		triggerParam.trigger = true;
+    }
 }

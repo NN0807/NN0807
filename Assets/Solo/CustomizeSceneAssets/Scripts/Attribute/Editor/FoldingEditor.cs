@@ -5,162 +5,162 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-// ‘S‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚É“K‰
-// ƒfƒtƒHƒ‹ƒg‚Å‚±‚ÌƒGƒfƒBƒ^‚ğ“K‰
+// å…¨ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«é©å¿œ
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã“ã®ã‚¨ãƒ‡ã‚£ã‚¿ã‚’é©å¿œ
 [CustomEditor(typeof(MonoBehaviour), true, isFallback = true)]
-// •¡”ƒIƒuƒWƒFƒNƒg‚É“K‰
+// è¤‡æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«é©å¿œ
 [CanEditMultipleObjects]
 public class FoldingEditor : Editor
 {
-    // Ü‚èô‚İó‘Ô‚ğ•Û‚·‚éƒfƒBƒNƒVƒ‡ƒiƒŠ
+    // æŠ˜ã‚Šç•³ã¿çŠ¶æ…‹ã‚’ä¿æŒã™ã‚‹ãƒ‡ã‚£ã‚¯ã‚·ãƒ§ãƒŠãƒª
     private Dictionary<string, bool> foldoutStates = new Dictionary<string, bool>();
-    // ‰Šú‰»ó‘Ô
+    // åˆæœŸåŒ–çŠ¶æ…‹
     private bool initialized;
 
-    // ƒGƒfƒBƒ^‚ª—LŒø‰»‚³‚ê‚½
+    // ã‚¨ãƒ‡ã‚£ã‚¿ãŒæœ‰åŠ¹åŒ–ã•ã‚ŒãŸæ™‚
     private void OnEnable()
     {
-        // ‰Šú‰»ó‘Ô‚ğ false
+        // åˆæœŸåŒ–çŠ¶æ…‹ã‚’ false
         initialized = false;
     }
 
-    // ƒCƒ“ƒXƒyƒNƒ^‚É•\¦‚·‚éGUI
+    // ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ã«è¡¨ç¤ºã™ã‚‹GUI
     public override void OnInspectorGUI()
     {
-        // ƒIƒuƒWƒFƒNƒg‚ğXV
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ›´æ–°
         serializedObject.Update();
-        // ƒZƒbƒgƒAƒbƒvˆ—
+        // ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—å‡¦ç†
         Setup();
 
-        // Ü‚èô‚İ•`‰æ
+        // æŠ˜ã‚Šç•³ã¿æç”»
         DrawFoldingProperties();
 
-        // •ÏX‚ğSerializedObject‚É“K—p
+        // å¤‰æ›´ã‚’SerializedObjectã«é©ç”¨
         serializedObject.ApplyModifiedProperties();
     }
 
-    // ƒZƒbƒgƒAƒbƒvˆ—
+    // ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—å‡¦ç†
     void Setup()
     {
-        // ‚à‚¤‚·‚Å‚É‰Šú‰»‚³‚ê‚Ä‚¢‚ê‚ÎƒZƒbƒgƒAƒbƒv‚µ‚È‚¢
+        // ã‚‚ã†ã™ã§ã«åˆæœŸåŒ–ã•ã‚Œã¦ã„ã‚Œã°ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ãªã„
         if (initialized) { return; }
 
-        // ƒZƒbƒgƒAƒbƒvŠ®—¹
+        // ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—å®Œäº†
         initialized = true;
     }
 
-    // Ü‚èô‚İƒvƒƒpƒeƒB•`‰æ
+    // æŠ˜ã‚Šç•³ã¿ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£æç”»
     void DrawFoldingProperties()
     {
-        // ©g‚ÌƒNƒ‰ƒX‚©‚çƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾
+        // è‡ªèº«ã®ã‚¯ãƒ©ã‚¹ã‹ã‚‰ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—
         List<FieldInfo> objectFields;
         int length = EditorTypes.Get(target, out objectFields);
 
-        // Œ»İÜ‚èô‚İƒOƒ‹[ƒv“à‚©‚Ç‚¤‚©
+        // ç¾åœ¨æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—å†…ã‹ã©ã†ã‹
         bool insideFoldGroup = true;
 
-        // Œ»İ‚ÌÜ‚èô‚İƒOƒ‹[ƒv–¼
+        // ç¾åœ¨ã®æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—å
         string currentFoldGroupName = "";
 
-        // Ü‚èô‚İ‚ğ‚µ‚½‚©
+        // æŠ˜ã‚Šç•³ã¿ã‚’ã—ãŸã‹
         bool isFolding = false;
 
-        // ƒtƒB[ƒ‹ƒh•ªƒ‹[ƒv
+        // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åˆ†ãƒ«ãƒ¼ãƒ—
         for (int i = 0; i < length; i++)
         {
-            // ƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾
+            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—
             FieldInfo field = objectFields[i];
 
-            // StartFoldingAttribute ‚ğ‚Â‚©ƒ`ƒFƒbƒN
+            // StartFoldingAttribute ã‚’æŒã¤ã‹ãƒã‚§ãƒƒã‚¯
             StartFoldingAttribute startFold = field.GetCustomAttribute<StartFoldingAttribute>();
             if (startFold != null)
             {
-                // Ü‚èô‚İ‚ğ‚µ‚½
+                // æŠ˜ã‚Šç•³ã¿ã‚’ã—ãŸ
                 isFolding = true;
 
-                // ƒtƒH[ƒ‹ƒhƒAƒEƒgó‘Ô‚ğæ“¾i–³‚¯‚ê‚Î’Ç‰Áj
+                // ãƒ•ã‚©ãƒ¼ãƒ«ãƒ‰ã‚¢ã‚¦ãƒˆçŠ¶æ…‹ã‚’å–å¾—ï¼ˆç„¡ã‘ã‚Œã°è¿½åŠ ï¼‰
                 if (!foldoutStates.ContainsKey(startFold.foldName))
                 {
-                    // ƒfƒtƒHƒ‹ƒg‚Í•Â‚¶‚é
+                    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯é–‰ã˜ã‚‹
                     foldoutStates[startFold.foldName] = false;
                 }
 
-                // ƒtƒH[ƒ‹ƒhƒAƒEƒgƒOƒ‹[ƒv‚ğ•\¦
+                // ãƒ•ã‚©ãƒ¼ãƒ«ãƒ‰ã‚¢ã‚¦ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ã‚’è¡¨ç¤º
                 foldoutStates[startFold.foldName] = EditorGUILayout.Foldout(foldoutStates[startFold.foldName], startFold.foldName, true);
-                // Œ»İ‚ÌÜ‚èô‚İƒOƒ‹[ƒv–¼‚ğİ’è
+                // ç¾åœ¨ã®æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—åã‚’è¨­å®š
                 currentFoldGroupName = startFold.foldName;
-                // Ü‚èô‚İƒOƒ‹[ƒv“à‚É“ü‚Á‚½‚±‚Æ‚ğ‹L˜^
+                // æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—å†…ã«å…¥ã£ãŸã“ã¨ã‚’è¨˜éŒ²
                 insideFoldGroup = true;
             }
 
-            // Ü‚èô‚İƒOƒ‹[ƒv“à‚È‚ç‚Î•`‰æ
+            // æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—å†…ãªã‚‰ã°æç”»
             if (!insideFoldGroup || (foldoutStates.ContainsKey(currentFoldGroupName) && foldoutStates[currentFoldGroupName]))
             {
-                // EndFoldingAttribute ‚ğ‚Â‚©ƒ`ƒFƒbƒN
+                // EndFoldingAttribute ã‚’æŒã¤ã‹ãƒã‚§ãƒƒã‚¯
                 EndFoldingAttribute endFold = field.GetCustomAttribute<EndFoldingAttribute>();
                 if (endFold != null)
                 {
-                    // Ü‚èô‚İƒOƒ‹[ƒv‚ğI—¹
+                    // æŠ˜ã‚Šç•³ã¿ã‚°ãƒ«ãƒ¼ãƒ—ã‚’çµ‚äº†
                     insideFoldGroup = false;
                     currentFoldGroupName = "";
                 }
 
-                // ƒVƒŠƒAƒ‰ƒCƒY‚³‚ê‚½ƒvƒƒpƒeƒB‚ğæ“¾
+                // ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã•ã‚ŒãŸãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å–å¾—
                 SerializedProperty property = serializedObject.FindProperty(field.Name);
                 if (property != null)
                 {
                     EditorGUI.indentLevel++;
-                    // ƒvƒƒpƒeƒB‚ğ•`‰æ
+                    // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’æç”»
                     EditorGUILayout.PropertyField(property, true);
                     EditorGUI.indentLevel--;
                 }
             }
         }
 
-        // ˆê“x‚àÜ‚èô‚İˆ—‚ğ‚µ‚Ä‚¢‚È‚¢‚È‚ç
-        // ƒfƒtƒHƒ‹ƒgƒCƒ“ƒXƒyƒNƒ^‚ğ•\¦
+        // ä¸€åº¦ã‚‚æŠ˜ã‚Šç•³ã¿å‡¦ç†ã‚’ã—ã¦ã„ãªã„ãªã‚‰
+        // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ã‚’è¡¨ç¤º
         if(!isFolding) { DrawDefaultInspector(); }
     }
 }
 
-// ƒ^ƒCƒvî•ñ‚ğŠÇ—
+// ã‚¿ã‚¤ãƒ—æƒ…å ±ã‚’ç®¡ç†
 static class EditorTypes
 {
-    // ƒtƒB[ƒ‹ƒhî•ñæ“¾
+    // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±å–å¾—
     public static int Get(UnityEngine.Object target, out List<FieldInfo> objectFields)
     {
-        // ƒtƒB[ƒ‹ƒhî•ñ
+        // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±
         Dictionary<int, List<FieldInfo>> fields = new Dictionary<int, List<FieldInfo>>();
-        // Œ^‚ğæ“¾
+        // å‹ã‚’å–å¾—
         Type t = target.GetType();
-        // ƒnƒbƒVƒ…ƒR[ƒhæ“¾
+        // ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰å–å¾—
         int hash = t.GetHashCode();
-        // ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg‚ÌŒ^‚©‚ç‚·‚×‚Ä‚ÌƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾‚µAŒ^ƒcƒŠ[‚Ì‡˜‚ÉŠî‚Ã‚¢‚Ä•À‚×‘Ö‚¦
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹ã‹ã‚‰ã™ã¹ã¦ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—ã—ã€å‹ãƒ„ãƒªãƒ¼ã®é †åºã«åŸºã¥ã„ã¦ä¸¦ã¹æ›¿ãˆ
         IList<Type> typeTree = t.GetTypeTree();
         objectFields = target.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .OrderByDescending(x => typeTree.IndexOf(x.DeclaringType))
                 .ToList();
 
-        // æ“¾‚µ‚½ƒtƒB[ƒ‹ƒhî•ñ‚Ì”‚ğ•Ô‚·
+        // å–å¾—ã—ãŸãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã®æ•°ã‚’è¿”ã™
         return objectFields.Count;
     }
 
-    // Œp³‚µ‚Ä‚¢‚éƒNƒ‰ƒX‚ÌŒ^‚ğƒŠƒXƒg‚Å•Ô‚·
+    // ç¶™æ‰¿ã—ã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã®å‹ã‚’ãƒªã‚¹ãƒˆã§è¿”ã™
     public static IList<Type> GetTypeTree(this Type t)
     {
-        // Œp³Œ^ƒŠƒXƒg
+        // ç¶™æ‰¿å‹ãƒªã‚¹ãƒˆ
         var types = new List<Type>();
-        // ”h¶ƒNƒ‰ƒX‚Å‚ ‚éŒÀ‚èƒ‹[ƒv
+        // æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã§ã‚ã‚‹é™ã‚Šãƒ«ãƒ¼ãƒ—
         while (t.BaseType != null)
         {
-            // ƒŠƒXƒg‚É’Ç‰Á
+            // ãƒªã‚¹ãƒˆã«è¿½åŠ 
             types.Add(t);
-            // Šî’êƒNƒ‰ƒX‚É•ÏX
+            // åŸºåº•ã‚¯ãƒ©ã‚¹ã«å¤‰æ›´
             t = t.BaseType;
         }
 
-        // ƒŠƒXƒg‚ğ•Ô‚·
+        // ãƒªã‚¹ãƒˆã‚’è¿”ã™
         return types;
     }
 }

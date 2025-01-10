@@ -48,74 +48,98 @@ MonoBehaviour:
   - ModelPrefab: {fileID: 2043669617083626195, guid: 2b185cdd0d45dc14782ff611b68b07e4,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 8e5e4016d6276204aa0879e0f5d3a743, type: 3}
+    IconSprite: {fileID: 21300000, guid: db4a30f973475bd47b9e666fa714be33, type: 3}
   - ModelPrefab: {fileID: 1889568696295380478, guid: a14061eeef8f4144cbf22ed26cf5e239,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 58593e092549aad46bd5a81395cdd3fb, type: 3}
+    IconSprite: {fileID: 21300000, guid: 76abc99f509268e4682e8ed32a9ecc97, type: 3}
   - ModelPrefab: {fileID: 470304954711932054, guid: 3d370b6b8556b784999375b6ba56a133,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 1fd97b946dcb5dc48b73a38659d5052e, type: 3}
+    IconSprite: {fileID: 21300000, guid: 3a59b49ecec12ab48b8e3c533e10d442, type: 3}
   - ModelPrefab: {fileID: 7466873778185145858, guid: bdca50b69ce364f47a1f4b996c937c84,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: ce4f28c45ef1e8643b6c66c6b36dace9, type: 3}
+    IconSprite: {fileID: 21300000, guid: e56e698620de7be4da92cd22df099d85, type: 3}
   - ModelPrefab: {fileID: 2426333331532229594, guid: 9839c003efc9f0a46891618890c9daae,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 64eda33beca97b748a1153ac22ff79ab, type: 3}
+    IconSprite: {fileID: 21300000, guid: 47625a442cdde7549a330df4ae1922c5, type: 3}
   - ModelPrefab: {fileID: 6567642624862665829, guid: 53cea148f6c1e1340bfac75c6e22aefc,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 7d45094eab2b4434e9825f6f5146027c, type: 3}
+    IconSprite: {fileID: 21300000, guid: 07d94c873d259ce469da57ab80dee12e, type: 3}
   - ModelPrefab: {fileID: 5633285067356447726, guid: 44a2622c3c62ebb47a12a1420794a76e,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: 37ab1b21d7aaa7842935684cf01dc531, type: 3}
+    IconSprite: {fileID: 21300000, guid: 1a76b93f1d92fcd488c819f99a957b67, type: 3}
   - ModelPrefab: {fileID: 1195995091984151011, guid: 2ec9f156ad4ecd840b53be9f1c70a5d9,
       type: 3}
     textNameSprite: {fileID: 21300000, guid: b0580dfb7f0027049b04ee9fd73d8597, type: 3}
+    IconSprite: {fileID: 21300000, guid: 64eac51640881c644a5ad301792a4d2e, type: 3}
   legList:
   - ModelPrefab: {fileID: 9222866986270178869, guid: 2629fe042d185f544ba2a43d9ea26539,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 9374f5d61e59d9d42968331637ccdb4e, type: 3}
+    IconSprite: {fileID: 21300000, guid: db4a30f973475bd47b9e666fa714be33, type: 3}
   - ModelPrefab: {fileID: 1710044784648014978, guid: e8305ba72394609448cbe86e5aace84b,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 9903e25e0c0ac9b46906f4ec14af6915, type: 3}
+    IconSprite: {fileID: 21300000, guid: 76abc99f509268e4682e8ed32a9ecc97, type: 3}
   - ModelPrefab: {fileID: 4853391483632494721, guid: 63924fcf5ff65484697d2aa45af3f78b,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 750c395ed20ffbb4f80093b570a64936, type: 3}
+    IconSprite: {fileID: 21300000, guid: 3a59b49ecec12ab48b8e3c533e10d442, type: 3}
   - ModelPrefab: {fileID: 2620138599949869324, guid: a9ced180e7860004caf3ca6de2c82b2b,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: e479ba1c21a57c44689232ff2e39fea1, type: 3}
+    IconSprite: {fileID: 21300000, guid: e56e698620de7be4da92cd22df099d85, type: 3}
   - ModelPrefab: {fileID: 2226225997618655581, guid: abc06ffedb08b4b498940d8bb5efb693,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: bfa012256db90b74fa3d0397026f80db, type: 3}
+    IconSprite: {fileID: 21300000, guid: 47625a442cdde7549a330df4ae1922c5, type: 3}
   - ModelPrefab: {fileID: 2429907259113136909, guid: 41907eeabd5ef834d80e5052db2b4796,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 2b2f97d0577486842972c8237ad5dbcf, type: 3}
+    IconSprite: {fileID: 21300000, guid: 07d94c873d259ce469da57ab80dee12e, type: 3}
   - ModelPrefab: {fileID: 6061366528973448936, guid: 0158d5a1d37c12041b6135d6876d2f9b,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 39bb8a8066617cb46afec708fe51eb49, type: 3}
+    IconSprite: {fileID: 21300000, guid: 1a76b93f1d92fcd488c819f99a957b67, type: 3}
   - ModelPrefab: {fileID: 7208804631738049545, guid: 144dc519b21cfd84a9320c6d2e59d46a,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 9b8b0bcf6142c1b4faed30ebf0390b23, type: 3}
+    IconSprite: {fileID: 21300000, guid: 64eac51640881c644a5ad301792a4d2e, type: 3}
   punchList:
   - ModelPrefab: {fileID: 3919211669686098008, guid: 9ec20f04bae1f274ea38ba214a9b8894,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 626b77938683c004ba72ea108c076e11, type: 3}
+    IconSprite: {fileID: 21300000, guid: db4a30f973475bd47b9e666fa714be33, type: 3}
   - ModelPrefab: {fileID: 2256125795488631198, guid: 34aa95c08d1204f48afa0ccf49a667c6,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 17628ad4415d12642b307ac3a83696c1, type: 3}
+    IconSprite: {fileID: 21300000, guid: 76abc99f509268e4682e8ed32a9ecc97, type: 3}
   - ModelPrefab: {fileID: 649564744959094756, guid: d1701d5c570cd4d418fa81e7b511cc4c,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 3c774b7315b43574cbac9c3192e00250, type: 3}
+    IconSprite: {fileID: 21300000, guid: 3a59b49ecec12ab48b8e3c533e10d442, type: 3}
   - ModelPrefab: {fileID: 5608367184888467609, guid: cf7e0d7df5d1bf24bbf7c31c97be72b9,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 37ce4d7494f348f4e9069951ef5546b8, type: 3}
+    IconSprite: {fileID: 21300000, guid: e56e698620de7be4da92cd22df099d85, type: 3}
   - ModelPrefab: {fileID: 8200501759366127624, guid: f1de83e97ba81a747a4be36363efa2c7,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: b6a0b2b43bb98b54bb46ca18d4ec4fc3, type: 3}
+    IconSprite: {fileID: 21300000, guid: 47625a442cdde7549a330df4ae1922c5, type: 3}
   - ModelPrefab: {fileID: 6568202633004773143, guid: cfa6ebcc1b6a1744ba2e83de26b81a0b,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 7fda5487f696da645a9f3f500954e280, type: 3}
+    IconSprite: {fileID: 21300000, guid: 07d94c873d259ce469da57ab80dee12e, type: 3}
   - ModelPrefab: {fileID: 7348829078440242605, guid: f67e345ea47d37a4f952324f221d8c2c,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 7eeec659911f7f24dbb29dba2ad2f18c, type: 3}
+    IconSprite: {fileID: 21300000, guid: 1a76b93f1d92fcd488c819f99a957b67, type: 3}
   - ModelPrefab: {fileID: 6080494498901066152, guid: eb04038d431fa064cad07383bdc7b5bd,
       type: 3}
-    textNameSprite: {fileID: 0}
+    textNameSprite: {fileID: 21300000, guid: 104d3f4d7779d6d4ea725a9c28d40e82, type: 3}
+    IconSprite: {fileID: 21300000, guid: 64eac51640881c644a5ad301792a4d2e, type: 3}

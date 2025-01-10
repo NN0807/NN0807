@@ -1,18 +1,18 @@
 using UnityEngine;
 
-// Ü‚èô‚İŠJn
+// æŠ˜ã‚Šç•³ã¿é–‹å§‹
 public class StartFoldingAttribute : PropertyAttribute
 {
     public string foldName;
 
-    // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     public StartFoldingAttribute(string name)
     {
         this.foldName = name;
     }
 }
 
-// Ü‚èô‚İI—¹
+// æŠ˜ã‚Šç•³ã¿çµ‚äº†
 public class EndFoldingAttribute : PropertyAttribute
 {
 

@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class PartsList : MonoBehaviour
 {
-	// ƒŠƒXƒg\‘¢‘Ì
+	// ãƒªã‚¹ãƒˆæ§‹é€ ä½“
 	[System.Serializable]
 	public struct PartsListStruct
 	{
-		[OverwriteLabel("ƒ‚ƒfƒ‹ƒvƒŒƒnƒu")]
+		[OverwriteLabel("ãƒ¢ãƒ‡ãƒ«ãƒ—ãƒ¬ãƒãƒ–")]
 		public GameObject ModelPrefab;
-		[OverwriteLabel("ƒp[ƒc–¼ƒXƒvƒ‰ƒCƒg")]
+		[OverwriteLabel("ãƒ‘ãƒ¼ãƒ„åã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ")]
 		public Sprite textNameSprite;
+		[OverwriteLabel("ãƒ‘ãƒ¼ãƒ„åã‚¢ã‚¤ã‚³ãƒ³")]
+		public Sprite IconSprite;
 	}
 
-	///<summary>‘ÌƒŠƒXƒg</summary>
+	///<summary>ä½“ãƒªã‚¹ãƒˆ</summary>
 	[SerializeField]
 	public PartsListStruct[] bodyList;
 
-	///<summary>‘«ƒŠƒXƒg</summary>
+	///<summary>è¶³ãƒªã‚¹ãƒˆ</summary>
 	[SerializeField]
 	public PartsListStruct[] legList;
 
-	///<summary>ƒpƒ“ƒ`ƒŠƒXƒg</summary>
+	///<summary>ãƒ‘ãƒ³ãƒãƒªã‚¹ãƒˆ</summary>
 	[SerializeField]
 	public PartsListStruct[] punchList;
 }

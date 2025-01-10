@@ -4,59 +4,59 @@ using UnityEngine;
 
 public class Scroll : MonoBehaviour
 {
-    ///<summary>¶¬‚·‚éƒXƒNƒ[ƒ‹‰æ‘œƒvƒŒƒnƒu</summary>
-    [SerializeField]
-    [OverwriteLabel("ƒXƒNƒ[ƒ‹‰æ‘œƒvƒŒƒnƒu")]
-    private GameObject ScrollPrefab = null;
+	///<summary>ç”Ÿæˆã™ã‚‹ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç”»åƒãƒ—ãƒ¬ãƒãƒ–</summary>
+	[SerializeField]
+	[OverwriteLabel("ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç”»åƒãƒ—ãƒ¬ãƒãƒ–")]
+	private GameObject ScrollPrefab = null;
 
-    ///<summary>¶¬‚µ‚Ä‚¢‚é‰æ‘œƒIƒuƒWƒFƒNƒg</summary>
-    [HideInInspector]
-    private GameObject[] ScrollObject = new GameObject[2];
+	///<summary>ç”Ÿæˆã—ã¦ã„ã‚‹ç”»åƒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
+	[HideInInspector]
+	private GameObject[] ScrollObject = new GameObject[2];
 
-    ///<summary>ƒXƒNƒ[ƒ‹ƒXƒs[ƒh</summary>
-    [SerializeField]
-    [OverwriteLabel("ƒXƒNƒ[ƒ‹ƒXƒs[ƒh")]
-    private float scrollSpeed = 0f;
+	///<summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¹ãƒ”ãƒ¼ãƒ‰</summary>
+	[SerializeField]
+	[OverwriteLabel("ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¹ãƒ”ãƒ¼ãƒ‰")]
+	private float scrollSpeed = 0f;
 
-    private void Awake()
-    {
-        // ƒXƒNƒ[ƒ‹‰æ‘œ¶¬
-        ScrollObject[0] = Instantiate(ScrollPrefab, transform).gameObject;
+	private void Awake()
+	{
+		// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç”»åƒç”Ÿæˆ
+		ScrollObject[0] = Instantiate(ScrollPrefab, transform).gameObject;
 
-        // Ÿ‚Ì‰æ‘œ‚à¶¬
-        ScrollObject[1] = Instantiate(ScrollPrefab, transform).gameObject;
-        ScrollObject[1].transform.localPosition = new Vector3(1920f, 0f, 0f);
-    }
+		// æ¬¡ã®ç”»åƒã‚‚ç”Ÿæˆ
+		ScrollObject[1] = Instantiate(ScrollPrefab, transform).gameObject;
+		ScrollObject[1].transform.localPosition = new Vector3(1920f, 0f, 0f);
+	}
 
-    private void Update()
-    {
-        // ƒXƒNƒ[ƒ‹ˆ—
-        MoveScroll();
+	private void Update()
+	{
+		// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†
+		MoveScroll();
 
-        // ‰æ–Ê‚©‚çŠO‘¤‚Éo‚½‰æ‘œ‚ğŠJnˆÊ’u‚É–ß‚·
-        ResetPos();
-    }
+		// ç”»é¢ã‹ã‚‰å¤–å´ã«å‡ºãŸç”»åƒã‚’é–‹å§‹ä½ç½®ã«æˆ»ã™
+		ResetPos();
+	}
 
-    ///<summary>ƒXƒNƒ[ƒ‹</summary>
-    private void MoveScroll()
-    {
-        // ‰æ‘œ‚ğƒXƒNƒ[ƒ‹
-        for (int i = 0; i < 2; i++)
-        {
-            ScrollObject[i].transform.localPosition -= new Vector3(1f * scrollSpeed, 0f, 0f);
-        }
-    }
+	///<summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«</summary>
+	private void MoveScroll()
+	{
+		// ç”»åƒã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
+		for (int i = 0; i < 2; i++)
+		{
+			ScrollObject[i].transform.localPosition -= new Vector3(1f * scrollSpeed, 0f, 0f);
+		}
+	}
 
-    ///<summary>ƒXƒNƒ[ƒ‹‚µ‚«‚Á‚½‰æ‘œ‚ğŠJnˆÊ’u‚É–ß‚·</summary>
-    private void ResetPos()
-    {
-        // Še‰æ‘œ‚ª‰æ–Ê”ÍˆÍ‚ğ’´‚¦‚½‚çŸ‚Ì‰æ‘œƒXƒNƒ[ƒ‹ŠJnˆÊ’u‚É–ß‚·
-        for (int i = 0; i < 2; i++)
-        {
-            if (ScrollObject[i].transform.localPosition.x < -1920f)
-            {
-                ScrollObject[i].transform.localPosition = new Vector3(1920f, 0f, 0f);
-            }
-        }
-    }
+	///<summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãã£ãŸç”»åƒã‚’é–‹å§‹ä½ç½®ã«æˆ»ã™</summary>
+	private void ResetPos()
+	{
+		// å„ç”»åƒãŒç”»é¢ç¯„å›²ã‚’è¶…ãˆãŸã‚‰æ¬¡ã®ç”»åƒã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é–‹å§‹ä½ç½®ã«æˆ»ã™
+		for (int i = 0; i < 2; i++)
+		{
+			if (ScrollObject[i].transform.localPosition.x < -1920f)
+			{
+				ScrollObject[i].transform.localPosition = new Vector3(1920f, 0f, 0f);
+			}
+		}
+	}
 }

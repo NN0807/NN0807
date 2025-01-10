@@ -1,4 +1,4 @@
-using System.Reflection;
+ï»¿using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
@@ -9,25 +9,22 @@ public class ButtonDrawer : PropertyDrawer
     {
         ButtonAttribute buttonAttribute = (ButtonAttribute)attribute;
 
-        // ƒvƒƒpƒeƒB–¼‚Ìƒ‰ƒxƒ‹‚ğ•`‰æ‚µAƒ‰ƒxƒ‹ˆÈŠO‚Ìrect‚ğ•Ô‚·
+        // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£åã®ãƒ©ãƒ™ãƒ«ã‚’æç”»ã—ã€ãƒ©ãƒ™ãƒ«ä»¥å¤–ã®rectã‚’è¿”ã™
         Rect rect_content = EditorGUI.PrefixLabel(position, label);
 
-        // ƒ{ƒ^ƒ“‚ğ•`‰æ
+        // ãƒœã‚¿ãƒ³ã‚’æç”»
         if (GUI.Button(rect_content, buttonAttribute.buttonName))
         {
             try
             {
-                // ƒƒ\ƒbƒh–¼‚©‚çƒƒ\ƒbƒh‚ğæ“¾AÀs
+                // ãƒ¡ã‚½ãƒƒãƒ‰åã‹ã‚‰ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å–å¾—ã€å®Ÿè¡Œ
                 MethodInfo method = property.serializedObject.targetObject.GetType().GetMethod(buttonAttribute.methodName);
                 method.Invoke(property.serializedObject.targetObject, null);
             }
             catch
             {
-                Debug.Log(buttonAttribute.methodName + " ‚ğÀs‚Å‚«‚Ü‚¹‚ñ");
+                Debug.Log(buttonAttribute.methodName + " ã‚’å®Ÿè¡Œã§ãã¾ã›ã‚“");
             }
-
         }
-
-
     }
 }
