@@ -130,9 +130,9 @@ public class CharacterManager : MonoBehaviour
 
     public bool    GetAnimationEvent()  { return animations[2].GetAnimationFlag();                                       }
 
-    public float   GetHorizontalInput() { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f; }
+    public float   GetHorizontalInput() { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f;  }
 
-    public float   GetVerticalInput()   { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f; }
+    public float   GetVerticalInput()   { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f;  }
 
     public Vector3 GetMoveForward()     { return _characterMove.GetMoveForward();                                        }
 }

@@ -5,42 +5,66 @@ using UnityEngine.InputSystem;
 
 public class PlayerCamera : MonoBehaviour
 {
-    // カメラオブジェクト
+    // 入力処理
     [SerializeField]
-    public GameObject mainCamera;
+    private HakopanControls _InputActions;
 
-    // 調整
-    [SerializeField]
-    public Vector3 Offset;
 
-    [SerializeField] private float sensitivity = 100f;
+
     private Vector2 lookInput;
-    private float xRotation = 0f;
-    private Transform playerBody;
 
-    private void Awake()
+
+    private Vector3 Offset;
+
+    void Awake()
     {
-        // プレイヤーのTransformを取得（カメラがプレイヤーに追従する場合）
-        playerBody = transform.parent;
+        _InputActions = new HakopanControls();
+        //Offset=new Vector3()
     }
 
-    // InputActionから呼び出されるメソッド
-    public void OnLook(InputAction.CallbackContext context)
+    // ゲーム実行時にこのオブジェクトが存在していたら実行される
+    void OnEnable()
     {
-        lookInput = context.ReadValue<Vector2>();
+        // 入力実行中イベントを追加
+        _InputActions.Player.Look.performed += OnLook;
+        // 入力キャンセルイベントを追加
+        _InputActions.Player.Look.canceled  += OnLook;
+        // 有効化
+        _InputActions.Enable();
     }
 
-    private void Update()
+    // ゲーム実行中にこのオブジェクトが削除されたら実行される
+    void OnDisable()
     {
-        float mouseX = lookInput.x * sensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * sensitivity * Time.deltaTime;
+        // 入力実行中イベントから削除
+        _InputActions.Player.Look.performed -= OnLook;
+        // 入力キャンセルイベントから削除
+        _InputActions.Player.Look.canceled  -= OnLook;
+        // 無効化
+        _InputActions.Disable();
+    }
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);  // 上下の視点制限
+    void OnLook(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            lookInput = context.ReadValue<Vector2>();
+            Debug.Log("Looking with input: " + lookInput);
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            lookInput = Vector2.zero;
+            Debug.Log("Stopped looking");
+        }
+    }
 
-        // カメラの上下の動き
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        // プレイヤーの左右の動き
-        playerBody.Rotate(Vector3.up * mouseX);
+    void Update()
+    {
+        // カメラの回転処理
+        if (lookInput != Vector2.zero)
+        {
+            transform.Rotate(Vector3.up, lookInput.x * 20, Space.World);
+            transform.Rotate(Vector3.right, -lookInput.y * 20, Space.Self);
+        }
     }
 }

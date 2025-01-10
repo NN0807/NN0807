@@ -26,6 +26,11 @@ public class CharacterOperation : MonoBehaviour
     [SerializeField]
     public bool _attackFlag    = false;
 
+    // ポーズマネージャー
+    // ※ポーズ画面が閉じた瞬間に攻撃するのを防ぐ
+    [SerializeField]
+    public PauseManager _pauseManager;
+
     // ダッシュ中イベント
     public event Action ActivateDashEvent;
     // ダッシュ(解除)イベント
@@ -36,6 +41,9 @@ public class CharacterOperation : MonoBehaviour
     {
         _InputActions = new HakopanControls();
         _InputActions.Enable();
+
+        // PauseManagerを取得
+        _pauseManager = FindObjectOfType<PauseManager>();
     }
 
     public void OperationUpdate(CharacterManager manager)
@@ -44,7 +52,8 @@ public class CharacterOperation : MonoBehaviour
         _attackFlag = manager.GetCurrentAnimations() != "Attack" ? false : true;
 
         // 攻撃
-        if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack") 
+        if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack"&&
+            _pauseManager != null && _pauseManager.IsPaused)  
         {
             _attackFlag = true;
             manager.SetAnimations(AnimationType.Attack);
@@ -77,7 +86,7 @@ public class CharacterOperation : MonoBehaviour
         // ポーズ
         if (_InputActions.Player.Pause.triggered)
         {
-
+            
         }
     }
 

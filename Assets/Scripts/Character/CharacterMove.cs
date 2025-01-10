@@ -15,14 +15,11 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     private Rigidbody _rigidbody;
 
 
-
-    public float DashDuration = 1.0f;  // ダッシュの持続時間
-    public float dashCooldown = 1f;  // ダッシュのクールダウン
     private bool IsDashing; // ダッシュフラグ
 
     private float _currentSpeed;
-    private float DashGauge; // 
-    private float lastDashTime;
+
+
 
     public void Initialize(CharacterManager manager)
     {
@@ -46,38 +43,6 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
 
         // 旋回
         Turn();
-
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
-        {
-            //StartDash();
-        }
-    }
-
-    // スタートダッシュ
-    public void StartDash()
-    {
-        IsDashing = true;
-        DashGauge = DashDuration;
-        //LastDashTime = Time.time;
-    }
-
-    void FixedUpdate()
-    {
-        //if (isDashing)
-        //{
-        //    if (dashTime > 0)
-        //    {
-        //        currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.fixedDeltaTime, maxDashSpeed);
-        //        _rigidbody.velocity = transform.forward * currentSpeed;
-        //        dashTime -= Time.fixedDeltaTime;
-        //    }
-        //    else
-        //    {
-        //        isDashing = false;
-        //        currentSpeed = 0f;  // ダッシュ終了後に速度をリセット
-        //    }
-        //}
     }
 
     // 移動処理

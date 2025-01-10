@@ -1495,9 +1495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b597cc124c10f5a4a9d8a53a52bf870a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 963194225}
-  Offset: {x: 0, y: 0, z: 0}
-  sensitivity: 100
 --- !u!1 &1097171936
 GameObject:
   m_ObjectHideFlags: 0
@@ -7608,6 +7605,7 @@ GameObject:
   - component: {fileID: 2134525913}
   - component: {fileID: 2134525915}
   - component: {fileID: 2134525912}
+  - component: {fileID: 2134525916}
   m_Layer: 0
   m_Name: CharacterManager
   m_TagString: Untagged
@@ -7682,9 +7680,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 2134525912}
-  _characterOperation: {fileID: 0}
+  _characterOperation: {fileID: 2134525916}
   _characterUI: {fileID: 0}
   _characterNumber: 0
+--- !u!114 &2134525916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134525911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5207302d60f90645ac44e95b0602cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HorizontalInput: 0
+  _VerticalInput: 0
+  _vibrationFlag: 0
+  _attackFlag: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
