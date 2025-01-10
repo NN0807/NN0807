@@ -53,7 +53,7 @@ public class CharacterOperation : MonoBehaviour
 
         // 攻撃
         if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack"&&
-            _pauseManager != null && _pauseManager.IsPaused)  
+            _pauseManager != null && !_pauseManager.IsPaused)  
         {
             _attackFlag = true;
             manager.SetAnimations(AnimationType.Attack);
