@@ -35,6 +35,11 @@ public class CharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // キャラクター番号から初期生成位置を設定する
+        GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
+        this.transform.position = _mt.Position;
+        this.transform.rotation = _mt.Rotation;
+
         // 操作スクリプトを設定
         TryGetComponent(out _characterOperation);
 
@@ -132,7 +137,7 @@ public class CharacterManager : MonoBehaviour
 
     public float   GetHorizontalInput() { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f;  }
 
-    public float   GetVerticalInput()   { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f;  }
+    public float   GetVerticalInput()   { return _characterOperation ? _characterOperation.GetVerticalInput()   : 0.0f;  }
 
     public Vector3 GetMoveForward()     { return _characterMove.GetMoveForward();                                        }
 }

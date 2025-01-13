@@ -4,9 +4,19 @@ using UnityEngine;
 
 namespace Common
 {
+
+    // 初期化用変数
+    public static class Initialize
+    {
+        public static readonly Vector3    Vector3    = new Vector3   (0.0f, 0.0f, 0.0f      );
+        public static readonly Quaternion Quaternion = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+    }
+
+
     // 定数
     public static class CharacterConst
     {
+        public const int CHARACTER_NUM   = 1;
         public const int CONST_MODEL_NUM = 8;
     }
 
@@ -39,10 +49,10 @@ namespace Common
     {
         public static readonly GenerateTransform[] _generateTransforms = new GenerateTransform[]
         {
-            new GenerateTransform(new Vector3( 0.0f, 2.5f,  2.2f), Quaternion.Euler(0.0f,   0.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3( 0.0f, 2.5f, -2.2f), Quaternion.Euler(0.0f, 180.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3(-2.2f, 2.5f,  0.0f), Quaternion.Euler(0.0f, -90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3( 2.2f, 2.5f,  0.0f), Quaternion.Euler(0.0f,  90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f))
+            new GenerateTransform(new Vector3( 0.0f, 2.5f,  2.2f), Quaternion.Euler(0.0f, -180.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
+            new GenerateTransform(new Vector3( 0.0f, 2.5f, -2.2f), Quaternion.Euler(0.0f,  180.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
+            new GenerateTransform(new Vector3(-2.2f, 2.5f,  0.0f), Quaternion.Euler(0.0f,  -90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
+            new GenerateTransform(new Vector3( 2.2f, 2.5f,  0.0f), Quaternion.Euler(0.0f,   90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f))
         };
     }
 }

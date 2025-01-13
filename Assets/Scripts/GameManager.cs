@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Common;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,10 +17,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private HakopanControls _InputActions;
 
+    /// <summary> キャラクターズ </summary>
+    [SerializeField]
+    //public CharacterManager[] characterManagers = new CharacterManager[CharacterConst.CHARACTER_NUM];
+
     private void Start()
     {
         _InputActions = new HakopanControls();
         _InputActions.Enable();
+
+        // 
+        //GenerateTransform _mt;
+       
+        //for (int Number = 0; Number < CharacterConst.CHARACTER_NUM; Number++) 
+        //{
+        //    _mt = TransformInfo._generateTransforms[characterManagers[Number].GetCharacterNumber()];
+
+        //    characterManagers[Number].SetPosition(_mt.Position);
+        //}
     }
 
     // 更新処理

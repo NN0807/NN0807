@@ -33,6 +33,10 @@ public class CharacterParamAsset : ScriptableObject
     // 最大スタミナ量
     [SerializeField]
     public float MaxStamina;
+
+    // カメラ感度
+    [SerializeField]
+    public float CameraSpeed;
 }
 
 [System.Serializable]

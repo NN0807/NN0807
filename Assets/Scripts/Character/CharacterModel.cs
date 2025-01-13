@@ -43,13 +43,13 @@ public class CharacterModel : MonoBehaviour
 
         // 脚部、体部、武器を 生成 & 登録
         GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
-        Leg    = Instantiate(LegModels[0],    _mt.Position, _mt.Rotation, this.transform);
-        Body   = Instantiate(BodyModels[0],   _mt.Position, _mt.Rotation, this.transform);
-        Weapon = Instantiate(WeaponModels[0], _mt.Position, _mt.Rotation, this.transform);
+        Leg    = Instantiate(LegModels[0],   this.transform);
+        Body   = Instantiate(BodyModels[0],  this.transform);
+        Weapon = Instantiate(WeaponModels[0],this.transform);
         Leg.   transform.localScale = _mt.Scale;
         Body.  transform.localScale = _mt.Scale;
         // 武器は体部に格納しておく為、拡縮値を"0"にしておく
-        Weapon.transform.localScale = new Vector3(0f, 0f, 0f);
+        Weapon.transform.localScale = Initialize.Vector3;
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
         manager.RegisterPart(Weapon);
@@ -187,4 +187,7 @@ public class CharacterModel : MonoBehaviour
 
         return null;
     }
+
+    // モデルの位置取得関数
+    public Vector3 GetModelPosition() { return Leg.transform.position; }
 }

@@ -89,6 +89,8 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     {
         // ダッシュフラグOFF
         IsDashing = false;
+
+        _currentSpeed = 0.0f;
     }
 
     // 衝撃処理

@@ -19,3 +19,4 @@ MonoBehaviour:
   Acceleration: 10
   MaxDashSpeed: 6
   MaxStamina: 5
+  CameraSpeed: 1.5
