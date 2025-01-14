@@ -29,6 +29,11 @@ public class CharacterModel : MonoBehaviour
     private GameObject BodyJoint2  = default;
     private GameObject WeaponJoint = default;
 
+    // GameObjectを引数に取り、生成イベントを処理するためのデリゲート
+    public delegate void ObjectCreatedHandler(GameObject createdObject);
+    // GameObject生成時に通知するイベント
+    public static event ObjectCreatedHandler OnObjectCreated;
+
     // 各部位を生成し、初期化
     public void GenerateAndRegisterParts(CharacterManager manager, int characterNumber)
     {
@@ -53,6 +58,9 @@ public class CharacterModel : MonoBehaviour
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
         manager.RegisterPart(Weapon);
+
+        // イベントで通知
+        OnObjectCreated?.Invoke(Leg);
     }
 
     public void ModelUpdate(CharacterManager manager, int _characterNumber)

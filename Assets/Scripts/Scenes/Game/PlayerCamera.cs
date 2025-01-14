@@ -15,12 +15,15 @@ public class PlayerCamera : MonoBehaviour
     // 視点入力値
     private Vector2 _lookInput;
 
-    // Playerから常に一定の間隔を保つためのオフセット値
-    private Vector3    _offsetPosition = new Vector3     ( 0.0f,    4.6f, 4.0f);
-    private Quaternion _offsetRotate   = Quaternion.Euler(55.0f, -180.0f, 0.0f);
+    // プレイヤーオブジェクト
+    public Transform _playerTransform;  
 
-    [SerializeField]
-    public InputManager _inputManager; 
+    public float rotationSpeed = 10.0f;   // 回転速度
+    public float distance = 5.0f;       // プレイヤーからの距離
+    public float verticalRotationLimit = 80.0f; // 垂直回転の制限角度
+    private Vector3 _offset;            // カメラとプレイヤーの相対位置
+    private float _currentAngleX = 15.0f; // 初期の垂直回転角度（斜め下）
+    private float _currentAngleY = -180.0f;  // 初期の水平回転角度（正面）
 
     void Awake()
     {
@@ -29,11 +32,8 @@ public class PlayerCamera : MonoBehaviour
         // データ設定
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
-        this.transform.position = _offsetPosition;
-        this.transform.rotation = _offsetRotate;
-
-        // 入力スクリプトを設定
-        //TryGetComponent(out _inputManager);
+        // カメラの初期オフセット
+        _offset = new Vector3(0.0f, 2.0f, -distance); 
     }
 
     // ゲーム実行時にこのオブジェクトが存在していたら実行される
@@ -55,6 +55,12 @@ public class PlayerCamera : MonoBehaviour
         _InputActions.Player.Look.canceled  += OnLook;
         // 有効化
         _InputActions.Enable();
+
+        // OnObjectCreatedイベントにSetCameraTargetメソッドを登録
+        // オブジェクト生成時にカメラのターゲットを設定するため
+        // イベントを"static"として宣言されているため、
+        // クラスのインスタンスを作成せずに直接アクセス出来る
+        CharacterModel.OnObjectCreated += SetCameraTarget;
     }
 
     // ゲーム実行中にこのオブジェクトが削除されたら実行される
@@ -66,6 +72,9 @@ public class PlayerCamera : MonoBehaviour
         _InputActions.Player.Look.canceled  -= OnLook;
         // 無効化
         _InputActions.Disable();
+
+        // OnObjectCreatedイベントにSetCameraTargetメソッドを解除
+        CharacterModel.OnObjectCreated -= SetCameraTarget;
     }
 
     void OnLook(InputAction.CallbackContext context)
@@ -84,27 +93,28 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        // マウス入力に対して感度を調整
-        //float cameraSpeed = characterParamAsset.CameraSpeed;
+        // 水平回転（Y軸）
+        _currentAngleY += _lookInput.x * rotationSpeed * Time.deltaTime;
 
-        if (_inputManager.GetCurrentInputDevice() == "Keyboard") 
-        {
-            // マウス感度を下げる（例えば0.5f）
-            //cameraSpeed *= 0.1f;
-        }
-        else
-        {
-            //cameraSpeed = characterParamAsset.CameraSpeed;
-        }
+        // 垂直回転（X軸）と制限
+        _currentAngleX += _lookInput.y * rotationSpeed * Time.deltaTime;
+        _currentAngleX = Mathf.Clamp(_currentAngleX, -verticalRotationLimit, verticalRotationLimit);
 
+        // 回転行列を使ってカメラ位置を更新
+        Quaternion rotation = Quaternion.Euler(_currentAngleX, _currentAngleY, 0);
+        Vector3 direction = rotation * _offset;
 
+        // カメラ位置の更新
+        transform.position = _playerTransform.position + direction;
 
-        // カメラの回転処理
-        if (_lookInput != Vector2.zero)
-        {
-            transform.Rotate(Vector3.up,     _lookInput.x * 1.0f/*cameraSpeed*/, Space.World);
-            transform.Rotate(Vector3.right, -_lookInput.y * 1.0f/*cameraSpeed*/, Space.Self );
-        }
+        // プレイヤーを注視
+        transform.LookAt(_playerTransform);
+    }
+
+    void SetCameraTarget(GameObject target)
+    {
+        // カメラの視線の先を生成されたオブジェクトに設定
+        _playerTransform = target.transform;
     }
 }
  

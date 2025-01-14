@@ -89,5 +89,13 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
             // イベント発火
             CollisionAttackEnterEvent?.Invoke(MoveForward,characterParamAsset.Attack);
         }
+
+        // クリティカルポイントと衝突したら
+        if (collision.gameObject.CompareTag("CriticalPoint"))
+        {
+            Debug.Log("弱点に衝突しました");
+            // イベント発火
+            CollisionAttackEnterEvent?.Invoke(MoveForward, characterParamAsset.Attack * 100.0f);
+        }
     }
 }

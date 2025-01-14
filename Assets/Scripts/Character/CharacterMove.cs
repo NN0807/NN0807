@@ -14,16 +14,21 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     [SerializeField]
     private Rigidbody _rigidbody;
 
+    // ダッシュフラグ
+    private bool IsDashing;
+    // コピーフラグ
+    private bool IsCopying;
 
-    private bool IsDashing; // ダッシュフラグ
-
-    private float _currentSpeed;
+    // 歩き速度
+    private float _walkSpeed;
+    // ダッシュ速度
+    private float _dashSpeed;
 
 
 
     public void Initialize(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider 初期化");
+        Debug.Log("CharacterMove 初期化");
 
         // データ設定
         _rigidbody = GetComponent<Rigidbody>();
@@ -31,12 +36,13 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
 
         // 変数初期化
         MoveForward   = Vector3.zero;
-        _currentSpeed = 0.0f;
+        _walkSpeed    = 0.0f;
+        _dashSpeed    = 0.0f;
     }
 
     public void UpdatePart(CharacterManager manager)
     {
-        Debug.Log("CharacterCollider　更新処理");
+        Debug.Log("CharacterMove　更新処理");
 
         // 移動
         Move(manager);
@@ -56,7 +62,11 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
             Camera.main.transform.right * manager.GetHorizontalInput();
 
         // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す
-        if (!IsDashing) _rigidbody.velocity = MoveForward * (characterParamAsset.MoveSpeed) + new Vector3(0, _rigidbody.velocity.y, 0);
+        if (!IsDashing)
+        {
+            _rigidbody.velocity = MoveForward * (characterParamAsset.MoveSpeed) + new Vector3(0, _rigidbody.velocity.y, 0);
+            _walkSpeed = Mathf.Max(_rigidbody.velocity.x / MoveForward.x, _rigidbody.velocity.y / MoveForward.y, _rigidbody.velocity.z / MoveForward.z);
+        }
     }
 
     // 旋回処理
@@ -78,10 +88,11 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         IsDashing = true;
 
         // 最大ダッシュ速度を越えないように、現在の速度を算出する
-        _currentSpeed = Mathf.Min(_currentSpeed + characterParamAsset.Acceleration * Time.deltaTime, characterParamAsset.MaxDashSpeed);
+        _dashSpeed = Mathf.Min((_walkSpeed + _dashSpeed) + characterParamAsset.Acceleration * Time.deltaTime,
+            characterParamAsset.MaxDashSpeed);
 
         // 移動方向にダッシュスピードを掛ける
-        _rigidbody.velocity = MoveForward * _currentSpeed;
+        _rigidbody.velocity = MoveForward * _dashSpeed;
     }
 
     // ダッシュ終了処理
@@ -90,7 +101,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         // ダッシュフラグOFF
         IsDashing = false;
 
-        _currentSpeed = 0.0f;
+        _dashSpeed = 0.0f;
     }
 
     // 衝撃処理
