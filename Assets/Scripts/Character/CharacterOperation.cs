@@ -72,7 +72,7 @@ public class CharacterOperation : MonoBehaviour
         }
 
         // ダッシュ
-        if (_InputActions.Player.Dash.ReadValue<float>() > 0)
+        if (_InputActions.Player.Dash.ReadValue<float>() > 0 && _InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f)
         {
             // 押されている間の処理を発火
             ActivateDashEvent?.Invoke();
