@@ -175,7 +175,7 @@ public class CharacterModel : MonoBehaviour
         {
             Gizmos.color = Color.red;
 
-            Gizmos.DrawWireSphere(LegJoint.transform.position, 0.02f);
+            Gizmos.DrawSphere(LegJoint.transform.position, 0.02f);
         }
 
     }
