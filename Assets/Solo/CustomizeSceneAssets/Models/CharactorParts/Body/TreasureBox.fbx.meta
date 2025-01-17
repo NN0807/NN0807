@@ -3,7 +3,12 @@ guid: 9cfecb96a1a9c9c41ad9bd58ec80425a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_dustweddingtamtetreasure
+    second: {fileID: 2100000, guid: 2dfa5952c0ce0ff4592177a1dafaac1b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,9 +38,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: treasurebox_idle
-      takeName: treasurebox_idle
-      internalID: -962326145676153527
+      name: Idle
+      takeName: Idle
+      internalID: -3100369314251171874
       firstFrame: 1
       lastFrame: 91
       wrapMode: 0
@@ -62,9 +67,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: treasurebox_walk
-      takeName: treasurebox_walk
-      internalID: 2839170179047616320
+      name: Walk
+      takeName: Walk
+      internalID: 2667949614841947897
       firstFrame: 91
       lastFrame: 150
       wrapMode: 0
@@ -91,11 +96,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: treasurebox_attack
-      takeName: treasurebox_attack
-      internalID: -2172318086761431700
+      name: Attack
+      takeName: Attack
+      internalID: 6720303635017113406
       firstFrame: 151
       lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hit
+      takeName: Hit
+      internalID: -1304387373167265313
+      firstFrame: 290
+      lastFrame: 320
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

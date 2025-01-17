@@ -3,7 +3,12 @@ guid: d4b6d1cd81c150b47ba00bcfe5cd43f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_hatofferinghatdiceschool
+    second: {fileID: 2100000, guid: 16695597af88fd44ca5c92a54ad8385a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,9 +38,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: dice_idle
-      takeName: dice_idle
-      internalID: -6965438078730271612
+      name: Idle
+      takeName: Idle
+      internalID: -3100369314251171874
       firstFrame: 1
       lastFrame: 91
       wrapMode: 0
@@ -60,11 +65,11 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: dice_walk
-      takeName: dice_walk
-      internalID: 6101139222012805503
+      name: Walk
+      takeName: Walk
+      internalID: 2667949614841947897
       firstFrame: 91
       lastFrame: 150
       wrapMode: 0
@@ -91,9 +96,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 91
     - serializedVersion: 16
-      name: dice_attack
-      takeName: dice_attack
-      internalID: -9100761759234406880
+      name: Attack
+      takeName: Attack
+      internalID: 6720303635017113406
       firstFrame: 151
       lastFrame: 290
       wrapMode: 0
@@ -120,9 +125,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: dice_hit
-      takeName: dice_hit
-      internalID: -4266337897645942311
+      name: Hit
+      takeName: Hit
+      internalID: -1304387373167265313
       firstFrame: 290
       lastFrame: 320
       wrapMode: 0
