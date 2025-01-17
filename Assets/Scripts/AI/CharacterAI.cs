@@ -5,40 +5,76 @@ using UnityEngine.AI;
 
 public class CharacterAI : MonoBehaviour
 {
-	/// <summary>
-	/// �i�r���b�V���G�[�W�F���g
+	///<summary>データアセット</summary> 
+	[SerializeField]
+	[ReadOnly]
+	private CharacterParamAsset characterParamAsset;
+
+	///<summary>
+	/// キャラクターマネージャー
+	///</summary>
+	[SerializeField]
+	[ReadOnly]
+	private CharacterManager characterManager;
+
+	///<summary>
+	/// サンダルオブジェクト
 	/// </summary>
 	[SerializeField]
 	[ReadOnly]
-	private NavMeshAgent agent;
+	private GameObject sandalObj;
 
 	/// <summary>
-	/// �S�[���ʒu
+	/// ナビメッシュエージェント
 	/// </summary>
 	[SerializeField]
-	private GameObject goalPos;
-
+	[ReadOnly]
+	public NavMeshAgent agent;
+	  
 	/// <summary>
-	/// AI�p�����[�^�[(��)
+	/// AIパラメーター(仮)
 	/// </summary>
 	private struct AIParam
-    {
-		private float Aggressiveness;	// �U���I��
-		private float Intelligence;		// ����
-		private float MentalStrength;	// �C�̋���
+	{
+		private float Aggressiveness;	// 攻撃的か
+		private float Intelligence;		// 賢さ
+		private float MentalStrength;	// 気の強さ
 	}
 
-	// Start is called before the first frame update
 	private void Awake()
 	{
-		// �G�[�W�F���g�擾
+		// 各コンポーネント取得
 		TryGetComponent(out agent);
+		TryGetComponent(out characterManager);
+
+		// パラメーター取得してエージェントに設定
+		characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
+		agent.speed = characterParamAsset.MoveSpeed;            // 速度
+		agent.angularSpeed = 1000f;								// 旋回速度
+		agent.acceleration = characterParamAsset.Acceleration;  // 加速度
 	}
 
-	// Update is called once per frame
+	private void Start()
+	{
+		// サンダルオブジェクト取得
+		sandalObj = transform.GetChild(0).gameObject;
+	}
+
 	void Update()
 	{
-		// �S�[���ʒu��ݒ�
-		agent.SetDestination(goalPos.transform.position);
+		// アニメーション更新
+		UpdateAnimation();
+	}
+
+	// アニメーション遷移更新処理
+	void UpdateAnimation()
+	{
+		// 移動速度に応じてアニメーション
+		if (agent.velocity.magnitude > 0f)
+		{
+			characterManager.SetAnimations(Common.AnimationType.Walk);
+		}
+		else
+			characterManager.SetAnimations(Common.AnimationType.Idle);
 	}
 }
