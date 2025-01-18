@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private string _currentInputDevice = "Gamepad"; // 初期値をゲームパッドに設定
+    // 初期値をゲームパッドに設定
+    private string _currentInputDevice = "Gamepad"; 
 
     private void OnEnable()
     {
