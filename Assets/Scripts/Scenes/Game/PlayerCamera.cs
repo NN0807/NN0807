@@ -8,32 +8,35 @@ public class PlayerCamera : MonoBehaviour
     // データアセット
     public CharacterParamAsset characterParamAsset;
 
-    // 入力処理
-    [SerializeField]
-    private HakopanControls _InputActions;
-
-    // 視点入力値
-    private Vector2 _lookInput;
-
     // プレイヤーオブジェクト
-    public Transform _playerTransform;  
+    public Transform _playerTransform;
 
-    public float rotationSpeed = 10.0f;   // 回転速度
-    public float distance = 5.0f;       // プレイヤーからの距離
-    public float verticalRotationLimit = 80.0f; // 垂直回転の制限角度
-    private Vector3 _offset;            // カメラとプレイヤーの相対位置
-    private float _currentAngleX = 15.0f; // 初期の垂直回転角度（斜め下）
-    private float _currentAngleY = -180.0f;  // 初期の水平回転角度（正面）
+    // プレイヤーからの距離
+    [SerializeField]
+    public float _distance = 5.0f;
+
+    // カメラとプレイヤーの相対位置
+    private Vector3 _offset;            
+
+    // 初期の垂直回転角度（斜め下）
+    [SerializeField]
+    public float _currentAngleX =   30.0f;
+
+    // 初期の水平回転角度（正面）
+    [SerializeField]
+    public float _currentAngleY = -180.0f;
+
+    // スムーズに追従するスピード
+    [SerializeField]
+    public float _smoothSpeed = 1.0f;  
 
     void Awake()
     {
-        // 初期設定
-        _InputActions = new HakopanControls();
         // データ設定
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
         // カメラの初期オフセット
-        _offset = new Vector3(0.0f, 2.0f, -distance); 
+        _offset = new Vector3(0.0f, 2.0f, -_distance);
     }
 
     // ゲーム実行時にこのオブジェクトが存在していたら実行される
@@ -43,18 +46,6 @@ public class PlayerCamera : MonoBehaviour
         {
             Debug.LogError("CharacterParamAsset が見つかりません！");
         }
-
-        if (_InputActions == null)
-        {
-            Debug.LogError("_InputActions が初期化されていません！");
-        }
-
-        // 入力実行中イベントを追加
-        _InputActions.Player.Look.performed += OnLook;
-        // 入力キャンセルイベントを追加
-        _InputActions.Player.Look.canceled  += OnLook;
-        // 有効化
-        _InputActions.Enable();
 
         // OnObjectCreatedイベントにSetCameraTargetメソッドを登録
         // オブジェクト生成時にカメラのターゲットを設定するため
@@ -66,46 +57,22 @@ public class PlayerCamera : MonoBehaviour
     // ゲーム実行中にこのオブジェクトが削除されたら実行される
     void OnDisable()
     {
-        // 入力実行中イベントから削除
-        _InputActions.Player.Look.performed -= OnLook;
-        // 入力キャンセルイベントから削除
-        _InputActions.Player.Look.canceled  -= OnLook;
-        // 無効化
-        _InputActions.Disable();
-
         // OnObjectCreatedイベントにSetCameraTargetメソッドを解除
         CharacterModel.OnObjectCreated -= SetCameraTarget;
     }
 
-    void OnLook(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            _lookInput = context.ReadValue<Vector2>();
-            //Debug.Log("Looking with input: " + _lookInput);
-        }
-        else if (context.phase == InputActionPhase.Canceled)
-        {
-            _lookInput = Vector2.zero;
-            //Debug.Log("Stopped looking");
-        }
-    }
-
     void Update()
     {
-        // 水平回転（Y軸）
-        _currentAngleY += _lookInput.x * rotationSpeed * Time.deltaTime;
-
-        // 垂直回転（X軸）と制限
-        _currentAngleX += _lookInput.y * rotationSpeed * Time.deltaTime;
-        _currentAngleX = Mathf.Clamp(_currentAngleX, -verticalRotationLimit, verticalRotationLimit);
-
-        // 回転行列を使ってカメラ位置を更新
+        // 回転行列を使って目標位置を計算
         Quaternion rotation = Quaternion.Euler(_currentAngleX, _currentAngleY, 0);
-        Vector3 direction = rotation * _offset;
+        Vector3 desiredPosition = _playerTransform.position + (rotation * _offset);
+
+        // 現在の位置と目標位置を補間
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
 
         // カメラ位置の更新
-        transform.position = _playerTransform.position + direction;
+        //transform.position = smoothedPosition;
+        transform.position = _playerTransform.position + (rotation * _offset); ;
 
         // プレイヤーを注視
         transform.LookAt(_playerTransform);

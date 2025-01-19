@@ -24,7 +24,9 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0bf22f92af865544b83a70184b622c8b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _DETAIL_NORMALMAP
+  - _MULTISCATTERING
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -41,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: aa8e66e465d4b334ebf6f9f02cb8fc25, type: 3}
+        m_Texture: {fileID: 2800000, guid: eb3249d4e05c1b1468340179950701e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -61,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f42cbd54309fa094183c4de6e76cd954, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DisplacementMap:
@@ -81,7 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: b61886f9ef9ad0a45bc7455f3e96aceb, type: 3}
+        m_Texture: {fileID: 2800000, guid: fe0d2ec8ae918bd40be76a5a9d2d073e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -130,14 +132,14 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DetailNormalMapToggle: 0
+    - _DetailNormalMapToggle: 1
     - _DetailNormalScale: 1
     - _DisplacementMapToggle: 0
     - _DisplacementScale: 0.1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _Emission: 0
-    - _EnergyConservationToggle: 0
+    - _EnergyConservationToggle: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0

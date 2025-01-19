@@ -25,6 +25,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _MULTISCATTERING
   - _NORMALMAP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -42,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 7a3d83af80b32ab4f9fe810730b21519, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52e57c6c1be216a4ca9436785be2d977, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -82,11 +83,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: edc0984d993b270478f6e087cb3e7c4c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 728d22dd3b1030b47a575886a53f97dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 8b9c16dd95ff0734786948d20adfbe1c, type: 3}
+        m_Texture: {fileID: 2800000, guid: a89a6500c6c9b0643a1580e21a9702ed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -138,7 +139,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _Emission: 0
-    - _EnergyConservationToggle: 0
+    - _EnergyConservationToggle: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0

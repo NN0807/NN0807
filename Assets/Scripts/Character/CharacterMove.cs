@@ -49,7 +49,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     {
         Debug.Log("CharacterMove　更新処理");
 
-        if(manager.GetCurrentAnimations() != "Attack")
+        if (manager.GetCurrentAnimations() != "Attack") 
         {
             // 移動
             Move(manager);

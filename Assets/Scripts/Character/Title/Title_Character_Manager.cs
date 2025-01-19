@@ -17,11 +17,6 @@ public class Title_Character_Manager : MonoBehaviour
     public Vector3 startMarker = new Vector3(0.0f, 0.0f, 0.0f);
     public Vector3 endMarker = new Vector3(0.402f, -0.222f, 0.0f);
 
-    // スピード
-    public float speed = 1.0F;
-
-    //二点間の距離を入れる
-    private float distance_two;
 
     public float duration = 1.0f;
     private float timeElapsed = 0.0f;
@@ -32,9 +27,6 @@ public class Title_Character_Manager : MonoBehaviour
     {
         // CharacterModelにパーツ生成を指示
         _title_Character_Model?.GenerateAndRegisterParts(this);
-
-        //二点間の距離を代入(スピード調整に使う)
-        distance_two = Vector3.Distance(startMarker, endMarker);
     }
 
     // パーツ登録
@@ -50,6 +42,7 @@ public class Title_Character_Manager : MonoBehaviour
     {
         // 常に待機アニメーションをさせる
         SetAnimations(AnimationType.Idle);
+
         // 現在の位置
         //float present_Location = (Time.time * speed) / distance_two;
         // オブジェクトの移動(ここだけ変わった！)

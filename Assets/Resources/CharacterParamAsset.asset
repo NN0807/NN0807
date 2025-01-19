@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CharacterParamAsset
   m_EditorClassIdentifier: 
   CharacterName: Temp
-  MoveSpeed: 3
+  MoveSpeed: 1
   RotateSpeed: 5
   Attack: 0
   Acceleration: 10
-  MaxDashSpeed: 6
+  MaxDashSpeed: 2
   MaxStamina: 5
   CameraSpeed: 1.5

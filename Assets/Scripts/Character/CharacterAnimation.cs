@@ -12,6 +12,9 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     // アニメーションイベントフラグ
     private bool _animationFlag;
 
+    // 攻撃アニメーションイベントフラグ
+    private bool _attackAnimationFlag;
+
     public void Initialize(CharacterManager manager)
     {
         Debug.Log("CharacterCollider 初期化");
@@ -35,15 +38,23 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
                _stateInfo.IsName("Attack") ? "Attack" : "None";
     }
 
-    public bool GetAnimationFlag()   { return _animationFlag; }
+    // 攻撃アニメーションフラグ取得関数
+    public bool GetAttackAnimationFlag() { return _attackAnimationFlag; }
 
-    public void AnimationEvent()     { _animationFlag = !_animationFlag; }
+    // 攻撃アニメーションフラグ取得設定関数
+    public void AttackAnimationEvent()   { _attackAnimationFlag = !_attackAnimationFlag; }
 
-    public void SetWalkAnimation()   { _animator.SetTrigger("Walk"); _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Attack"); }
+    // アニメーションフラグ取得関数
+    public bool GetAnimationFlag()       { return _animationFlag; }
 
-    public void SetIdleAnimation()   { _animator.SetTrigger("Idle"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Attack"); }
+    // アニメーションフラグ設定関数
+    public void AnimationEvent()         { _animationFlag = !_animationFlag; }
 
-    public void SetAttackAnimation() { _animator.SetTrigger("Attack"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Idle"); }
+    public void SetWalkAnimation()       { _animator.SetTrigger("Walk"); _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Attack"); }
 
-    public void SetHitAnimation()    { _animator.SetTrigger("Hit");    }
+    public void SetIdleAnimation()       { _animator.SetTrigger("Idle"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Attack"); }
+
+    public void SetAttackAnimation()     { _animator.SetTrigger("Attack"); _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Idle"); }
+
+    public void SetHitAnimation()        { _animator.SetTrigger("Hit");    }
 }

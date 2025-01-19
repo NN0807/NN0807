@@ -41,7 +41,8 @@ public class CharacterModel : MonoBehaviour
         // キー名「body,leg,punch」の値をロードする。データが存在しない場合「0」を返す
         // ※セーブ処理　SlotManager.cs 284行目
         // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
-        var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
+        //var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
+        var _bodyNumber   = Random.Range(0, 8);
         var _legNumber    = PlayerPrefs.GetInt("leg",   0);
         var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
 
@@ -49,7 +50,7 @@ public class CharacterModel : MonoBehaviour
         // 脚部、体部、武器を 生成 & 登録
         GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
         Leg    = Instantiate(LegModels[0],   this.transform);
-        Body   = Instantiate(BodyModels[0],  this.transform);
+        Body   = Instantiate(BodyModels[_bodyNumber],  this.transform);
         Weapon = Instantiate(WeaponModels[0],this.transform);
         Leg.   transform.localScale = _mt.Scale;
         Body.  transform.localScale = _mt.Scale;
@@ -69,6 +70,17 @@ public class CharacterModel : MonoBehaviour
         ModelConnection();
         // 武器の拡縮値更新
         WeaponScaleUpdate(manager, _characterNumber);
+
+        // オブジェクトの現在の回転を取得
+        Vector3 rotation = transform.eulerAngles;
+
+        // 各軸の回転値が360度を超えた場合に0度に戻す
+        rotation.x = NormalizeAngle(rotation.x);
+        rotation.y = NormalizeAngle(rotation.y);
+        rotation.z = NormalizeAngle(rotation.z);
+
+        // 正規化した回転値をオブジェクトに適用
+        transform.eulerAngles = rotation;
     }
 
     void ModelConnection()
@@ -195,6 +207,19 @@ public class CharacterModel : MonoBehaviour
 
         return null;
     }
+
+    // 回転値を正規化する関数
+    float NormalizeAngle(float angle)
+    {
+        // 360度を超えた角度を0から359度の範囲に制限
+        angle = angle % 360;
+        if (angle < 0)
+        {
+            angle += 360;
+        }
+        return angle;
+    }
+
 
     // モデルの位置取得関数
     public Vector3 GetModelPosition() { return Leg.transform.position; }
