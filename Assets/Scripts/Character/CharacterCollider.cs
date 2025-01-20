@@ -88,6 +88,12 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
             Debug.Log("攻撃が衝突しました");
             // イベント発火
             CollisionAttackEnterEvent?.Invoke(MoveForward,characterParamAsset.Attack);
+
+            // 衝突したオブジェクトのコライダーの表面上で、最寄りの接触点を取得
+            Vector3 _hitPoint = collision.ClosestPoint(transform.position);
+
+            // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
+            EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
         }
 
         // クリティカルポイントと衝突したら

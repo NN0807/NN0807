@@ -92,6 +92,8 @@ public class CharacterOperation : MonoBehaviour
         {
             // 押されている間の処理を発火
             ActivateDashEvent?.Invoke();
+
+            manager.SetAnimations(AnimationType.Walk);
         }
         else
         {

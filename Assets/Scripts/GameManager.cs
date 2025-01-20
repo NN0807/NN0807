@@ -25,16 +25,6 @@ public class GameManager : MonoBehaviour
     {
         _InputActions = new HakopanControls();
         _InputActions.Enable();
-
-        // 
-        //GenerateTransform _mt;
-       
-        //for (int Number = 0; Number < CharacterConst.CHARACTER_NUM; Number++) 
-        //{
-        //    _mt = TransformInfo._generateTransforms[characterManagers[Number].GetCharacterNumber()];
-
-        //    characterManagers[Number].SetPosition(_mt.Position);
-        //}
     }
 
     // 更新処理
