@@ -30,6 +30,9 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     {
         Debug.Log("CharacterAnimation 初期化");
         _animator = GetComponent<Animator>();
+
+        // デフォのアニメーション速度を保存しておく
+        _deactivatedashAnimationSpeed = _animator.speed;
     }
 
     public void UpdatePart(CharacterManager manager)
@@ -38,16 +41,7 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
 
         // ダッシュ中のアニメーション速度を更新する
         // 脚部パーツのみ、その他パーツは若干、、
-        if (_partsType == PartsType.Leg)
-        {
-            _activateDashAnimationSpeed = 4.0f;
-        }
-        else
-        { 
-            _activateDashAnimationSpeed = 2.0f;
-
-        }
-       // _activateDashAnimationSpeed = _partsType == PartsType.Leg ? 4.0f : 2.0f;
+        _activateDashAnimationSpeed = _partsType == PartsType.Leg ? 4.0f : 2.0f;
     }
 
     public string GetCurrentAnimation() 

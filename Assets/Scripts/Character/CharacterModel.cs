@@ -45,14 +45,15 @@ public class CharacterModel : MonoBehaviour
         var _bodyNumber   = Random.Range(0, 8);
         //var _legNumber    = PlayerPrefs.GetInt("leg",   0);
         var _legNumber    = Random.Range(0, 8);
-        var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
+        //var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
+        var _weaponNumber = Random.Range(0, 8);
 
 
         // 脚部、体部、武器を 生成 & 登録
         GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
-        Leg    = Instantiate(LegModels[0],   this.transform);
-        Body   = Instantiate(BodyModels[_bodyNumber],  this.transform);
-        Weapon = Instantiate(WeaponModels[0],this.transform);
+        Leg    = Instantiate(LegModels[_legNumber],      this.transform);
+        Body   = Instantiate(BodyModels[_bodyNumber],    this.transform);
+        Weapon = Instantiate(WeaponModels[_weaponNumber],this.transform);
         Leg.   transform.localScale = _mt.Scale;
         Body.  transform.localScale = _mt.Scale;
         // 武器は体部に格納しておく為、拡縮値を"0"にしておく

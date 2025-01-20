@@ -36,6 +36,11 @@ public class CharacterOperation : MonoBehaviour
     // ダッシュ(解除)イベント
     public event Action DeactivateDashEvent;
 
+    // 再攻撃までの0.7秒の遅延
+    private float _attackDelay = 0.7f; 
+    // 再攻撃までのインターバル時間
+    private float _attackintervalTime = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,25 +54,32 @@ public class CharacterOperation : MonoBehaviour
     public void OperationUpdate(CharacterManager manager)
     {
         // フラグ更新
-        _attackFlag = manager.GetCurrentAnimations() != "Attack" ? false : true;
+        _attackFlag = manager.IsCurrentlyAttacking();
+
+        // 攻撃していなければインターバル時間を経過させる
+        if(!_attackFlag) _attackintervalTime += Time.deltaTime;
+        // 攻撃中はインターバル時間をリセット
+        else _attackintervalTime = 0.0f;
 
         // 攻撃
         //if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack" &&
         //    _pauseManager != null && !_pauseManager.IsPaused)
-        if (_InputActions.Player.Fire.triggered && !manager.IsCurrentlyAttacking()) 
+        if (_InputActions.Player.Fire.triggered && !manager.IsCurrentlyAttacking() &&
+            _attackintervalTime > _attackDelay) 
         {
-            _attackFlag = true;
             manager.SetAnimations(AnimationType.Attack);
         }
 
         // 待機
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && !manager.IsCurrentlyAttacking())
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude == 0.0f && !manager.IsCurrentlyAttacking())
         {
-            manager.SetAnimations(AnimationType.Idle);
+             manager.SetAnimations(AnimationType.Idle);
         }
 
         // 移動
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f && !manager.IsCurrentlyAttacking()) 
+        if (_InputActions.Player.Dash.ReadValue<float>() == 0 &&
+            _InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f &&
+            !manager.IsCurrentlyAttacking()) 
         {
             manager.SetAnimations(AnimationType.Walk);
         }
