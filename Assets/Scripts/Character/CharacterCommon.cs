@@ -29,6 +29,14 @@ namespace Common
         Hit
     }
 
+    // パーツタイプ
+    public enum PartsType
+    {
+        Leg = 0, // 脚部
+        Body,    // 体部
+        Weapon   // 武器
+    }
+
     // 初期生成行列
     public struct GenerateTransform
     {

@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5028064389047959927}
+  _partsType: 0
+  _activateDashAnimationSpeed: 0
 --- !u!114 &8883037009145053174
 MonoBehaviour:
   m_ObjectHideFlags: 0

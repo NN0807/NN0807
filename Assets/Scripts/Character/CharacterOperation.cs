@@ -52,21 +52,22 @@ public class CharacterOperation : MonoBehaviour
         _attackFlag = manager.GetCurrentAnimations() != "Attack" ? false : true;
 
         // 攻撃
-        if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack"&&
-            _pauseManager != null && !_pauseManager.IsPaused)  
+        //if (_InputActions.Player.Fire.triggered && manager.GetCurrentAnimations() != "Attack" &&
+        //    _pauseManager != null && !_pauseManager.IsPaused)
+        if (_InputActions.Player.Fire.triggered && !manager.IsCurrentlyAttacking()) 
         {
             _attackFlag = true;
             manager.SetAnimations(AnimationType.Attack);
         }
 
         // 待機
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && !_attackFlag) 
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude <= 0.0f && !manager.IsCurrentlyAttacking())
         {
             manager.SetAnimations(AnimationType.Idle);
         }
 
         // 移動
-        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f && !_attackFlag) 
+        if (_InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f && !manager.IsCurrentlyAttacking()) 
         {
             manager.SetAnimations(AnimationType.Walk);
         }
@@ -74,7 +75,8 @@ public class CharacterOperation : MonoBehaviour
         // ダッシュ
         if (_InputActions.Player.Dash.ReadValue<float>() > 0 &&
             _InputActions.Player.Move.ReadValue<Vector2>().magnitude > 0.0f &&
-            manager.GetCanDashFlag())  
+            !manager.IsCurrentlyAttacking() &&
+             manager.GetCanDashFlag()) 
         {
             // 押されている間の処理を発火
             ActivateDashEvent?.Invoke();

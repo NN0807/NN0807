@@ -64,14 +64,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.10505839
+      - time: 0.12511408
         functionName: AnimationEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8293182
+      - time: 0.74909544
         functionName: AnimationEvent
         data: 
         objectReferenceParameter: {instanceID: 0}

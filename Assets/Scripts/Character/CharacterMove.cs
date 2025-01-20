@@ -10,8 +10,6 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     // 前方方向
     private Vector3 MoveForward;
 
-    private Animator animator;
-
     // 剛体
     [SerializeField]
     private Rigidbody _rigidbody;
@@ -27,7 +25,6 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     private float _dashSpeed;
 
 
-
     public void Initialize(CharacterManager manager)
     {
         Debug.Log("CharacterMove 初期化");
@@ -40,9 +37,6 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         MoveForward   = Vector3.zero;
         _walkSpeed    = 0.0f;
         _dashSpeed    = 0.0f;
-
-        animator = GetComponent<Animator>();
-
     }
 
     public void UpdatePart(CharacterManager manager)
@@ -96,8 +90,6 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         // ダッシュフラグON
         IsDashing = true;
 
-        animator.speed = 5.0f;
-
         // 最大ダッシュ速度を越えないように、現在の速度を算出する
         _dashSpeed = Mathf.Min((_walkSpeed + _dashSpeed) + characterParamAsset.Acceleration * Time.deltaTime,
             characterParamAsset.MaxDashSpeed);
@@ -112,8 +104,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         // ダッシュフラグOFF
         IsDashing = false;
 
-        animator.speed = 1.0f;
-
+        // ダッシュ速度リセット
         _dashSpeed = 0.0f;
     }
 

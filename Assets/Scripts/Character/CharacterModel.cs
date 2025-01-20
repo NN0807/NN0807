@@ -43,7 +43,8 @@ public class CharacterModel : MonoBehaviour
         // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
         //var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
         var _bodyNumber   = Random.Range(0, 8);
-        var _legNumber    = PlayerPrefs.GetInt("leg",   0);
+        //var _legNumber    = PlayerPrefs.GetInt("leg",   0);
+        var _legNumber    = Random.Range(0, 8);
         var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
 
 

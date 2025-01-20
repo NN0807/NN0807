@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6527842728428563010}
+  _partsType: 1
+  _activateDashAnimationSpeed: 0
 --- !u!114 &1591961687914900418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,10 +304,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.3, z: 0.29}
-  m_Center: {x: 0, y: 0.01, z: 0}
+  m_Size: {x: 0.4, y: 0.23, z: 0.29}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!54 &5232306834850671986
 Rigidbody:
   m_ObjectHideFlags: 0

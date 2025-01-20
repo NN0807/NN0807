@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8500264757753209334}
+  _partsType: 1
 --- !u!114 &1886500110237878840
 MonoBehaviour:
   m_ObjectHideFlags: 0

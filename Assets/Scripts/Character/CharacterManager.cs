@@ -57,8 +57,8 @@ public class CharacterManager : MonoBehaviour
     public void RegisterPart(GameObject part)
     {
         // 全キャラクタースクリプトを初期化
-        var characterPart = part.GetComponent<ICharacterPart>();
-        if (characterPart != null)
+        var characterPartsArray = part.GetComponents<ICharacterPart>();
+        foreach (var characterPart in characterPartsArray)
         {
             characterParts.Add(characterPart);
             characterPart.Initialize(this);
@@ -104,6 +104,17 @@ public class CharacterManager : MonoBehaviour
         return _legAnimation;
     }
 
+    // 現在キャラクターが攻撃アニメーション中かどうかを判定する関数
+    public bool IsCurrentlyAttacking()
+    {
+        foreach (var animation in animations)
+        {
+            // 一つでもtrueがあればtrueを返す
+            if (animation.GetAttackAnimationFlag()) return true;
+        }
+        return false; // 全てfalseであればfalseを返す
+    }
+
     // 各種スクリプトにコライダーを通知してイベントを登録
     private void RegisterCollidersEvent()
     {
@@ -119,6 +130,11 @@ public class CharacterManager : MonoBehaviour
     {
         _characterUI?  .RegisterOperationEvent(_characterOperation);
         _characterMove?.RegisterOperationEvent(_characterOperation);
+
+        foreach (var animation in animations)
+        {
+            animation.RegisterOperationEvent(_characterOperation);
+        }
     }
 
     // アニメーション起動

@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LookDolly",
-                    "type": "Value",
-                    "id": "66adea9b-896b-4153-912c-0c7c8cbb2087",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "1db1c327-a48c-4f7e-accf-aea464038b0e",
@@ -333,39 +324,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7cc0d326-801c-4127-a63f-751bed935eaf",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookDolly",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "029149c5-fb50-465b-b0e4-f72047ceb2ab",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookDolly",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "acf17e39-1e5a-4ebd-b738-0238d9d16a04",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "Invert,Scale(factor=0.003)",
-                    "groups": "",
-                    "action": "LookDolly",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
