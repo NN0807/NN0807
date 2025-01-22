@@ -438,9 +438,10 @@ GameObject:
   - component: {fileID: 319593000}
   - component: {fileID: 319592999}
   - component: {fileID: 319592998}
+  - component: {fileID: 319593003}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Enemy
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,7 +454,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319592997}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -469,8 +470,8 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!136 &319592999
 CapsuleCollider:
@@ -560,6 +561,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319593003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319592997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f5d7123b7c8824b9072259599bb006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 319592998}
+  n: {x: 0, y: 0, z: 1}
+  p: 10
 --- !u!1 &320930462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1488,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b597cc124c10f5a4a9d8a53a52bf870a, type: 3}
   m_Name: 
@@ -7206,6 +7222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927305936}
   - component: {fileID: 1927305937}
+  - component: {fileID: 1927305938}
   m_Layer: 6
   m_Name: VFX_Fire
   m_TagString: Effect
@@ -7253,6 +7270,21 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1927305938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927305935}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f5d7123b7c8824b9072259599bb006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 0}
+  n: {x: 0, y: 0, z: 0}
+  p: 0
 --- !u!1 &1928874340
 GameObject:
   m_ObjectHideFlags: 0

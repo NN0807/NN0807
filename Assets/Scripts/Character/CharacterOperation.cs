@@ -123,7 +123,7 @@ public class CharacterOperation : MonoBehaviour
         Gamepad gamepad = Gamepad.current;
         if (gamepad != null && !_vibrationFlag) 
         {
-            gamepad.SetMotorSpeeds(1.0f, 1.0f);
+            gamepad.SetMotorSpeeds(0.5f, 0.5f);
             _vibrationFlag = true;
         }
     }

@@ -24,6 +24,47 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     // ダッシュ速度
     private float _dashSpeed;
 
+    // 入力処理
+    [SerializeField]
+    private HakopanControls _InputActions;
+
+    // 剛体
+    [SerializeField]
+    //private Rigidbody _rigidbody;
+
+    public Vector3 n;
+    public float p;
+
+    [SerializeField]
+    private bool _impulseFlag = false;
+
+    // 衝撃処理時間
+    private float _impulseTime = 0.0f;
+
+    void Start()
+    {
+        _InputActions = new HakopanControls();
+        _InputActions.Enable();
+        _rigidbody = GetComponent<Rigidbody>();
+
+        n = new Vector3(0, 0, 1);
+        p = 50.0f;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // ポーズ
+        if (_InputActions.Player.Pause.triggered)
+        {
+            // 吹っ飛ばす
+            //_rigidbody.AddForce(n * p, ForceMode.Impulse);
+            Impulse(n, p);
+        }
+    }
+
+
 
     public void Initialize(CharacterManager manager)
     {
@@ -43,15 +84,27 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     {
         Debug.Log("CharacterMove　更新処理");
 
-        if (manager.GetCurrentAnimations() != "Attack") 
+        // 攻撃中は移動も旋回も出来なくする
+        if (!manager.IsCurrentlyAttacking())   
         {
             // 移動
-            Move(manager);
+            if (!_impulseFlag) Move(manager);
 
             // 旋回
             Turn();
         }
+        else
+        {
+            // 速力リセット
+            _rigidbody.velocity = Vector3.zero;
+        }
 
+        if (_impulseFlag) _impulseTime += Time.deltaTime;
+        if (_impulseTime > 0.5f)
+        {
+            _impulseTime = 0.0f;
+            _impulseFlag = false;
+        }
     }
 
     // 移動処理
@@ -90,12 +143,15 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         // ダッシュフラグON
         IsDashing = true;
 
-        // 最大ダッシュ速度を越えないように、現在の速度を算出する
-        _dashSpeed = Mathf.Min((_walkSpeed + _dashSpeed) + characterParamAsset.Acceleration * Time.deltaTime,
+        if (!_impulseFlag)
+        {
+            // 最大ダッシュ速度を越えないように、現在の速度を算出する
+            _dashSpeed = Mathf.Min((_walkSpeed + _dashSpeed) + characterParamAsset.Acceleration * Time.deltaTime,
             characterParamAsset.MaxDashSpeed);
 
-        // 移動方向にダッシュスピードを掛ける
-        _rigidbody.velocity = MoveForward * _dashSpeed;
+            // 移動方向にダッシュスピードを掛ける
+            _rigidbody.velocity = MoveForward * _dashSpeed;
+        }     
     }
 
     // ダッシュ終了処理
@@ -111,6 +167,9 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     // 衝撃処理
     private void Impulse(Vector3 forward, float attack)
     {
+        // 衝撃フラグ設定
+        _impulseFlag = true;
+
         // 吹っ飛ばす
         _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
     }

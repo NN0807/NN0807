@@ -15,6 +15,8 @@ public class Fight_UI : MonoBehaviour
     void Start()
     {
         _fightImage = GetComponent<Image>();
+
+        _fightImage.rectTransform.localScale = new Vector3(3.0f, 0.0f, 1.0f);
     }
 
     // Update is called once per frame

@@ -411,6 +411,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3100556640127684426}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 26a39769eac12ea478ec53b44e386549,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5683489542523487920}
   m_SourcePrefab: {fileID: 100100000, guid: 26a39769eac12ea478ec53b44e386549, type: 3}
 --- !u!4 &2699797895187081454 stripped
 Transform:
@@ -459,6 +463,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _partsType: 0
+  _activateDashAnimationSpeed: 0
+  HitStopTime: 0.23
+  HitStopTimer: 0
+  _hitStopFlag: 0
+  s: 0
 --- !u!65 &4249503027948634142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -488,7 +497,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3331620619258786388}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -505,7 +514,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &7210890162235987273
 MonoBehaviour:
@@ -534,6 +543,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
   _rigidbody: {fileID: 3931130317371887139}
+  n: {x: 0, y: 0, z: 0}
+  p: 0
+  _impulseFlag: 0
 --- !u!114 &3385681389478844098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,3 +596,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5683489542523487920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3331620619258786388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e705e5cf26ead3c4d909b190ef23f217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave_Form: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+  Input_Scale_Fitter: 0.005
+  Strength: 0.5

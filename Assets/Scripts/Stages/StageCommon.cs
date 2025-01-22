@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace StageCommon
 {
-
     // 定数
     public static class StageConst
     {
@@ -15,5 +14,11 @@ namespace StageCommon
         public const float START_X    = -2.1f;
         public const float START_Z    =  2.1f;
     }
+}
+
+public interface IGimmickPart
+{
+    void Initialize(CubeManager manager);
+    void UpdatePart(CubeManager manager);
 }
 

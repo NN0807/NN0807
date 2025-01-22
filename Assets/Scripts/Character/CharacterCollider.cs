@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Common;
 
 public class CharacterCollider : MonoBehaviour, ICharacterPart
 {
@@ -44,35 +45,45 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
     void OnCollisionEnter(Collision collision)
     {
         // 武器と衝突したら
-        if (collision.gameObject.CompareTag("Weapon"))
+        if (collision.gameObject.CompareTag("Weapon")) 
         {
             Debug.Log("攻撃を受けました");
 
             // イベント発火
             CollisionEFKStayEvent?.Invoke();
+
+            CollisionAttackEnterEvent?.Invoke(-MoveForward.normalized, characterParamAsset.Attack);
+
+            // ヒットアニメーション再生
+            _characterManager.SetAnimations(AnimationType.Hit);
         }
     }
 
     // 当たっている間に呼ばれる関数
     void OnCollisionStay(Collision collision)
     {
-        // Effectと衝突したら
+        // "火炎"に衝突したら
         if (collision.gameObject.CompareTag("Effect"))
         {
             Debug.Log("Effectタグのオブジェクトに衝突しました");
 
             // イベント発火
             CollisionEFKStayEvent?.Invoke();
+
+            // ヒットアニメーション再生
+            _characterManager.SetAnimations(AnimationType.Hit);
         }
     }
 
     // 離れたら呼ばれる関数
     void OnCollisionExit(Collision collision)
     {
-        // Effectとの衝突から離れたら
-        if (collision.gameObject.CompareTag("Effect"))
+        // "火炎"or武器との衝突から離れたら
+        if (collision.gameObject.CompareTag("Effect") ||
+            collision.gameObject.CompareTag("Weapon") ||
+            collision.gameObject.CompareTag("Enemy")) 
         {
-            Debug.Log("Effectタグのオブジェクトから離れました");
+            Debug.Log("火炎or武器タグのオブジェクトから離れました");
 
             // イベント発火
             CollisionEFKExitEvent?.Invoke();
@@ -87,13 +98,16 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         {
             Debug.Log("攻撃が衝突しました");
             // イベント発火
-            CollisionAttackEnterEvent?.Invoke(MoveForward,characterParamAsset.Attack);
+            // 攻撃中は、、、、
+            CollisionAttackEnterEvent?.Invoke(-MoveForward,100.0f);
 
             // 衝突したオブジェクトのコライダーの表面上で、最寄りの接触点を取得
             Vector3 _hitPoint = collision.ClosestPoint(transform.position);
 
             // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
             EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
+
+            _characterManager.HitStop();
         }
 
         // クリティカルポイントと衝突したら

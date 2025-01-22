@@ -192,6 +192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfferingBox
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f134380bd35db664d99584571bf772db,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7930097150456469213, guid: f134380bd35db664d99584571bf772db,
         type: 3}
       propertyPath: m_TagString
@@ -274,6 +279,10 @@ MonoBehaviour:
   _animator: {fileID: 6527842728428563010}
   _partsType: 1
   _activateDashAnimationSpeed: 0
+  HitStopTime: 0.23
+  HitStopTimer: 0
+  _hitStopFlag: 0
+  s: 0
 --- !u!114 &1591961687914900418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +341,6 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0

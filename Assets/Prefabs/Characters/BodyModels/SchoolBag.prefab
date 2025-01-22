@@ -232,6 +232,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c373a86f098930f40b8a6be6338be05a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2859342620578907036, guid: c373a86f098930f40b8a6be6338be05a,
         type: 3}
       propertyPath: m_Layer
@@ -322,6 +327,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _partsType: 1
+  _activateDashAnimationSpeed: 0
+  HitStopTime: 0.23
+  HitStopTimer: 0
+  _hitStopFlag: 0
+  s: 0
 --- !u!114 &4884064987474149267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +390,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!4 &662644699715988007 stripped

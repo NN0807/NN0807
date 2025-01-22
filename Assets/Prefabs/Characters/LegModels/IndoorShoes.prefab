@@ -416,6 +416,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3400121227802852458}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 712a141e8aa97bd48a7bb3be90096912,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3075681630079288731}
   m_SourcePrefab: {fileID: 100100000, guid: 712a141e8aa97bd48a7bb3be90096912, type: 3}
 --- !u!4 &8325176837131452132 stripped
 Transform:
@@ -463,6 +467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1409517018512943231}
+  _partsType: 0
+  _activateDashAnimationSpeed: 0
+  HitStopTime: 0.23
+  HitStopTimer: 0
+  _hitStopFlag: 0
+  s: 0
 --- !u!65 &7647481276298450328
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -492,7 +502,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8701843525948925022}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -509,7 +519,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &3161875672802212189
 MonoBehaviour:
@@ -538,6 +548,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
   _rigidbody: {fileID: 6021460580930268963}
+  n: {x: 0, y: 0, z: 0}
+  p: 0
+  _impulseFlag: 0
 --- !u!114 &6813717377981770887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,3 +601,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-3075681630079288731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701843525948925022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e705e5cf26ead3c4d909b190ef23f217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave_Form: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+  Input_Scale_Fitter: 0.005
+  Strength: 0.5

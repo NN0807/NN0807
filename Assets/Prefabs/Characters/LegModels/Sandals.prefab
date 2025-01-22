@@ -269,12 +269,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
@@ -396,11 +396,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2994783775512560317}
+      addedObject: {fileID: 6493846356224779598}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6493846356224779598}
+      addedObject: {fileID: -8543773001418646350}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       insertIndex: -1
@@ -421,6 +421,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8883037009145053174}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3342770603920961807}
   m_SourcePrefab: {fileID: 100100000, guid: f8bca322052d7994190d9be09a3197a3, type: 3}
 --- !u!4 &2828181861526111149 stripped
 Transform:
@@ -455,27 +459,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &2994783775512560317
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3203300441740269847}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.01, z: 0.2}
-  m_Center: {x: 0, y: -0.02, z: 0}
 --- !u!114 &6493846356224779598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +490,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!65 &-8543773001418646350
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203300441740269847}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.01, z: 0.2}
+  m_Center: {x: 0, y: -0.02, z: 0}
 --- !u!54 &1957011483284390770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -515,7 +519,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3203300441740269847}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -532,7 +536,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &7386735644012132645
 MonoBehaviour:
@@ -548,6 +552,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
   _rigidbody: {fileID: 1957011483284390770}
+  n: {x: 0, y: 0, z: 0}
+  p: 0
+  _impulseFlag: 0
 --- !u!114 &2406515929656882033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +583,10 @@ MonoBehaviour:
   _animator: {fileID: 5028064389047959927}
   _partsType: 0
   _activateDashAnimationSpeed: 0
+  HitStopTime: 0.23
+  HitStopTimer: 0
+  _hitStopFlag: 0
+  s: 0
 --- !u!114 &8883037009145053174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,3 +606,18 @@ MonoBehaviour:
   StaminaGaugeBack: {fileID: 442399459403665973}
   _material: {fileID: 2100000, guid: 71c80d50e8e8455408ad823bfd15a3f5, type: 2}
   _blinkSpeed: 20
+--- !u!114 &3342770603920961807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203300441740269847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e705e5cf26ead3c4d909b190ef23f217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wave_Form: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+  Input_Scale_Fitter: 0.005
+  Strength: 0.5

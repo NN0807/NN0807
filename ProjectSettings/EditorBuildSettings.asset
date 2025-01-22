@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Solo Mode/Ice/Ice_Stage_Scene.unity
-    guid: 976e128111e78e7429d63017c2be06e9
+    path: Assets/Scenes/Solo Mode/Water/Water_Stage_Scene.unity
+    guid: 7fb83446b4484b1439884a4c31227897
   m_configObjects: {}

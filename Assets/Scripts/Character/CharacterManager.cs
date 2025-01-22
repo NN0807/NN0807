@@ -33,7 +33,7 @@ public class CharacterManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // キャラクター番号から初期生成位置を設定する
         GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
@@ -57,7 +57,7 @@ public class CharacterManager : MonoBehaviour
     public void RegisterPart(GameObject part)
     {
         // 全キャラクタースクリプトを初期化
-        var characterPartsArray = part.GetComponents<ICharacterPart>();
+        var characterPartsArray = part.GetComponentsInChildren<ICharacterPart>();
         foreach (var characterPart in characterPartsArray)
         {
             characterParts.Add(characterPart);
@@ -146,6 +146,14 @@ public class CharacterManager : MonoBehaviour
             else if (animationType == AnimationType.Walk)   animation.SetWalkAnimation();
             else if (animationType == AnimationType.Attack) animation.SetAttackAnimation();
             else if (animationType == AnimationType.Hit)    animation.SetHitAnimation();
+        }
+    }
+
+    public void HitStop()
+    {
+        foreach (var animation in animations)
+        {
+            animation.HitStop();
         }
     }
 

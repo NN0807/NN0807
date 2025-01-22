@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 
+
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour,ICharacterPart
 {
@@ -22,9 +23,17 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
 
     // ダッシュ中のアニメーション速度変数
     [SerializeField]
-    public float _activateDashAnimationSpeed   = 0.0f;
+    public float _activateDashAnimationSpeed    = 0.0f;
     // ダッシュ以外のアニメーション速度変数
     private float _deactivatedashAnimationSpeed = 1.0f;
+
+    /// <summary> ヒットストップ時間(秒) </summary>
+    public float HitStopTime = 0.23f;
+    public float HitStopTimer = 0.0f;
+
+    public bool _hitStopFlag = false;
+
+    public float s = 0.0f;
 
     public void Initialize(CharacterManager manager)
     {
@@ -42,6 +51,21 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         // ダッシュ中のアニメーション速度を更新する
         // 脚部パーツのみ、その他パーツは若干、、
         _activateDashAnimationSpeed = _partsType == PartsType.Leg ? 4.0f : 2.0f;
+
+        if(_hitStopFlag)
+        {
+            s = _animator.speed;
+            // モーションを止める
+            _animator.speed = 0f;
+
+            HitStopTimer += Time.deltaTime;
+            if (HitStopTimer > HitStopTime) 
+            {
+                _animator.speed = s;
+                _hitStopFlag = false;
+                HitStopTimer = 0.0f;
+            }
+        }
     }
 
     public string GetCurrentAnimation() 
@@ -65,11 +89,15 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         operation.DeactivateDashEvent += DeactivateDash;
     }
 
+
+
+    public void HitStop() { _hitStopFlag = true; }
+
     // ダッシュイベント
     private void ActivateDash()          { _animator.speed = _activateDashAnimationSpeed;                                                  }
-                                                                                                                                           
+
     // ダッシュ解除イベント                                                                                                                
-    private void DeactivateDash()        { _animator.speed = _deactivatedashAnimationSpeed;                                                }
+    private void DeactivateDash()        { _animator.speed = _hitStopFlag ? 0.0f : _deactivatedashAnimationSpeed;                          }
                                                                                                                                            
     // 攻撃アニメーションフラグ取得関数                                                                                                    
     public bool GetAttackAnimationFlag() { return _attackAnimationFlag;                                                                    }
@@ -83,11 +111,11 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     // アニメーションフラグ設定関数
     public void AnimationEvent()         { _animationFlag = !_animationFlag;                                                               }
 
-    public void SetWalkAnimation()       { _animator.SetTrigger("Walk");/* _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Attack");*/ }
+    public void SetWalkAnimation()       { _animator.SetTrigger("Walk");  }
 
-    public void SetIdleAnimation()       { _animator.SetTrigger("Idle");/* _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Attack"); */}
+    public void SetIdleAnimation()       { _animator.SetTrigger("Idle");  }
 
-    public void SetAttackAnimation()     { _animator.SetTrigger("Attack");/* _animator.ResetTrigger("Walk"); _animator.ResetTrigger("Idle");*/ }
+    public void SetAttackAnimation()     { _animator.SetTrigger("Attack");}
 
-    public void SetHitAnimation()        { _animator.SetTrigger("Hit");                                                                    }
+    public void SetHitAnimation()        { _animator.SetTrigger("Hit");   }
 }
