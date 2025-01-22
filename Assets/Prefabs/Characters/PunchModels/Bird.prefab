@@ -136,6 +136,8 @@ MonoBehaviour:
   _animator: {fileID: 8084523280158030753}
   _partsType: 2
   _activateDashAnimationSpeed: 0
+  _hitStopTime: 0.23
+  _hitStopTimer: 0
 --- !u!1 &8902914472270219936 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2280393539903010113, guid: ca1468a9be11f884b88afb5f7a658258,
@@ -176,3 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 8192

@@ -24,17 +24,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     // ダッシュ速度
     private float _dashSpeed;
 
-    // 入力処理
-    [SerializeField]
-    private HakopanControls _InputActions;
-
-    // 剛体
-    [SerializeField]
-    //private Rigidbody _rigidbody;
-
-    public Vector3 n;
-    public float p;
-
+    // 衝撃を受けたかの判定フラグ
     [SerializeField]
     private bool _impulseFlag = false;
 
@@ -43,28 +33,14 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
 
     void Start()
     {
-        _InputActions = new HakopanControls();
-        _InputActions.Enable();
         _rigidbody = GetComponent<Rigidbody>();
-
-        n = new Vector3(0, 0, 1);
-        p = 50.0f;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        // ポーズ
-        if (_InputActions.Player.Pause.triggered)
-        {
-            // 吹っ飛ばす
-            //_rigidbody.AddForce(n * p, ForceMode.Impulse);
-            Impulse(n, p);
-        }
+        
     }
-
-
 
     public void Initialize(CharacterManager manager)
     {
@@ -99,9 +75,12 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
             _rigidbody.velocity = Vector3.zero;
         }
 
+        // 衝撃を受けたらタイマー起動
         if (_impulseFlag) _impulseTime += Time.deltaTime;
+        // 衝撃を受けてから0.5秒経過したら
         if (_impulseTime > 0.5f)
         {
+            // タイマーとフラグをリセット
             _impulseTime = 0.0f;
             _impulseFlag = false;
         }
@@ -165,21 +144,21 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     }
 
     // 衝撃処理
-    private void Impulse(Vector3 forward, float attack)
-    {
-        // 衝撃フラグ設定
-        _impulseFlag = true;
+    //private void Impulse(Vector3 forward, float attack)
+    //{
+    //    // 衝撃フラグ設定
+    //    _impulseFlag = true;
 
-        // 吹っ飛ばす
-        _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
-    }
+    //    // 吹っ飛ばす
+    //    _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
+    //}
 
     // イベント登録をCharacterMove内で行う
-    public void RegisterColliderEvent(CharacterCollider collider)
-    {
-        // イベントに関数を登録
-        collider.CollisionAttackEnterEvent += Impulse;
-    }
+    //public void RegisterColliderEvent(CharacterCollider collider)
+    //{
+    //    // イベントに関数を登録
+    //    collider.CollisionAttackEnterEvent += Impulse;
+    //}
 
     // イベント登録をCharacterMove内で行う
     public void RegisterOperationEvent(CharacterOperation operation)

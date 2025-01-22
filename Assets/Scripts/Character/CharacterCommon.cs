@@ -26,7 +26,8 @@ namespace Common
         Idle,
         Walk,
         Attack,
-        Hit
+        Hit,
+        HitEarlyExit
     }
 
     // パーツタイプ

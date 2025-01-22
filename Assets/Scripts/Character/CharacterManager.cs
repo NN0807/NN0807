@@ -121,7 +121,7 @@ public class CharacterManager : MonoBehaviour
         foreach (var collider in colliders)
         {
             _characterOperation?.RegisterColliderEvent(collider);
-            _characterMove?.RegisterColliderEvent(collider);
+           // _characterMove?.RegisterColliderEvent(collider);
         }
     }
 
@@ -142,18 +142,29 @@ public class CharacterManager : MonoBehaviour
     {
         foreach (var animation in animations)
         {
-            if      (animationType == AnimationType.Idle)   animation.SetIdleAnimation();
-            else if (animationType == AnimationType.Walk)   animation.SetWalkAnimation();
-            else if (animationType == AnimationType.Attack) animation.SetAttackAnimation();
-            else if (animationType == AnimationType.Hit)    animation.SetHitAnimation();
+            if      (animationType == AnimationType.Idle)         animation.SetIdleAnimation();
+            else if (animationType == AnimationType.Walk)         animation.SetWalkAnimation();
+            else if (animationType == AnimationType.Attack)       animation.SetAttackAnimation();
+            else if (animationType == AnimationType.Hit)          animation.SetHitAnimation();
+            else if (animationType == AnimationType.HitEarlyExit) animation.SetHitEarlyExitAnimation();
         }
     }
 
+    // ヒットストップを各CharacterAnimationに知らせる関数
     public void HitStop()
     {
         foreach (var animation in animations)
         {
             animation.HitStop();
+        }
+    }
+
+    // アニメーション強制変更関数
+    public void AnimationChange(string animationName)
+    {
+        foreach (var animation in animations)
+        {
+            animation.AnimationChange(animationName);
         }
     }
 

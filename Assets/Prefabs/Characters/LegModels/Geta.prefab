@@ -464,10 +464,8 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _partsType: 0
   _activateDashAnimationSpeed: 0
-  HitStopTime: 0.23
-  HitStopTimer: 0
-  _hitStopFlag: 0
-  s: 0
+  _hitStopTime: 0.23
+  _hitStopTimer: 0
 --- !u!65 &4249503027948634142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -513,7 +511,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &7210890162235987273
@@ -543,8 +541,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
   _rigidbody: {fileID: 3931130317371887139}
-  n: {x: 0, y: 0, z: 0}
-  p: 0
   _impulseFlag: 0
 --- !u!114 &3385681389478844098
 MonoBehaviour:

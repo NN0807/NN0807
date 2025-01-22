@@ -28,12 +28,14 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     private float _deactivatedashAnimationSpeed = 1.0f;
 
     /// <summary> ヒットストップ時間(秒) </summary>
-    public float HitStopTime = 0.23f;
-    public float HitStopTimer = 0.0f;
+    public float _hitStopTime  = 0.3f;
+    public float _hitStopTimer = 0.0f;
 
-    public bool _hitStopFlag = false;
+    // ヒットストップフラグ
+    private bool _hitStopFlag  = false;
 
-    public float s = 0.0f;
+    // デフォルトのアニメーション速度を保存しておく変数
+    private float _defaultAnimationSpeed = 0.0f;
 
     public void Initialize(CharacterManager manager)
     {
@@ -52,18 +54,25 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         // 脚部パーツのみ、その他パーツは若干、、
         _activateDashAnimationSpeed = _partsType == PartsType.Leg ? 4.0f : 2.0f;
 
+        // ヒットストップフラグがONになれば
         if(_hitStopFlag)
         {
-            s = _animator.speed;
+            // アニメーション速度を保存しておく
+            _defaultAnimationSpeed = _animator.speed;
             // モーションを止める
-            _animator.speed = 0f;
+            _animator.speed = 0.0f;
 
-            HitStopTimer += Time.deltaTime;
-            if (HitStopTimer > HitStopTime) 
+            // タイマー起動
+            _hitStopTimer += Time.deltaTime;
+            // タイマーがヒットストップ時間を越えたら
+            if (_hitStopTimer > _hitStopTime) 
             {
-                _animator.speed = s;
+                // アニメーション速度を元に戻す
+                _animator.speed = _defaultAnimationSpeed;
+                // ヒットストップフラグをOFF
                 _hitStopFlag = false;
-                HitStopTimer = 0.0f;
+                // タイマーリセット
+                _hitStopTimer = 0.0f;
             }
         }
     }
@@ -89,33 +98,46 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         operation.DeactivateDashEvent += DeactivateDash;
     }
 
+    // アニメーション強制遷移関数
+    public void AnimationChange(string animationName)
+    {
+        // 一旦全アニメーションをリセット
+        _animator.ResetTrigger("Idle"); 
+        _animator.ResetTrigger("Walk");
+        _animator.ResetTrigger("Attack"); 
+        _animator.ResetTrigger("Hit");
+        // 遷移したいアニメーションを宣言
+        _animator.SetTrigger(animationName);
+    }
 
-
-    public void HitStop() { _hitStopFlag = true; }
+    // ヒットストップ関数
+    public void HitStop()                  { _hitStopFlag = true; }
 
     // ダッシュイベント
-    private void ActivateDash()          { _animator.speed = _activateDashAnimationSpeed;                                                  }
+    private void ActivateDash()            { _animator.speed = _activateDashAnimationSpeed; }
 
     // ダッシュ解除イベント                                                                                                                
-    private void DeactivateDash()        { _animator.speed = _hitStopFlag ? 0.0f : _deactivatedashAnimationSpeed;                          }
-                                                                                                                                           
+    private void DeactivateDash()          { _animator.speed = _hitStopFlag ? 0.0f : _deactivatedashAnimationSpeed; }
+
     // 攻撃アニメーションフラグ取得関数                                                                                                    
-    public bool GetAttackAnimationFlag() { return _attackAnimationFlag;                                                                    }
-                                                                                                                                           
+    public bool GetAttackAnimationFlag()   { return _attackAnimationFlag; }
+
     // 攻撃アニメーションフラグ取得設定関数                                                                                                
-    public void AttackAnimationEvent()   { _attackAnimationFlag = !_attackAnimationFlag;                                                   }
-                                                                                                                                           
+    public void AttackAnimationEvent()     { _attackAnimationFlag = !_attackAnimationFlag; }
+
     // アニメーションフラグ取得関数                                                                                                        
-    public bool GetAnimationFlag()       { return _animationFlag;                                                                          }
+    public bool GetAnimationFlag()         { return _animationFlag; }
 
     // アニメーションフラグ設定関数
-    public void AnimationEvent()         { _animationFlag = !_animationFlag;                                                               }
+    public void AnimationEvent()           { _animationFlag = !_animationFlag; }
+                                           
+    public void SetWalkAnimation()         { _animator.SetTrigger("Walk"); _animator.ResetTrigger("Idle"); }
+                                           
+    public void SetIdleAnimation()         { _animator.SetTrigger("Idle"); _animator.ResetTrigger("Walk"); }
+                                           
+    public void SetAttackAnimation()       { _animator.SetTrigger("Attack");}
+                                           
+    public void SetHitAnimation()          { _animator.SetTrigger("Hit"); _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Walk"); }
 
-    public void SetWalkAnimation()       { _animator.SetTrigger("Walk");  }
-
-    public void SetIdleAnimation()       { _animator.SetTrigger("Idle");  }
-
-    public void SetAttackAnimation()     { _animator.SetTrigger("Attack");}
-
-    public void SetHitAnimation()        { _animator.SetTrigger("Hit");   }
+    public void SetHitEarlyExitAnimation() { _animator.SetTrigger("HitEarlyExit"); }
 }

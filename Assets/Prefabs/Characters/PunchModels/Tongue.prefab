@@ -134,6 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &2927960735905345236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1be5133b7fb545241b528797ebbdbc12,
@@ -175,3 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 2575802936590873106}
   _partsType: 2
+  _activateDashAnimationSpeed: 0
+  _hitStopTime: 0.23
+  _hitStopTimer: 0
