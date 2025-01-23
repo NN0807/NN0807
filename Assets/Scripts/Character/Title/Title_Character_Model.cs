@@ -22,8 +22,31 @@ public class Title_Character_Model : MonoBehaviour
     private GameObject BodyJoint = default;
 
 
+    // 開始地点と終了地点の位置と拡縮値
+    private Vector3   _startPos = new Vector3(0.0f, 0.0f, -0.3f);
+    private Vector3[] _endPos;
+    private Vector3 _startScale = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 _endScale   = new Vector3(0.6f, 0.6f, 0.6f);
+
+    // イージング時間
+    [SerializeField]
+    private float _easingTime = 1.5f;
+
+    void Awake()
+    {
+        // 配列のサイズを指定して初期化
+        _endPos = new Vector3[4];
+
+        // 値を設定
+        _endPos[0] = new Vector3( 0.402f, -0.222f,    0.0f);
+        _endPos[1] = new Vector3(-0.427f, -0.182f, -0.106f);
+        _endPos[2] = new Vector3( 0.462f,  0.148f, -0.319f);
+        _endPos[3] = new Vector3(-0.473f,  0.225f, -0.319f);
+    }
+
+
     // 各部位を生成し、初期化
-    public void GenerateAndRegisterParts(Title_Character_Manager manager)
+    public void GenerateAndRegisterParts(Title_Character_Manager manager, int number)
     {
         var _bodyNumber = Random.Range(0, 8); // 0以上8未満の整数を取得
         var _legNumber  = Random.Range(0, 8); // 0以上8未満の整数を取得
@@ -33,6 +56,22 @@ public class Title_Character_Model : MonoBehaviour
         Body = Instantiate(BodyModels[0], this.transform);
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
+
+        // ↓イージング演出
+
+        // 開始地点を設定
+        this.transform.position = _startPos;
+        this.transform.localScale = _startScale;
+
+        // 引数のEnumを変えるだけで、イージング関数の差し替えができる
+        // EaseOutQuadで、絶対座標で_endPosの位置に1秒かけて移動させる
+        StartCoroutine(
+            Move(this.transform, _endPos[number], _easingTime, Easing.Ease.OutBack, true)
+        );
+
+        StartCoroutine(
+            Scale(this.transform, _endScale, _easingTime, Easing.Ease.OutExpo)
+        );
     }
 
     // Update is called once per frame
@@ -94,6 +133,62 @@ public class Title_Character_Model : MonoBehaviour
         }
 
         return null;
+    }
+
+    // 指定したTransformの座標を更新する
+    // 引数 Transform, 目的値の座標、何秒で動かすか、イージングの種類、移動先が絶対座標かどうか
+    public IEnumerator Move(Transform transform, Vector3 destinationPos, float seconds, Easing.Ease easing, bool absolute)
+    {
+        // イージング関数の取得
+        var Ease = Easing.GetEasingMethod(easing);
+
+        // 現在点と移動先の設定
+        Vector3 staPos = transform.localPosition;
+        Vector3 endPos = absolute ? destinationPos : staPos + destinationPos;
+        // 初期地点と目標地点の差
+        Vector3 difPos = endPos - staPos;
+
+        // N秒かけて移動させる
+        float e = 0;
+        while (true)
+        {
+            yield return null;
+            e += Time.deltaTime / seconds;
+            if (e >= 1.0f)
+            {
+                transform.localPosition = endPos;
+                break;
+            }
+            Vector3 nextPos = staPos + Ease(e) * difPos;
+            transform.localPosition = nextPos;
+        }
+    }
+
+    public IEnumerator Scale(Transform transform, Vector3 destinationScale, float seconds, Easing.Ease easing)
+    {
+        // イージング関数の取得
+        var Ease = Easing.GetEasingMethod(easing);
+
+        // 現在点と移動先の設定
+        Vector3 staScale = transform.localScale;
+        Vector3 endScale = destinationScale;
+        // 初期地点と目標地点の差
+        Vector3 difScale = endScale - staScale;
+
+        // N秒かけて移動させる
+        float e = 0;
+        while (true)
+        {
+            yield return null;
+            e += Time.deltaTime / seconds;
+            if (e >= 1.0f)
+            {
+                transform.localScale = endScale;
+                break;
+            }
+            Vector3 nextPos = staScale + Ease(e) * difScale;
+            transform.localScale = nextPos;
+        }
     }
 
     // モデルの位置取得関数

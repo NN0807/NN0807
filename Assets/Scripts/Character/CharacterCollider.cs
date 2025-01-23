@@ -110,57 +110,64 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         // Enemy(Player)と衝突したら
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) 
         {
-            // 自分がAIかどうかを判定
-            CharacterAI characterAI = collision.transform.parent.GetComponent<CharacterAI>();
-            if (characterAI != null)
+            // 攻撃を与えたCharacterの"CharacterManager"を取得する
+            CharacterManager _hitCharacterManager = collision.transform.parent.GetComponent<CharacterManager>();
+
+            // 自身の体に攻撃が当たった場合に、コリジョン処理を無効化する
+            if (_characterManager._characterNumber != _hitCharacterManager._characterNumber)
             {
-                // AIならダメージステートに遷移処理
-                characterAI.stateMachine.ChangeState(new AI_DamageState());
-            }
+                // 自分がAIかどうかを判定
+                //CharacterAI characterAI = collision.transform.parent.GetComponent<CharacterAI>();
+                //if (characterAI != null)
+                //{
+                //    // AIならダメージステートに遷移処理
+                //    characterAI.stateMachine.ChangeState(new AI_DamageState());
+                //}
 
-            // 衝突相手の"剛体"を取得
-            Rigidbody _rigidbody = collision.gameObject.GetComponent<Rigidbody>();
+                // 衝突相手の"剛体"を取得
+                Rigidbody _rigidbody = collision.gameObject.GetComponent<Rigidbody>();
 
-            // 衝突したオブジェクトのコライダーの表面上で、最寄りの接触点を取得
-            Vector3 _hitPoint = collision.ClosestPoint(transform.position);
+                // 衝突したオブジェクトのコライダーの表面上で、最寄りの接触点を取得
+                Vector3 _hitPoint = collision.ClosestPoint(transform.position);
 
-            // 攻撃の発生位置から相手に向かってレイキャストを行う
-            RaycastHit _hit;
-            Vector3 _attackDirection = (_rigidbody.position - _hitPoint).normalized;
-            // レイキャスト
-            if (Physics.Raycast(transform.position, _attackDirection, out _hit, Mathf.Infinity, _criticalHitLayer))
-            {
-                // クリティカルポイントにヒットした場合
-                Debug.Log("弱点に衝突しました");
-
-                // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
-                EffectManager.Instance.PlayEffect("CriticalHitEffect", _hitPoint);
-
-                // 攻撃が当たった剛体があれば
-                if (_rigidbody != null)
+                // 攻撃の発生位置から相手に向かってレイキャストを行う
+                RaycastHit _hit;
+                Vector3 _attackDirection = (_rigidbody.position - _hitPoint).normalized;
+                // レイキャスト
+                if (Physics.Raycast(transform.position, _attackDirection, out _hit, Mathf.Infinity, _criticalHitLayer))
                 {
-                    // ふっ飛ばさせる！！！
-                    _rigidbody.AddForce(_attackDirection * characterParamAsset.Attack * 100.0f, ForceMode.Impulse);
+                    // クリティカルポイントにヒットした場合
+                    Debug.Log("弱点に衝突しました");
+
+                    // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
+                    EffectManager.Instance.PlayEffect("CriticalHitEffect", _hitPoint);
+
+                    // 攻撃が当たった剛体があれば
+                    if (_rigidbody != null)
+                    {
+                        // ふっ飛ばさせる！！！
+                        _rigidbody.AddForce(_attackDirection * characterParamAsset.Attack * 100.0f, ForceMode.Impulse);
+                    }
                 }
-            }
-            else
-            {
-                // クリティカルポイントにヒットしなかった場合、通常の衝突処理
-                Debug.Log("攻撃が衝突しました");
-
-                // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
-                EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
-
-                // 攻撃が当たった剛体があれば
-                if (_rigidbody != null)
+                else
                 {
-                    // ふっ飛ばさせる！！！
-                    _rigidbody.AddForce(_attackDirection * characterParamAsset.Attack, ForceMode.Impulse);
-                }
-            }
+                    // クリティカルポイントにヒットしなかった場合、通常の衝突処理
+                    Debug.Log("攻撃が衝突しました");
 
-            // ヒットストップ演出
-            _characterManager.HitStop();
+                    // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
+                    EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
+
+                    // 攻撃が当たった剛体があれば
+                    if (_rigidbody != null)
+                    {
+                        // ふっ飛ばさせる！！！
+                        _rigidbody.AddForce(_attackDirection * characterParamAsset.Attack, ForceMode.Impulse);
+                    }
+                }
+
+                // ヒットストップ演出
+                _characterManager.HitStop();
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ public class Title_Log : MonoBehaviour
 
     // イージング時間
     [SerializeField]
-    public float _easingTime = 1.0f;
+    public float _easingTime = 1.5f;
 
     // Start is called before the first frame update
     void Start()
