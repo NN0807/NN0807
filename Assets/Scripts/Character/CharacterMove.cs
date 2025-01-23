@@ -54,6 +54,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         MoveForward   = Vector3.zero;
         _walkSpeed    = 0.0f;
         _dashSpeed    = 0.0f;
+        _impulseTime  = 0.0f;
     }
 
     public void UpdatePart(CharacterManager manager)
@@ -144,21 +145,11 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
     }
 
     // 衝撃処理
-    //private void Impulse(Vector3 forward, float attack)
-    //{
-    //    // 衝撃フラグ設定
-    //    _impulseFlag = true;
-
-    //    // 吹っ飛ばす
-    //    _rigidbody.AddForce(forward * attack, ForceMode.Impulse);
-    //}
-
-    // イベント登録をCharacterMove内で行う
-    //public void RegisterColliderEvent(CharacterCollider collider)
-    //{
-    //    // イベントに関数を登録
-    //    collider.CollisionAttackEnterEvent += Impulse;
-    //}
+    public void SetImpulse()
+    {
+        // 衝撃フラグ設定
+        _impulseFlag = true;
+    }
 
     // イベント登録をCharacterMove内で行う
     public void RegisterOperationEvent(CharacterOperation operation)

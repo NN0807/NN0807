@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     public CharacterOperation _characterOperation;
     // 移動スクリプト
-    private CharacterMove     _characterMove;
+    public CharacterMove      _characterMove;
     // UIスクリプト
     [SerializeField]
     public CharacterUI        _characterUI;
@@ -31,6 +31,8 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     public int _characterNumber = 0;
 
+    [SerializeField]
+    public Rigidbody _legRigidbody;
 
     // Start is called before the first frame update
     void Awake()
@@ -70,7 +72,14 @@ public class CharacterManager : MonoBehaviour
         var animation = part.GetComponent<CharacterAnimation>();
         if (animation != null)  animations.Add(animation);
         var move      = part.GetComponent<CharacterMove>();
-        if (move      != null) _characterMove = move;
+        if (move      != null)
+        {
+            _characterMove = move;
+            // 脚部パーツの剛体を取得
+            // ※脚部が体部武器を引き連れて移動しているため、
+            // 一番親の剛体を取得しておくことで後々使うかもしれない、、、
+            _legRigidbody = part.GetComponent<Rigidbody>();
+        }
         var ui        = part.GetComponent<CharacterUI>();
         if (ui        != null) _characterUI = ui;
     }
@@ -159,6 +168,17 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    // ヒットストップをフラグを取得する関数
+    public bool GetHitStopFlag()
+    {
+        foreach (var animation in animations)
+        {
+            return animation.GetHitStopFlag();
+        }
+
+        return false;
+    }
+
     // アニメーション強制変更関数
     public void AnimationChange(string animationName)
     {
@@ -167,6 +187,12 @@ public class CharacterManager : MonoBehaviour
             animation.AnimationChange(animationName);
         }
     }
+
+    // 脚部の剛体を取得する関数
+    public Rigidbody GetLegRigidBody()  { return _legRigidbody; }
+
+    // 衝撃フラグを起動する関数
+    public void      SetImpulse()       { _characterMove.SetImpulse(); }
 
     public bool    GetAnimationEvent()  { return animations[2].GetAnimationFlag();                                            }
                                                                                                                               

@@ -53,6 +53,8 @@ public class CharacterUI : MonoBehaviour
         // スタミナ設定
         _currentStamina = characterParamAsset.MaxStamina;
 
+        _material.SetColor("_Color", Color.white * 3.0f);
+
         // マテリアルの初期カラーを保存
         _originalColor = _material.GetColor("_Color");
     }

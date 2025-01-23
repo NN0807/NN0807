@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: WeaponJoint
       objectReference: {fileID: 0}
+    - target: {fileID: 4325221109767277462, guid: d32bc3aca252ee443a29117f7f53409b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

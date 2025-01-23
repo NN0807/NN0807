@@ -110,8 +110,11 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         _animator.SetTrigger(animationName);
     }
 
-    // ヒットストップ関数
+    // ヒットストップフラグを設定する関数
     public void HitStop()                  { _hitStopFlag = true; }
+
+    // ヒットストップフラグを取得する関数
+    public bool GetHitStopFlag()           { return _hitStopFlag; }
 
     // ダッシュイベント
     private void ActivateDash()            { _animator.speed = _activateDashAnimationSpeed; }

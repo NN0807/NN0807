@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 319593003}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Enemy
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7159,6 +7159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 0}
   _characterOperation: {fileID: 0}
+  _characterMove: {fileID: 0}
   _characterUI: {fileID: 0}
   _characterNumber: 1
 --- !u!4 &1777461712
@@ -7976,6 +7977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 2134525912}
   _characterOperation: {fileID: 2134525916}
+  _characterMove: {fileID: 0}
   _characterUI: {fileID: 0}
   _characterNumber: 0
 --- !u!114 &2134525916

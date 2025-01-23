@@ -186,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 55444473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 515.08014, y: 212.50961, z: -8.346739}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,7 +475,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: edb570694ed84dd4994975ee563e4658,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: edb570694ed84dd4994975ee563e4658,
         type: 3}
@@ -522,11 +522,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Title
       objectReference: {fileID: 0}
+    - target: {fileID: 2796977980574112954, guid: edb570694ed84dd4994975ee563e4658,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf441460e90998144b5110e92cf40a39, type: 2}
     - target: {fileID: 6969009038308752716, guid: edb570694ed84dd4994975ee563e4658,
         type: 3}
       propertyPath: m_Name
       value: Title_Hakopan
       objectReference: {fileID: 0}
+    - target: {fileID: 7441006490931452586, guid: edb570694ed84dd4994975ee563e4658,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf441460e90998144b5110e92cf40a39, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1095,6 +1105,7 @@ GameObject:
   - component: {fileID: 1910236191}
   - component: {fileID: 1910236190}
   - component: {fileID: 1910236189}
+  - component: {fileID: 1910236192}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -1203,6 +1214,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910236187}
   m_CullTransparentMesh: 1
+--- !u!114 &1910236192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910236187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea6e135ba088334eb98045a5c04a519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startButton: {fileID: 1910236189}
 --- !u!1 &1933106633
 GameObject:
   m_ObjectHideFlags: 0
