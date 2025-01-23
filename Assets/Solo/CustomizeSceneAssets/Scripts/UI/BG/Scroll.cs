@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scroll : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Scroll : MonoBehaviour
 
 		// 次の画像も生成
 		ScrollObject[1] = Instantiate(ScrollPrefab, transform).gameObject;
-		ScrollObject[1].transform.localPosition = new Vector3(1920f, 0f, 0f);
+		ScrollObject[1].transform.localPosition = new Vector3(ScrollPrefab.GetComponent<Image>().sprite.texture.width, 0f, 0f);
 	}
 
 	private void Update()
@@ -53,9 +54,9 @@ public class Scroll : MonoBehaviour
 		// 各画像が画面範囲を超えたら次の画像スクロール開始位置に戻す
 		for (int i = 0; i < 2; i++)
 		{
-			if (ScrollObject[i].transform.localPosition.x < -1920f)
+			if (ScrollObject[i].transform.localPosition.x < -ScrollPrefab.GetComponent<Image>().sprite.texture.width)
 			{
-				ScrollObject[i].transform.localPosition = new Vector3(1920f, 0f, 0f);
+				ScrollObject[i].transform.localPosition = new Vector3(ScrollPrefab.GetComponent<Image>().sprite.texture.width, 0f, 0f);
 			}
 		}
 	}

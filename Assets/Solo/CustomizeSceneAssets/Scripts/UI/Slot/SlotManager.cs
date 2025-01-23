@@ -96,16 +96,9 @@ public class SlotManager : MonoBehaviour
 	[SerializeField]
 	public bool UpdateModelFlg = false;
 
-	/// <summary>
-	/// ゲームパッド振動
-	/// </summary>
-	[SerializeField]
-	public GamepadVibration gamepadVibration;
-
 	private void Awake()
 	{
-		// ゲームパッド振動スクリプト取得
-		TryGetComponent<GamepadVibration>(out gamepadVibration);
+		CustomizeSceneManager.Instance.isCharacterCustomize = true;
 
 		// 入力処理初期化
 		inputActions = new CustomizeSceneController();
@@ -126,6 +119,9 @@ public class SlotManager : MonoBehaviour
 
 	private void Update()
 	{
+		// 選択遷移中は処理しない
+		if (CustomizeSceneManager.Instance.isMoving) return;
+
 		// 上下移動中ではなく
 		if (!selectSlot.Upflg && !selectSlot.Downflg)
 		{
@@ -144,16 +140,6 @@ public class SlotManager : MonoBehaviour
 				// 矢印を光らせる
 				selectFream.transform.Find("DownArrow").GetComponent<BloomController>().triggerParam.trigger = true;
 			}
-		}
-
-		// 決定・戻る処理
-		if(inputActions.UI.Decision.triggered)
-		{
-			SelectComplete();
-		}
-		if(inputActions.UI.Back.triggered)
-		{
-			BackScene();
 		}
 
 		// 選択されているスロットの更新処理
@@ -287,27 +273,8 @@ public class SlotManager : MonoBehaviour
 		}
 	}
 
-	///<summary>戻る</summary>
-	public void BackScene()
-	{
-		// デバッグ
-		Debug.Log("ひとつ前のシーンに戻る");
-	}
-
-	///<summary>キャラ決定</summary> 
-	public void SelectComplete()
-	{
-		// デバッグ表示
-		Debug.Log("キャラ決定");
-
-		// 選択されたパーツ文字列をデータに保存
-		// SavePartsData();
-
-		// TODO:画面遷移処理（のちに追加）
-	}
-
 	///<summary>選択されたパーツ文字列をデータに保存</summary>
-	private void SavePartsData()
+	public void SavePartsData()
 	{
 		// staticを使ったデータ受け渡し
 		//GameData.bodySelectPartsName = partsDataText[selectSlotNum,reelID[(int)reelType.body]];
