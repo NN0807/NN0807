@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &8620227642745896311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f134380bd35db664d99584571bf772db,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7930097150456469213, guid: f134380bd35db664d99584571bf772db,
         type: 3}
@@ -294,6 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &4453032631820789236
 BoxCollider:
   m_ObjectHideFlags: 0

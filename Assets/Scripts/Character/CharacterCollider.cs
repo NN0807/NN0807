@@ -44,7 +44,7 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         MoveForward = manager.GetMoveForward();
     }
 
-    // 当たった時に呼ばれる関数
+    // 攻撃を受けた時に呼ばれる関数
     void OnCollisionEnter(Collision collision)
     {
         // 武器と衝突したら
@@ -63,7 +63,7 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         }
     }
 
-    // 当たっている間に呼ばれる関数
+    // ステージギミック用、当たっている間に呼ばれる関数
     void OnCollisionStay(Collision collision)
     {
         // "火炎"に衝突したら
@@ -79,7 +79,7 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         }
     }
 
-    // 離れたら呼ばれる関数
+    // 相手の攻撃を受けて、離れたら呼ばれる関数
     void OnCollisionExit(Collision collision)
     {
         // "火炎"との衝突から離れたら
@@ -104,12 +104,20 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         }
     }
 
-    // 当たった時に呼ばれる関数(Trigger版)
+    // 攻撃を与えた時に呼ばれる関数(Trigger版)
     void OnTriggerEnter(Collider collision)
     {
         // Enemy(Player)と衝突したら
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) 
         {
+            // 自分がAIかどうかを判定
+            CharacterAI characterAI = collision.transform.parent.GetComponent<CharacterAI>();
+            if (characterAI != null)
+            {
+                // AIならダメージステートに遷移処理
+                characterAI.stateMachine.ChangeState(new AI_DamageState());
+            }
+
             // 衝突相手の"剛体"を取得
             Rigidbody _rigidbody = collision.gameObject.GetComponent<Rigidbody>();
 

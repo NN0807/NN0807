@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &5364108593888871103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,7 +213,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b01cf2d840d65b64c92f040f7b50c7eb,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7930097150456469213, guid: b01cf2d840d65b64c92f040f7b50c7eb,
         type: 3}
@@ -298,10 +301,8 @@ MonoBehaviour:
   _animator: {fileID: 3834181027982681491}
   _partsType: 1
   _activateDashAnimationSpeed: 0
-  HitStopTime: 0.23
-  HitStopTimer: 0
-  _hitStopFlag: 0
-  s: 0
+  _hitStopTime: 0.3
+  _hitStopTimer: 0
 --- !u!114 &1919868873876918251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &6817336240065661225
 BoxCollider:
   m_ObjectHideFlags: 0

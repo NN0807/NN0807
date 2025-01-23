@@ -7932,7 +7932,7 @@ MonoBehaviour:
   _characterModel: {fileID: 2134525912}
   _characterOperation: {fileID: 2134525916}
   _characterUI: {fileID: 0}
-  _characterNumber: 0
+  _characterNumber: 1
 --- !u!114 &2134525916
 MonoBehaviour:
   m_ObjectHideFlags: 0

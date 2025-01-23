@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &4181506667456349111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,7 +208,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a9bef7bdf8b4aac4291ce715df704794,
         type: 3}
       propertyPath: m_Name
-      value: WeddingRingBox
+      value: WeddingringBox
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a9bef7bdf8b4aac4291ce715df704794,
         type: 3}
@@ -215,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a9bef7bdf8b4aac4291ce715df704794,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7930097150456469213, guid: a9bef7bdf8b4aac4291ce715df704794,
         type: 3}
@@ -303,10 +306,8 @@ MonoBehaviour:
   _animator: {fileID: 7755397874497088857}
   _partsType: 1
   _activateDashAnimationSpeed: 0
-  HitStopTime: 0.23
-  HitStopTimer: 0
-  _hitStopFlag: 0
-  s: 0
+  _hitStopTime: 0.3
+  _hitStopTimer: 0
 --- !u!114 &2818376437241188080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
+  _criticalHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &545415590752781322
 BoxCollider:
   m_ObjectHideFlags: 0

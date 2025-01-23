@@ -21,6 +21,8 @@ public class AI_AttackState : AIBaseState
 
 		// メンタル加算
 		characterAI.AddMental(0.25f);
+
+		characterAI.agent.GetComponent<Rigidbody>().isKinematic = false;
 	}
 
 	// ステート更新処理
@@ -61,6 +63,8 @@ public class AI_AttackState : AIBaseState
 	// ステートから出る時
 	public override void Exit()
 	{
-
+		// キャラクターAI取得
+		CharacterAI characterAI = stateMachine.characterAI;
+		characterAI.agent.GetComponent<Rigidbody>().isKinematic = true;
 	}
 }
