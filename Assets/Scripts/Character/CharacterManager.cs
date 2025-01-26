@@ -31,8 +31,13 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     public int _characterNumber = 0;
 
+    // 脚部の剛体
     [SerializeField]
     public Rigidbody _legRigidbody;
+
+    // 脚部のオブジェクト
+    [SerializeField]
+    public GameObject _legObject;
 
     // Start is called before the first frame update
     void Awake()
@@ -79,6 +84,7 @@ public class CharacterManager : MonoBehaviour
             // ※脚部が体部武器を引き連れて移動しているため、
             // 一番親の剛体を取得しておくことで後々使うかもしれない、、、
             _legRigidbody = part.GetComponent<Rigidbody>();
+            _legObject    = part;
         }
         var ui        = part.GetComponent<CharacterUI>();
         if (ui        != null) _characterUI = ui;
@@ -130,7 +136,6 @@ public class CharacterManager : MonoBehaviour
         foreach (var collider in colliders)
         {
             _characterOperation?.RegisterColliderEvent(collider);
-           // _characterMove?.RegisterColliderEvent(collider);
         }
     }
 
@@ -189,12 +194,16 @@ public class CharacterManager : MonoBehaviour
     }
 
     // 脚部の剛体を取得する関数
-    public Rigidbody GetLegRigidBody()  { return _legRigidbody; }
+    public Rigidbody  GetLegRigidBody()   { return _legRigidbody; }
+
+    // 脚部パーツ取得関数
+    public GameObject GetLegParts()       { return _legObject; }
 
     // 衝撃フラグを起動する関数
-    public void      SetImpulse()       { _characterMove.SetImpulse(); }
-
-    public bool    GetAnimationEvent()  { return animations[2].GetAnimationFlag();                                            }
+    public void       SetImpulse()        { _characterMove.SetImpulse(); }
+    
+    // 武器の拡縮フラグを取得する関数
+    public bool       GetAnimationEvent() { return animations[2].GetAnimationFlag();                                            }
                                                                                                                               
     public float   GetHorizontalInput() { return _characterOperation ? _characterOperation.GetHorizontalInput() : 0.0f;       }
                                                                                                                               

@@ -62,7 +62,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         Debug.Log("CharacterMove　更新処理");
 
         // 攻撃中は移動も旋回も出来なくする
-        if (!manager.IsCurrentlyAttacking())   
+        if (!manager.IsCurrentlyAttacking())    
         {
             // 移動
             if (!_impulseFlag) Move(manager);
@@ -73,7 +73,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         else
         {
             // 速力リセット
-            _rigidbody.velocity = Vector3.zero;
+            //_rigidbody.velocity = Vector3.zero;
         }
 
         // 衝撃を受けたらタイマー起動

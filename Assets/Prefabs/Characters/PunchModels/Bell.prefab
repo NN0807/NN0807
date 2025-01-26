@@ -191,3 +191,4 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 8192
+  _hitCharacterManager: {fileID: 0}

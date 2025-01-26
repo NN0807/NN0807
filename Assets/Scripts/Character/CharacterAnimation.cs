@@ -126,7 +126,8 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     public bool GetAttackAnimationFlag()   { return _attackAnimationFlag; }
 
     // 攻撃アニメーションフラグ取得設定関数                                                                                                
-    public void AttackAnimationEvent()     { _attackAnimationFlag = !_attackAnimationFlag; }
+    public void AttackAnimationTrueEvent()  { _attackAnimationFlag = true;  }
+    public void AttackAnimationFalseEvent() { _attackAnimationFlag = false; }
 
     // アニメーションフラグ取得関数                                                                                                        
     public bool GetAnimationFlag()         { return _animationFlag; }
@@ -140,7 +141,14 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
                                            
     public void SetAttackAnimation()       { _animator.SetTrigger("Attack");}
                                            
-    public void SetHitAnimation()          { _animator.SetTrigger("Hit"); _animator.ResetTrigger("Idle"); _animator.ResetTrigger("Walk"); }
+    public void SetHitAnimation()          { 
+                                             _animator.SetTrigger("Hit");
+                                             _animator.ResetTrigger("Idle");
+                                             _animator.ResetTrigger("Walk");
+                                             _animator.ResetTrigger("Attack");
+                                             // 攻撃中に攻撃を受けると攻撃アニメーションフラグがONになったままになる為。
+                                             _attackAnimationFlag = false; 
+    }
 
     public void SetHitEarlyExitAnimation() { _animator.SetTrigger("HitEarlyExit"); }
 }

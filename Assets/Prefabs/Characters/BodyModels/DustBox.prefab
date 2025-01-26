@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 4688416548543890796}
   - component: {fileID: 755267142858436950}
   - component: {fileID: 4980061780843264231}
-  - component: {fileID: 971199455156381562}
-  - component: {fileID: 7116881689032199375}
-  m_Layer: 0
+  - component: {fileID: 59666325495533574}
+  m_Layer: 13
   m_Name: Critical Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7438626157816610777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.02, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &971199455156381562
+--- !u!135 &59666325495533574
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,28 +99,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.49999997
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7116881689032199375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7438626157816610777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed89ddd95886184898e90f5b8a6cdc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterParamAsset: {fileID: 0}
-  _criticalHitLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1001 &2971578188751390004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,6 +307,9 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 0
+  _hitCharacterManager: {fileID: 0}
+  _hasWeaponEntered: 0
+  _hasCharacterEntered: 0
 --- !u!65 &5934753511680184435
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8761447753278154119, guid: 1be5133b7fb545241b528797ebbdbc12,
         type: 3}
       propertyPath: m_TagString
-      value: Weapon
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1be5133b7fb545241b528797ebbdbc12,
         type: 3}
@@ -72,6 +72,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: WeaponJoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527164373967713898, guid: 1be5133b7fb545241b528797ebbdbc12,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 8391806971968038481, guid: 1be5133b7fb545241b528797ebbdbc12,
         type: 3}
@@ -142,6 +147,7 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 8192
+  _hitCharacterManager: {fileID: 0}
 --- !u!1 &2927960735905345236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1be5133b7fb545241b528797ebbdbc12,

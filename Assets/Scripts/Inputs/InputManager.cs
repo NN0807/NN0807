@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+
 
 public class InputManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class InputManager : MonoBehaviour
 
         // 現在の入力デバイスを確認
         CheckInitialInputDevice();
+
+        InputSystem.onEvent += OnInputEvent;
     }
 
     private void OnDisable()
@@ -25,6 +29,8 @@ public class InputManager : MonoBehaviour
         // デバイスの接続/切断のイベントの処理解除
         InputSystem.onDeviceChange -= OnDeviceChange;
         InputSystem.onActionChange -= OnActionChange;
+
+        InputSystem.onEvent -= OnInputEvent;
     }
 
     // デバイスの変更があった場合の処理
@@ -65,6 +71,18 @@ public class InputManager : MonoBehaviour
                     SetCurrentInputDevice("Keyboard/Mouse");
                 }
             }
+        }
+    }
+
+    private void OnInputEvent(InputEventPtr eventPtr, InputDevice device)
+    {
+        if (device is Gamepad)
+        {
+            SetCurrentInputDevice("Gamepad");
+        }
+        else if (device is Mouse || device is Keyboard)
+        {
+            SetCurrentInputDevice("Keyboard/Mouse");
         }
     }
 

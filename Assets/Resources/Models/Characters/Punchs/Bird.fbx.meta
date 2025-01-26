@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: AttackAnimationEvent
+        functionName: AttackAnimationTrueEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -79,7 +79,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: AttackAnimationEvent
+        functionName: AttackAnimationFalseEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -147,6 +147,7 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 8192
+  _hitCharacterManager: {fileID: 0}
 --- !u!1 &5961905808965682106 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ae0eecb01e03fc49b5020ac1c6f2784,

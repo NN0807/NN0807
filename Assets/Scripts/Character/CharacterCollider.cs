@@ -40,6 +40,10 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
     // 攻撃の発生位置から相手に向かってのベクトル変数
     private Vector3 _attackDirection;
 
+    // 複数回当たり判定関数に侵入するのを防ぐ
+    public bool _hasWeaponEntered = false;
+    public bool _hasCharacterEntered = false;
+
     public void Initialize(CharacterManager manager)
     {
         Debug.Log("CharacterCollider 初期化");
@@ -66,9 +70,6 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
             // 通常攻撃
             if (_hitFlag)
             {
-                // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
-                EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
-
                 // 攻撃が当たった剛体があれば
                 if (_rigidbody != null)
                 {
@@ -83,9 +84,6 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
             // クリティカル攻撃
             if (_criticalhitFlag)
             {
-                // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
-                EffectManager.Instance.PlayEffect("CriticalHitEffect", _hitPoint);
-
                 // 攻撃が当たった剛体があれば
                 if (_rigidbody != null)
                 {
@@ -102,33 +100,7 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
     // 攻撃を受けた時に呼ばれる関数
     void OnCollisionEnter(Collision collision)
     {
-        // 武器と衝突したら
-        if (collision.gameObject.CompareTag("Weapon")) 
-        {
-            Debug.Log("攻撃を受けました");
-
-            // イベント発火
-            CollisionEFKStayEvent?.Invoke();
-
-            // ヒットアニメーション再生
-            _characterManager.SetAnimations(AnimationType.Hit);
-
-            // 攻撃を与えたキャラのcharacterManagerを取得
-            //_hitCharacterManager = this.gameObject.transform.parent.GetComponent<CharacterManager>();
-
-            //// 衝突相手の"剛体"を取得
-            //Rigidbody _rigidbody = this.gameObject.GetComponent<Rigidbody>();
-            // ふっ飛ばさせる！！！
-            //_hitCharacterManager.GetLegRigidBody().AddForce(-MoveForward * 50.0f, ForceMode.Impulse);
-
-            // ヒットストップ演出
-            _characterManager.HitStop();
-
-            // 自身の衝撃判定をON
-            _characterManager.SetImpulse();
-
-            //_hitFlag = true;
-        }
+        
     }
 
     // ステージギミック用、当たっている間に呼ばれる関数
@@ -172,64 +144,148 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
         }
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        // 武器と衝突し、離れたら
+        if (other.gameObject.CompareTag("Weapon") && _hasWeaponEntered) 
+        {
+            // 武器同士の衝突
+            if (transform.gameObject.CompareTag("Weapon")) return;
+
+            // 攻撃を与えたCharacterの"CharacterManager"を取得する
+            if (_characterManager._characterNumber != other.transform.root.gameObject.GetComponent<CharacterManager>()._characterNumber) 
+            {
+                Debug.Log($"衝突し、離れた武器オブジェクト: {other.gameObject.name}");
+
+                // Triggerから出たらリセット
+                _hasWeaponEntered = false;
+
+                // イベント発火
+                CollisionEFKExitEvent?.Invoke();
+            }
+        }
+
+        // 武器が相手から離れたら
+        if ((other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player")) &&
+            _hasCharacterEntered) 
+        {
+            Debug.Log($"衝突し、離れた体部パーツ: {other.gameObject.name}");
+
+            // Triggerから出たらリセット
+            _hasCharacterEntered = false;
+
+            // イベント発火
+            CollisionEFKExitEvent?.Invoke();
+        }
+
+    }
+
     // 攻撃を与えた時に呼ばれる関数(Trigger版)
     void OnTriggerEnter(Collider collision)
     {
-        // Enemy(Player)と衝突したら
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")) 
+        // 武器と衝突したら
+        if (collision.gameObject.CompareTag("Weapon") && !_hasWeaponEntered) 
         {
+            // 武器同士の衝突
+            if (transform.gameObject.CompareTag("Weapon")) return;
+
             // 攻撃を与えたCharacterの"CharacterManager"を取得する
-            _hitCharacterManager = collision.transform.parent.GetComponent<CharacterManager>();
+            _hitCharacterManager = collision.transform.root.gameObject.GetComponent<CharacterManager>();
 
             // 自身の体に攻撃が当たった場合に、コリジョン処理を無効化する
             if (_characterManager._characterNumber != _hitCharacterManager._characterNumber)
             {
-                // 自分がAIかどうかを判定
-                //CharacterAI characterAI = collision.transform.parent.GetComponent<CharacterAI>();
-                //if (characterAI != null)
-                //{
-                //    // AIならダメージステートに遷移処理
-                //    characterAI.stateMachine.ChangeState(new AI_DamageState());
-                //}
+                // すでに処理済みなら無視
+                if (_hasWeaponEntered) return;
+                _hasWeaponEntered = true;
+
+                Debug.Log($"衝突した武器オブジェクト: {collision.gameObject.name}");
+
+                Debug.Log("攻撃を受けました");
+
+                // イベント発火
+                CollisionEFKStayEvent?.Invoke();
+
+                // ヒットアニメーション再生
+                _characterManager.SetAnimations(AnimationType.Hit);
+
+                // ヒットストップ演出
+                _characterManager.HitStop();
+            }
+        }
+
+        // Enemy(Player)と衝突したら
+        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")))
+        {
+            // 攻撃を与えたCharacterの"CharacterManager"を取得する
+            _hitCharacterManager = collision.transform.root.gameObject.GetComponent<CharacterManager>();
+
+            // 自身の子オブジェクト同士の衝突を回避
+            if (_characterManager._characterNumber != _hitCharacterManager._characterNumber)
+            {
+                // すでに処理済みなら無視
+                if (_hasCharacterEntered) return;
+                _hasCharacterEntered = true;
 
                 // 衝突相手の"剛体"を取得
-                _rigidbody = collision.gameObject.GetComponent<Rigidbody>();
+                _rigidbody = collision.GetComponent<Rigidbody>();
+
+                // 衝突方向を算出する
+                _attackDirection = (collision.transform.position - _characterManager.GetLegParts().transform.position).normalized;
 
                 // 衝突したオブジェクトのコライダーの表面上で、最寄りの接触点を取得
                 _hitPoint = collision.ClosestPoint(transform.position);
 
                 // 攻撃の発生位置から相手に向かってレイキャストを行う
                 RaycastHit _hit;
-                _attackDirection = (_rigidbody.position - _hitPoint).normalized;
 
                 // レイキャスト
-                if (Physics.Raycast(transform.position, _attackDirection, out _hit, Mathf.Infinity, _criticalHitLayer))
+                if (Physics.Raycast(transform.position, _attackDirection, out _hit, Mathf.Infinity, _criticalHitLayer) &&
+                    !_hitFlag) 
                 {
                     // クリティカルポイントにヒットした場合
                     Debug.Log("弱点に衝突しました");
 
-                    // クリティカル攻撃フラグをON
-                    _criticalhitFlag = true;
+                    // 衝突した場所（hitPoint）にクリティカルヒットエフェクトを再生させる
+                    EffectManager.Instance.PlayEffect("CriticalHitEffect", _hitPoint);
 
-                    // 攻撃を与えたキャラのcharacterManagerを取得
-                    _hitCharacterManager = collision.gameObject.transform.parent.GetComponent<CharacterManager>();
+                    // 攻撃を与えた相手の"CharacterManager"の速度計算を停止
+                    _hitCharacterManager.SetImpulse();
+
+                    // 攻撃が当たった剛体があれば
+                    if (_rigidbody != null)
+                    {
+                        Debug.Log($"弱点に衝突したオブジェクト: {collision.gameObject.name}");
+                    }
 
                     // ヒットストップ演出
                     _characterManager.HitStop();
+
+                    // クリティカル攻撃フラグをON
+                    _criticalhitFlag = true;
                 }
                 else
                 {
                     // クリティカルポイントにヒットしなかった場合、通常の衝突処理
                     Debug.Log("攻撃が衝突しました");
 
+                    // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
+                    EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);
+
+                    // 攻撃を与えた相手の"CharacterManager"の速度計算を停止
+                    _hitCharacterManager.SetImpulse();
+
+                    // 攻撃が当たった剛体があれば
+                    if (_rigidbody != null)
+                    {
+                        Debug.Log($"衝突したオブジェクト: {collision.gameObject.name}");
+                    }
+
+                    // 自身のヒットストップ演出
+                    _characterManager.HitStop();
+
                     // 通常攻撃フラグをON
                     _hitFlag = true;
-
-                    // 攻撃を与えたキャラのcharacterManagerを取得
-                    _hitCharacterManager = collision.gameObject.transform.parent.GetComponent<CharacterManager>();
-
-                    // ヒットストップ演出
-                    _characterManager.HitStop();
                 }
             }
         }

@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 2755894652263115432}
   - component: {fileID: 1428728962235964545}
   - component: {fileID: 3688532857539554867}
-  - component: {fileID: 5851821187655025134}
-  - component: {fileID: 1883060334710713828}
-  m_Layer: 10
+  - component: {fileID: 4162644361547544219}
+  m_Layer: 13
   m_Name: Critical Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4435213670633743452}
@@ -85,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5851821187655025134
+--- !u!135 &4162644361547544219
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,22 +105,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1883060334710713828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681170005640151682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed89ddd95886184898e90f5b8a6cdc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterParamAsset: {fileID: 0}
-  _criticalHitLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1001 &4181506667456349111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,6 +307,9 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 0
+  _hitCharacterManager: {fileID: 0}
+  _hasWeaponEntered: 0
+  _hasCharacterEntered: 0
 --- !u!65 &545415590752781322
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1227,6 +1227,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 1910236189}
+  _volume: {fileID: 55444474}
+  _startButtonSprite: {fileID: 21300000, guid: 19d6b84e6ea1c054c851e17617159df4, type: 3}
+  _startAButtonSprite: {fileID: 21300000, guid: 606baa89b17ec9b4782e9d21f594ac2d,
+    type: 3}
+  inputManager: {fileID: 1801146250}
+  buttonToSelect: {fileID: 1910236187}
+  _material: {fileID: 2100000, guid: bae477364a84c7a439d99098a504fddb, type: 2}
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  minV: 0.4
+  maxV: 0.75
 --- !u!1 &1933106633
 GameObject:
   m_ObjectHideFlags: 0
