@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
+public class NetWorkCustomizeSceneManager : MonoBehaviour
 {
     /// <summary>
     /// キャラクターカスタマイズ中か
@@ -129,11 +127,6 @@ public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
         if (isCharacterCustomize)
         {
             // 前のシーンへ
-            // 受信メッセージ処理の実行・一時停止を切り替えることができる。
-            PhotonNetwork.IsMessageQueueRunning = false;
-
-            // シーン遷移
-            SceneManager.LoadSceneAsync("Lobby_Scene", LoadSceneMode.Single);
         }
         // ステージから戻るのでカスタマイズへ
         else if (isStgaeSelect)
