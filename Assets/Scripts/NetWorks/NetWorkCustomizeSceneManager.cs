@@ -162,7 +162,7 @@ public class NetWorkCustomizeSceneManager : MonoBehaviour
         if (isCharacterCustomize)
         {
             // 選択されたパーツ文字列をデータに保存
-            Slot.GetComponent<SlotManager>().SavePartsData();
+            Slot.GetComponent<NetWorkSlotManager>().SavePartsData();
 
             // ステージ選択画面に遷移
             ChangeStageSelect();
