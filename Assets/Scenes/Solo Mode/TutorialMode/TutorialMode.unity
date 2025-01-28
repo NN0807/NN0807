@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 67151773}
   - component: {fileID: 67151775}
   - component: {fileID: 67151774}
+  - component: {fileID: 67151776}
   m_Layer: 5
   m_Name: Guide_3
   m_TagString: Untagged
@@ -285,6 +286,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67151772}
   m_CullTransparentMesh: 1
+--- !u!225 &67151776
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67151772}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &86324827
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +698,7 @@ GameObject:
   - component: {fileID: 603166226}
   - component: {fileID: 603166228}
   - component: {fileID: 603166227}
+  - component: {fileID: 603166229}
   m_Layer: 5
   m_Name: Guide_4
   m_TagString: Untagged
@@ -749,6 +763,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603166225}
   m_CullTransparentMesh: 1
+--- !u!225 &603166229
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603166225}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &686969746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,8 +1054,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979466906}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1037,7 +1063,7 @@ Transform:
   - {fileID: 1914305876}
   - {fileID: 1397788164}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1016658545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1603,7 @@ GameObject:
   - component: {fileID: 1535190383}
   - component: {fileID: 1535190385}
   - component: {fileID: 1535190384}
+  - component: {fileID: 1535190386}
   m_Layer: 5
   m_Name: Guide_5
   m_TagString: Untagged
@@ -1641,6 +1668,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535190382}
   m_CullTransparentMesh: 1
+--- !u!225 &1535190386
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535190382}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1715095343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,6 +1691,7 @@ GameObject:
   - component: {fileID: 1715095344}
   - component: {fileID: 1715095346}
   - component: {fileID: 1715095345}
+  - component: {fileID: 1715095347}
   m_Layer: 5
   m_Name: Guide_2
   m_TagString: Untagged
@@ -1716,6 +1756,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715095343}
   m_CullTransparentMesh: 1
+--- !u!225 &1715095347
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715095343}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1753155813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2012,6 +2064,7 @@ MonoBehaviour:
   guideDisplayDelay: 1
   guideCenterPauseDuration: 1
   guideMoveDuration: 1
+  totalMoveTime: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

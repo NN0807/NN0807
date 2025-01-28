@@ -123,7 +123,7 @@ public class ModeSelectController : MonoBehaviour
         {
             // ソロモード
             case 0:
-                // SceneManager.LoadScene("BattleModeScene");
+                SceneManager.LoadScene("CustomizeScene");
                 break;
             // オンラインモード
             case 1:
