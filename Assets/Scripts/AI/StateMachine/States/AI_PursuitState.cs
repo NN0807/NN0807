@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class AI_PursuitState : AIBaseState
 {
-	// 諦めるまでの時間
+	/// <summary>
+	/// 諦めるまでの時間
+	/// </summary>
 	private float giveUpTimer = 5f;
 
-	// 追跡するターゲット
+	/// <summary>
+	/// 追跡するターゲット
+	/// </summary>
 	Transform targetTransform = null;
 
 	// ステートに入った時
@@ -29,6 +33,9 @@ public class AI_PursuitState : AIBaseState
 
 		// メンタル加算
 		characterAI.AddMental(0.1f);
+
+		// タイマー初期化
+		giveUpTimer = 5f;
 	}
 
 	// ステート更新処理
@@ -56,7 +63,7 @@ public class AI_PursuitState : AIBaseState
 		if (angle <= 30f && agent.remainingDistance <= agent.radius * 4f)
 		{
 			// メンタルがたまっていたら逃げる
-			if (stateMachine.characterAI.ConductLottery(stateMachine.characterAI.mental))
+			if (characterAI.ConductLottery(characterAI.mental))
 			{
 				// 逃走ステートへ
 				stateMachine.ChangeState(new AI_EscapeState());
@@ -67,12 +74,12 @@ public class AI_PursuitState : AIBaseState
 		}
 
 		// ギブアップ処理
-		// いつまでも追いかけていると辺なので
+		// いつまでも追いかけていると変なので
 		giveUpTimer -= Time.deltaTime;
 		if(giveUpTimer < 0f)
         {
 			// メンタルがたまっていたら逃げる
-			if (stateMachine.characterAI.ConductLottery(stateMachine.characterAI.mental))
+			if (characterAI.ConductLottery(characterAI.mental))
 			{
 				// 逃走ステートへ
 				stateMachine.ChangeState(new AI_EscapeState());

@@ -57,8 +57,10 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
         // ヒットストップフラグがONになれば
         if(_hitStopFlag)
         {
-            // アニメーション速度を保存しておく
-            _defaultAnimationSpeed = _animator.speed;
+            if(_animator.speed != 0f)
+                // アニメーション速度を保存しておく
+                _defaultAnimationSpeed = _animator.speed;
+
             // モーションを止める
             _animator.speed = 0.0f;
 

@@ -18,6 +18,11 @@ public class AIStateMachine
 	public AIBaseState currentState = null;
 
 	/// <summary>
+	/// ステートマシンを機能させるか
+	/// </summary>
+	public bool isUpdate = true;
+
+	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="characterAI">ステートない処理でAIパラメーターを用いるので保持しておく</param>
@@ -29,7 +34,7 @@ public class AIStateMachine
 	public void Update()
 	{
 		// ステートがあれば更新処理
-		if (currentState != null)
+		if (currentState != null && isUpdate)
 			currentState.Update();	
 	}
 
@@ -50,6 +55,12 @@ public class AIStateMachine
 	{
 		// 現在のステートの終了処理
 		if(currentState != null)	currentState.Exit();
+
+		// ステートマシンが無効になっていたら
+		if(!isUpdate)
+        {
+			return null;
+        }
 
 		// ステートの変更
 		currentState = state;

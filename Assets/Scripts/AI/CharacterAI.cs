@@ -101,7 +101,7 @@ public class CharacterAI : MonoBehaviour
 
 		// ステートマシン生成
 		stateMachine = new AIStateMachine(this);
-		stateMachine.ChangeState(new AI_IdleState(1f));
+		stateMachine.ChangeState(new AI_IdleState(0.1f));
 
 		// パラメーター取得してエージェントに設定
 		characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
@@ -114,6 +114,11 @@ public class CharacterAI : MonoBehaviour
 		agent.speed = characterParamAsset.MoveSpeed;            // 速度
 		agent.angularSpeed = 1000f;                             // 旋回速度
 		agent.acceleration = characterParamAsset.Acceleration;  // 加速度
+
+		// AIの性格値をランダムで決定
+		aIParam.Aggressiveness = Random.Range(0.5f, 0.9f);	// 攻撃的か(反撃や追撃)
+		aIParam.Intelligence = Random.Range(0.2f, 0.9f);	// 賢いか(ギミック回避率)
+		aIParam.MentalStrength = Random.Range(0.3f, 0.9f);	// 気が強いか(メンタル値の上昇率)
 
 		// 自分以外のキャラクターオブジェクト取得
 		CharacterManager[] characters = FindObjectsOfType<CharacterManager>();

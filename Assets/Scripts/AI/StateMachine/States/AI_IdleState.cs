@@ -38,14 +38,8 @@ public class AI_IdleState : AIBaseState
 		// 待機終了処理
 		if (time <= 0f)
 		{
-			// メンタルがたまっていたら逃げる
-			if (characterAI.ConductLottery(characterAI.mental))
-			{
-				// 逃走ステートへ
-				stateMachine.ChangeState(new AI_EscapeState());
-			}
 			// 攻撃的かで分岐
-			else if (characterAI.ConductLottery(characterAI.aIParam.Aggressiveness))
+			if (characterAI.ConductLottery(characterAI.aIParam.Aggressiveness))
 			{
 				// 追跡ステートへ
 				stateMachine.ChangeState(new AI_PursuitState());

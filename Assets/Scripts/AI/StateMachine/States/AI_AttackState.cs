@@ -21,8 +21,6 @@ public class AI_AttackState : AIBaseState
 
 		// メンタル加算
 		characterAI.AddMental(0.25f);
-
-		characterAI.agent.GetComponent<Rigidbody>().isKinematic = false;
 	}
 
 	// ステート更新処理
@@ -31,17 +29,17 @@ public class AI_AttackState : AIBaseState
 		// キャラクターAI取得
 		CharacterAI characterAI = stateMachine.characterAI;
 
-		// 攻撃が狩猟したら
+		// 攻撃が終了したら
 		if(characterAI.characterManager.IsCurrentlyAttacking() == false)
 		{
 			// メンタルがたまっていたら逃げる
-			if(characterAI.ConductLottery(stateMachine.characterAI.mental))
+			if(characterAI.ConductLottery(characterAI.mental))
             {
 				// 逃走ステートへ
 				stateMachine.ChangeState(new AI_EscapeState());
 			}
 			// 攻撃性が高ければもう一度攻撃
-			else if (characterAI.ConductLottery(stateMachine.characterAI.aIParam.Aggressiveness))
+			else if (characterAI.ConductLottery(characterAI.aIParam.Aggressiveness))
 			{
 				// もう一度攻撃
 				stateMachine.ChangeState(new AI_PursuitState());
@@ -63,8 +61,6 @@ public class AI_AttackState : AIBaseState
 	// ステートから出る時
 	public override void Exit()
 	{
-		// キャラクターAI取得
-		CharacterAI characterAI = stateMachine.characterAI;
-		characterAI.agent.GetComponent<Rigidbody>().isKinematic = true;
+
 	}
 }

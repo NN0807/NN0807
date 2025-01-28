@@ -13,21 +13,24 @@ public class Ai_TerritoryWanderState : AIBaseState
 	/// <summary>
 	/// テリトリー半径
 	/// </summary>
-	private float territoryRadius = 0.4f;
+	private float territoryRadius = 1f;
 
 	/// <summary>
-	/// テリトリー中心
+	/// テリトリー中心位置
 	/// </summary>
 	private Vector2 territoryCenterPos = default;
 
 	// ステートに入った時
 	public override void Enter()
 	{
+		// キャラクターAI取得
+		CharacterAI characterAI = stateMachine.characterAI;
+
 		// 歩きアニメーション
-		stateMachine.characterAI.characterManager.SetAnimations(Common.AnimationType.Walk);
+		characterAI.characterManager.SetAnimations(Common.AnimationType.Walk);
 
 		// 現在の位置を縄張りの中心に設定
-		territoryCenterPos = new Vector2(stateMachine.characterAI.transform.GetChild(0).position.x, stateMachine.characterAI.transform.GetChild(0).position.z);
+		territoryCenterPos = new Vector2(characterAI.transform.GetChild(0).position.x, characterAI.transform.GetChild(0).position.z);
 
 		// 目標地点設定
 		SetRandomtarget();
@@ -43,7 +46,7 @@ public class Ai_TerritoryWanderState : AIBaseState
 		// エージェントが目標地点に到着したかを確認
 		if (agent.remainingDistance <= agent.stoppingDistance)
 		{
-			stateMachine.ChangeState(new AI_IdleState(2f));
+			stateMachine.ChangeState(new AI_IdleState(0.1f));
 		}
 
 		// 何かに阻まれている状態の例外処理
@@ -51,7 +54,7 @@ public class Ai_TerritoryWanderState : AIBaseState
 			agent.pathStatus == NavMeshPathStatus.PathComplete &&
 			agent.remainingDistance < agent.stoppingDistance + 0.1f)
 		{
-			stateMachine.ChangeState(new AI_IdleState(2f));
+			stateMachine.ChangeState(new AI_IdleState(0.1f));
 		}
 	}
 

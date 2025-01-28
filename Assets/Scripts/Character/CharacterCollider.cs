@@ -73,6 +73,16 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
                 // 攻撃が当たった剛体があれば
                 if (_rigidbody != null)
                 {
+                    // 当たった相手がAIであれば
+                    CharacterAI characterAI = _hitCharacterManager.GetComponent<CharacterAI>();
+                    if (characterAI != null)
+                    {
+                        // ダメージステートへ遷移
+                        characterAI.stateMachine.ChangeState(new AI_DamageState());
+                        // エージェントを無効化
+                        characterAI.agent.enabled = false;
+                    }
+
                     // "脚部を"ふっ飛ばさせる！！！
                     _hitCharacterManager.GetLegRigidBody().AddForce(_attackDirection * characterParamAsset.Attack, ForceMode.Impulse);
                 }
@@ -87,6 +97,16 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
                 // 攻撃が当たった剛体があれば
                 if (_rigidbody != null)
                 {
+                    // 当たった相手がAIであれば
+                    CharacterAI characterAI = _hitCharacterManager.GetComponent<CharacterAI>();
+                    if (characterAI != null)
+                    {
+                        // ダメージステートへ遷移
+                        characterAI.stateMachine.ChangeState(new AI_DamageState());
+                        // エージェントを無効化
+                        characterAI.agent.enabled = false;
+                    }
+
                     // "脚部を"ふっ飛ばさせる！！！
                     _hitCharacterManager.GetLegRigidBody().AddForce(_attackDirection * characterParamAsset.Attack * 100.0f, ForceMode.Impulse);
                 }

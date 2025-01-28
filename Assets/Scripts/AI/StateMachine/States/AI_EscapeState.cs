@@ -69,13 +69,27 @@ public class AI_EscapeState : AIBaseState
     // ステート更新処理
     public override void Update()
     {
+        // キャラクターAI取得
+        CharacterAI characterAI = stateMachine.characterAI;
+
         // エージェント取得
         var agent = stateMachine.characterAI.agent;
 
         // エージェントが目標地点に到着したかを確認
         if (agent.remainingDistance <= agent.radius * 4f)
         {
-            stateMachine.ChangeState(new AI_IdleState(1f));
+            // メンタルがたまっていたら逃げる
+            if (characterAI.ConductLottery(characterAI.mental))
+            {
+                // 逃走ステートへ
+                stateMachine.ChangeState(new AI_EscapeState());
+            }
+            // 溜まっていなければ
+            else
+            {
+                // 待機ステートへ
+                stateMachine.ChangeState(new AI_IdleState(0.1f));
+            }
         }
     }
 
