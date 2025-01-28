@@ -30,8 +30,6 @@ public class ModeSelectController : MonoBehaviour
     {
         // ボタン配列を初期化
         buttons = new Button[] { battleModeButton, onlineModeButton, tutorialModeButton };
-        // 初期状態で選択演出を適用
-        // UpdateButtonSelection();
     }
 
     // Update is called once per frame
