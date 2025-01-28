@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetWorkSlotManager : MonoBehaviour
+public class NetWorkSlotManager : MonoBehaviourPunCallbacks
 {
 	///<summary>入力処理</summary>
 	[SerializeField]
@@ -276,18 +278,22 @@ public class NetWorkSlotManager : MonoBehaviour
 	///<summary>選択されたパーツ文字列をデータに保存</summary>
 	public void SavePartsData()
 	{
-		// staticを使ったデータ受け渡し
-		//GameData.bodySelectPartsName = partsDataText[selectSlotNum,reelID[(int)reelType.body]];
-		//GameData.legSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.leg]];
-		//GameData.punchSelectPartsName = partsDataText[selectSlotNum, reelID[(int)reelType.punch]];
-
 		// PlayerPrefsを使ったデータ受け渡し
 		// キーと値をセット
-		PlayerPrefs.SetInt("body", reelID[(int)reelType.body]);
-		PlayerPrefs.SetInt("leg", reelID[(int)reelType.leg]);
+		PlayerPrefs.SetInt("body",  reelID[(int)reelType.body]);
+		PlayerPrefs.SetInt("leg",   reelID[(int)reelType.leg]);
 		PlayerPrefs.SetInt("punch", reelID[(int)reelType.punch]);
 
 		// 保存
 		PlayerPrefs.Save();
+
+		// カスタムプロパティにデータを保存
+		var _playerProperties = new ExitGames.Client.Photon.Hashtable
+	    {
+		    { "BodyPart", reelID[(int)reelType.body] },
+		    { "LwgPart",  reelID[(int)reelType.leg]  }
+	    };
+		PhotonNetwork.LocalPlayer.SetCustomProperties(_playerProperties);
+		Debug.Log($"パーツ選択完了: Body = {reelID[(int)reelType.body]}, Foot = {reelID[(int)reelType.leg]}");
 	}
 }

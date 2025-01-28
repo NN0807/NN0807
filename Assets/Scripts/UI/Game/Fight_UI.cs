@@ -49,7 +49,9 @@ public class Fight_UI : MonoBehaviour
     void Update()
     {
         // 演出開始
-        if(_playEffect)
+        // ※カメラ演出が大体2.5秒で終わるんので
+        // 少し待って(0.25秒)から開始
+        if (Time.time > 2.75f) 
         {
             if(!_coroutineFlag)
             {
@@ -105,10 +107,6 @@ public class Fight_UI : MonoBehaviour
         }
     }
 
-    //UnityEditor.TransformWorldPlacementJSON:{"position":{"x":0.0,"y":7.940000057220459,"z":5.119999885559082},
-    //"rotation":{"x":0.0,"y":-0.8870108723640442,"z":0.4617486298084259,"w":0.0},
-    //"scale":{"x":1.0,"y":1.0,"z":1.0}}
-
     public IEnumerator Alpha(Image image, Color destinationAlpha, float seconds, Easing.Ease easing)
     {
         // イージング関数の取得
@@ -135,4 +133,8 @@ public class Fight_UI : MonoBehaviour
             image.color = nextPos;
         }
     }
+
+
+    // FIGHT演出の"2番目"が開始されたかのフラグを取得する関数
+    public bool GetCoroutineFlag2() { return _coroutineFlag2; }
 }

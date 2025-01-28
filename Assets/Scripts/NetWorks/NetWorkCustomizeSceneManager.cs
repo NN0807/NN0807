@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetWorkCustomizeSceneManager : MonoBehaviour
+public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
 {
     /// <summary>
     /// キャラクターカスタマイズ中か
@@ -178,6 +180,12 @@ public class NetWorkCustomizeSceneManager : MonoBehaviour
 
             // シーン遷移
             Debug.Log("シーン遷移");
+
+            // 受信メッセージ処理の実行・一時停止を切り替えることができる。
+            PhotonNetwork.IsMessageQueueRunning = false;
+
+            // 待機画面へ
+            SceneManager.LoadSceneAsync("Idle", LoadSceneMode.Single);
         }
     }
 

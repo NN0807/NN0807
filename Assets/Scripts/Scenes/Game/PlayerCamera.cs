@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -11,35 +12,26 @@ public class PlayerCamera : MonoBehaviour
     // プレイヤーオブジェクト
     public Transform _playerTransform;
 
-    // プレイヤーからの距離
-    [SerializeField]
-    private float _distance = -16.0f;
-
     // カメラとプレイヤーの相対位置
-    public Vector3 _offset;            
-
-    // 初期の垂直回転角度（斜め下）
-    [SerializeField]
-    public float _currentAngleX =   30.0f;
-
-    // 初期の水平回転角度（正面）
-    [SerializeField]
-    public float _currentAngleY = -180.0f;
+    private Vector3 _offset;            
 
     // 演出開始フラグ
     public bool _playEffect = false;
 
-    // FIGTH画像の拡縮値と色
-    private Vector3 _targetPos = new Vector3(0.0f, 2.0f, 5.0f);
-
-    // イージング時間
-    [SerializeField]
-    private float _easingTime = 1.0f;
-
     // コルーチンフラグ
     private bool _coroutineFlag = false;
 
-    // offset y2 z-16 AngleX60 Y0
+    private Vector3      _startOffset = new Vector3     ( 0.0f,    2.0f, -16.0f); // 初期位置オフセット
+    private Vector3        _endOffset = new Vector3     ( 0.0f,    2.0f,  -5.0f); // 最終位置オフセット
+    private Quaternion _startRotation = Quaternion.Euler(60.0f,    0.0f,   0.0f); // 初期角度
+    private Quaternion   _endRotation = Quaternion.Euler(30.0f, -180.0f,   0.0f); // 最終角度
+
+    private Quaternion       Rotation;
+
+    // 白画像
+    public Image _whiteBack;
+    // 白画像の透明値
+    public float _whiteBackAlpha;
 
     void Awake()
     {
@@ -47,7 +39,12 @@ public class PlayerCamera : MonoBehaviour
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
         // カメラの初期オフセット
-        _offset = new Vector3(0.0f, 2.0f, -5.0f);
+        _offset  = _startOffset;
+        Rotation = _startRotation;
+
+        // 画像初期設定
+        _whiteBackAlpha  = 1.0f;
+        _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
     }
 
     // ゲーム実行時にこのオブジェクトが存在していたら実行される
@@ -75,24 +72,24 @@ public class PlayerCamera : MonoBehaviour
     void Update()
     {
         // 演出開始
-        if (_playEffect)
+        if (Time.time > 1.5f) 
         {
             if (!_coroutineFlag)
             {
                 StartCoroutine(
-                Move(_offset, _targetPos, _easingTime, Easing.Ease.InOutSine, true));
+                ChangeTransform());
 
                 _coroutineFlag = true;
             }
+
+            // 透明値更新処理
+            if (_whiteBackAlpha > 0.0f) _whiteBackAlpha -= Time.deltaTime * 2.0f;
+            _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
         }
 
-
         // 回転行列を使って目標位置を計算
-        Quaternion rotation = Quaternion.Euler(_currentAngleX, _currentAngleY, 0);
-        Vector3 desiredPosition = _playerTransform.position + (rotation * _offset);
-
         // カメラ位置の更新
-        transform.position = _playerTransform.position + (rotation * _offset);
+        transform.position = _playerTransform.position + (Rotation * _offset);
 
         // プレイヤーを注視
         transform.LookAt(_playerTransform);
@@ -104,32 +101,23 @@ public class PlayerCamera : MonoBehaviour
         _playerTransform = target.transform;
     }
 
-    // 指定したTransformの座標を更新する
-    // 引数 Transform, 目的値の座標、何秒で動かすか、イージングの種類、移動先が絶対座標かどうか
-    public IEnumerator Move(Vector3 initializePos, Vector3 destinationPos, float seconds, Easing.Ease easing, bool absolute)
+    private System.Collections.IEnumerator ChangeTransform()
     {
-        // イージング関数の取得
-        var Ease = Easing.GetEasingMethod(easing);
+        float _duration    = 1.0f; // 1秒
+        float _elapsedTime = 0.0f;
 
-        // 現在点と移動先の設定
-        Vector3 staPos = initializePos;
-        Vector3 endPos = absolute ? destinationPos : staPos + destinationPos;
-        // 初期地点と目標地点の差
-        Vector3 difPos = endPos - staPos;
-
-        // N秒かけて移動させる
-        float e = 0;
-        while (true)
+        while (_elapsedTime < _duration)
         {
-            yield return null;
-            e += Time.deltaTime / seconds;
-            if (e >= 1.0f)
-            {
-                initializePos = endPos;
-                break;
-            }
-            Vector3 nextPos = staPos + Ease(e) * difPos;
-            initializePos = nextPos;
+            _elapsedTime += Time.deltaTime;
+            float t = _elapsedTime / _duration;
+
+            // オフセットを線形補間
+            _offset  =    Vector3.Lerp(_startOffset,   _endOffset,   t);
+
+            // 回転を線形補間
+            Rotation = Quaternion.Lerp(_startRotation, _endRotation, t);
+
+            yield return null; // 次のフレームまで待機
         }
     }
 }

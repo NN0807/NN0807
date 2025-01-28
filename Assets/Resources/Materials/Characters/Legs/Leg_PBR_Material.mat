@@ -126,7 +126,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoat: 0
     - _ClearCoatMask: 0
-    - _ClearCoatRoughness: 0.1
+    - _ClearCoatRoughness: 0
     - _ClearCoatSmoothness: 0
     - _ClearCoatStrength: 0
     - _Cull: 2

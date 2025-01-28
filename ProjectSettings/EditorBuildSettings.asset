@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Malta Mode/Lobby/Lobby_Scene.unity
     guid: 9e6b032019dee7e468ceaf17605771d5
   - enabled: 1
-    path: Assets/Scenes/Malta Mode/Customize/NetWorkCustomizeScene.unity
-    guid: e56c1926f221bb54e9d7960f9a805815
+    path: Assets/Scenes/Malta Mode/Idle/Idle.unity
+    guid: 65d88e3be2e86af4695ea53d380c189b
   m_configObjects: {}

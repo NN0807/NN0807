@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b651ba68f715504da44aae05d302578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 4740835355544579979}
   _partsType: 0
   _activateDashAnimationSpeed: 0
   _hitStopTime: 0.23
@@ -561,6 +561,9 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 0
+  _hitCharacterManager: {fileID: 0}
+  _hasWeaponEntered: 0
+  _hasCharacterEntered: 0
 --- !u!114 &388543285325572309
 MonoBehaviour:
   m_ObjectHideFlags: 0

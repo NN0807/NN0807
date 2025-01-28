@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b651ba68f715504da44aae05d302578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 7164011543664194482}
   _partsType: 1
   _activateDashAnimationSpeed: 0
   _hitStopTime: 0.3

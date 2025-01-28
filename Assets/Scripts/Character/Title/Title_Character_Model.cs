@@ -23,14 +23,18 @@ public class Title_Character_Model : MonoBehaviour
 
 
     // 開始地点と終了地点の位置と拡縮値
-    private Vector3   _startPos = new Vector3(0.0f, 0.0f, -0.3f);
+    private Vector3   _startPos = new Vector3(0.0f, -0.45f, -4.0f);
     private Vector3[] _endPos;
-    private Vector3 _startScale = new Vector3(0.0f, 0.0f, 0.0f);
-    private Vector3 _endScale   = new Vector3(0.6f, 0.6f, 0.6f);
+    private Vector3 _startScale = new Vector3(0.0f,   0.0f,  0.0f);
+    private Vector3 _endScale   = new Vector3(1.8f,   1.8f,  1.8f);
 
     // イージング時間
     [SerializeField]
     private float _easingTime = 1.5f;
+
+    // モデル生成フラグ
+    [SerializeField]
+    private bool _generateFlag = false;
 
     void Awake()
     {
@@ -38,10 +42,10 @@ public class Title_Character_Model : MonoBehaviour
         _endPos = new Vector3[4];
 
         // 値を設定
-        _endPos[0] = new Vector3( 0.402f, -0.222f,    0.0f);
-        _endPos[1] = new Vector3(-0.427f, -0.182f, -0.106f);
-        _endPos[2] = new Vector3( 0.462f,  0.148f, -0.319f);
-        _endPos[3] = new Vector3(-0.473f,  0.225f, -0.319f);
+        _endPos[0] = new Vector3( 1.160f, -0.711f, -0.960f);
+        _endPos[1] = new Vector3(-1.190f, -0.574f, -1.294f);
+        _endPos[2] = new Vector3( 1.510f,  0.590f, -2.210f);
+        _endPos[3] = new Vector3(-1.250f,  0.540f, -2.110f);
     }
 
 
@@ -52,8 +56,8 @@ public class Title_Character_Model : MonoBehaviour
         var _legNumber  = Random.Range(0, 8); // 0以上8未満の整数を取得
 
         // 脚部、体部を 生成 & 登録
-        Leg  = Instantiate(LegModels[0],  this.transform);
-        Body = Instantiate(BodyModels[0], this.transform);
+        Leg  = Instantiate(LegModels[_legNumber],   this.transform);
+        Body = Instantiate(BodyModels[_bodyNumber], this.transform);
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
 
@@ -72,13 +76,15 @@ public class Title_Character_Model : MonoBehaviour
         StartCoroutine(
             Scale(this.transform, _endScale, _easingTime, Easing.Ease.OutExpo)
         );
+
+        _generateFlag = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         // モデルパーツ接続
-        ModelConnection();
+        if (_generateFlag) ModelConnection();
     }
 
     void ModelConnection()

@@ -5,16 +5,17 @@ using UnityEngine;
 public class Title_Log : MonoBehaviour
 {
     // 開始地点と中間地点と終了地点の目印
-    public Vector3 _startPos  = new Vector3(0.0f, 0.035f, -1.0f);
-    public Vector3 _endPos    = new Vector3(0.0f, 0.035f,  0.0f);
+    public Vector3 _startPos  = new Vector3(0.0f, 0.035f, -6.00f);
+    public Vector3 _endPos    = new Vector3(0.0f, 0.035f, -0.95f);
 
     // イージング時間
     [SerializeField]
     public float _easingTime = 1.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    public void CustomStart()
     {
+        Debug.Log($"{gameObject.name} のCustomStartが呼ばれました");
+
         // 開始地点を設定
         this.transform.position = _startPos;
 
@@ -23,6 +24,19 @@ public class Title_Log : MonoBehaviour
         StartCoroutine(
             Move(this.transform, _endPos, _easingTime, Easing.Ease.OutBack, true)
         );
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //// 開始地点を設定
+        //this.transform.position = _startPos;
+
+        //// 引数のEnumを変えるだけで、イージング関数の差し替えができる
+        //// EaseOutQuadで、絶対座標で_endPosの位置に1秒かけて移動させる
+        //StartCoroutine(
+        //    Move(this.transform, _endPos, _easingTime, Easing.Ease.OutBack, true)
+        //);
     }
 
     // Update is called once per frame

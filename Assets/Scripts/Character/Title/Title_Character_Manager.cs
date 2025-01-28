@@ -20,14 +20,14 @@ public class Title_Character_Manager : MonoBehaviour
         Debug.Log($"{gameObject.name} のCustomStartが呼ばれました");
 
         // CharacterModelにパーツ生成を指示
-        //_title_Character_Model?.GenerateAndRegisterParts(this, Number);
+        _title_Character_Model?.GenerateAndRegisterParts(this, Number);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         // CharacterModelにパーツ生成を指示
-        _title_Character_Model?.GenerateAndRegisterParts(this, Number);
+        //_title_Character_Model?.GenerateAndRegisterParts(this, Number);
     }
 
     // パーツ登録
