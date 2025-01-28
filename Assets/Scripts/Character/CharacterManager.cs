@@ -193,6 +193,9 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    // 死亡処理
+    public void Dead()                    { Destroy(transform.gameObject); }
+
     // 脚部の剛体を取得する関数
     public Rigidbody  GetLegRigidBody()   { return _legRigidbody; }
 

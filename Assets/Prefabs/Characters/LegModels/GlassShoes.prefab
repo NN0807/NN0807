@@ -346,6 +346,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7ffa7893eca1a7c4e8d1ddfd53481a68,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1566771189786699165, guid: 7ffa7893eca1a7c4e8d1ddfd53481a68,
         type: 3}
       propertyPath: m_Layer
@@ -566,6 +571,9 @@ MonoBehaviour:
   _criticalHitLayer:
     serializedVersion: 2
     m_Bits: 0
+  _hitCharacterManager: {fileID: 0}
+  _hasWeaponEntered: 0
+  _hasCharacterEntered: 0
 --- !u!114 &-3756271417321847917
 MonoBehaviour:
   m_ObjectHideFlags: 0
