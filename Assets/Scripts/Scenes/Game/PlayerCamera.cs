@@ -12,6 +12,8 @@ public class PlayerCamera : MonoBehaviour
     // プレイヤーオブジェクト
     public Transform _playerTransform;
 
+    public Transform _playerDeadTargetPos;
+
     // カメラとプレイヤーの相対位置
     private Vector3 _offset;            
 
@@ -71,6 +73,16 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
+        // プレイヤーが死亡したら
+        if (_playerTransform == null)
+        {
+            // デスカメラに切り替える
+            _playerTransform = _playerDeadTargetPos;
+            // 真下を向く
+            Rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
+            _offset.y = 0;
+        }
+
         // 演出開始
         if (Time.time > 1.5f) 
         {

@@ -12,14 +12,23 @@ public class Idle_Character_Manager : MonoBehaviour
     // アニメーション登録用リスト
     private List<CharacterAnimation> animations = new List<CharacterAnimation>();
 
+    // モデル生成フラグ
     [SerializeField]
-    public int Number = 0;
+    public bool _generateFlag = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    void ModelGenerate(int legNumber, int bodyNumber)
+    {
         // CharacterModelにパーツ生成を指示
-        _idle_Character_Model?.GenerateAndRegisterParts(this, Number);
+        _idle_Character_Model?.GenerateAndRegisterParts(this, legNumber, bodyNumber);
+
+        // 生成フラグ"ON"
+        _generateFlag = true;
     }
 
     // パーツ登録
@@ -37,7 +46,7 @@ public class Idle_Character_Manager : MonoBehaviour
     void Update()
     {
         // 常に待機アニメーションをさせる
-        SetAnimations(AnimationType.Walk);
+        if (_generateFlag) SetAnimations(AnimationType.Walk);
     }
 
     // アニメーション起動
@@ -45,10 +54,10 @@ public class Idle_Character_Manager : MonoBehaviour
     {
         foreach (var animation in animations)
         {
-            if (animationType == AnimationType.Idle) animation.SetIdleAnimation();
-            else if (animationType == AnimationType.Walk) animation.SetWalkAnimation();
+            if      (animationType == AnimationType.Idle)   animation.SetIdleAnimation();
+            else if (animationType == AnimationType.Walk)   animation.SetWalkAnimation();
             else if (animationType == AnimationType.Attack) animation.SetAttackAnimation();
-            else if (animationType == AnimationType.Hit) animation.SetHitAnimation();
+            else if (animationType == AnimationType.Hit)    animation.SetHitAnimation();
         }
     }
 }

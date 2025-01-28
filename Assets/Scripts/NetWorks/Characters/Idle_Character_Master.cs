@@ -9,8 +9,11 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
 {
     // プレイヤーリスト表示用の親オブジェクト
     public Transform playerListParent;
-    // プレイヤー情報を表示するPrefab
-    public GameObject playerListItemPrefab;
+    // プレイヤー情報を表示するCharacterManager
+    public Idle_Character_Manager _idle_Character_Manager1P;
+    public Idle_Character_Manager _idle_Character_Manager2P;
+    public Idle_Character_Manager _idle_Character_Manager3P;
+    public Idle_Character_Manager _idle_Character_Manager4P;
 
     private void Start()
     {
@@ -30,13 +33,11 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
         // 各プレイヤーのデータを取得して表示
         foreach (var player in PhotonNetwork.PlayerList)
         {
-
-
-            int bodyPart = player.CustomProperties.ContainsKey("BodyPart") ? (int)player.CustomProperties["BodyPart"] : 0;
-            int footPart = player.CustomProperties.ContainsKey("LegPart")  ? (int)player.CustomProperties["LegPart"]  : 0;
+            int _bodyPart = player.CustomProperties.ContainsKey("BodyPart") ? (int)player.CustomProperties["BodyPart"] : 0;
+            int _legPart  = player.CustomProperties.ContainsKey("LegPart")  ? (int)player.CustomProperties["LegPart"]  : 0;
 
             // プレイヤー情報の表示用オブジェクトを生成
-            var playerItem = Instantiate(playerListItemPrefab, playerListParent);
+            //var playerItem = Instantiate(playerListItemPrefab, playerListParent);
         }
     }
 

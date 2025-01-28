@@ -27,19 +27,11 @@ public class Idle_Character_Model : MonoBehaviour
 
 
     // 各部位を生成し、初期化
-    public void GenerateAndRegisterParts(Idle_Character_Manager manager, int number)
+    public void GenerateAndRegisterParts(Idle_Character_Manager manager, int legNumber, int bodyNumber)
     {
-        // カスタマイズシーンで選択した各パーツ番号を読み込む
-        // キー名「body,leg,punch」の値をロードする。データが存在しない場合「0」を返す
-        // ※セーブ処理　SlotManager.cs 284行目
-        // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
-        var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
-        var _legNumber    = PlayerPrefs.GetInt("leg",   0);
-        var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
-
         // 脚部、体部を 生成 & 登録
-        Leg  = Instantiate(LegModels[_legNumber],   this.transform);
-        Body = Instantiate(BodyModels[_bodyNumber], this.transform);
+        Leg  = Instantiate(LegModels[legNumber],   this.transform);
+        Body = Instantiate(BodyModels[bodyNumber], this.transform);
         manager.RegisterPart(Leg);
         manager.RegisterPart(Body);
 

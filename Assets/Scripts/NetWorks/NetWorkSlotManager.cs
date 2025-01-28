@@ -291,9 +291,9 @@ public class NetWorkSlotManager : MonoBehaviourPunCallbacks
 		var _playerProperties = new ExitGames.Client.Photon.Hashtable
 	    {
 		    { "BodyPart", reelID[(int)reelType.body] },
-		    { "LwgPart",  reelID[(int)reelType.leg]  }
+		    { "LegPart",  reelID[(int)reelType.leg]  }
 	    };
 		PhotonNetwork.LocalPlayer.SetCustomProperties(_playerProperties);
-		Debug.Log($"パーツ選択完了: Body = {reelID[(int)reelType.body]}, Foot = {reelID[(int)reelType.leg]}");
+		Debug.Log($"パーツ選択完了: Body = {reelID[(int)reelType.body]}, Leg = {reelID[(int)reelType.leg]}");
 	}
 }

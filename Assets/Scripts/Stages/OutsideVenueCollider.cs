@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OutsideVenueCollider : MonoBehaviour
 {
-
-
     // キャラが衝突したら
     void OnCollisionEnter(Collision collision)
     {
@@ -13,6 +11,9 @@ public class OutsideVenueCollider : MonoBehaviour
         if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player")))
         {
             collision.transform.root.gameObject.GetComponent<CharacterManager>().Dead();
+
+            // 死亡カウント
+            GameManager.Instance.AddDeadCharacterCount();
         }
     }
 

@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class Finish_UI : MonoBehaviour
 {
-    // FIGHT画像
+    // FINISH画像
     [SerializeField]
-    public Image _fightImage;
+    public Image _finishImage;
 
     // 演出開始フラグ
     public bool _playEffect = false;
 
-    // FIGTH画像の拡縮値と色
-    private Vector3 _startScale = new Vector3(3640.0f, 0.0f, 1.0f);
-    private Vector3 _targetScale = new Vector3(1920.0f, 1080.0f, 1.0f);
-    private Color _startColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-    private Color _targetColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    // FINISH画像の拡縮値と色
+    private Vector3  _startScale  = new Vector3(3640.0f,    0.0f, 1.0f);
+    private Vector3 _targetScale  = new Vector3(1920.0f, 1080.0f, 1.0f);
+    private Color    _startColor  = new Color(     1.0f,    1.0f, 1.0f, 0.0f);
+    private Color   _targetColor  = new Color(     1.0f,    1.0f, 1.0f, 1.0f);
 
-    private Vector3 _startScale2 = new Vector3(1920.0f, 1080.0f, 1.0f);
+    private Vector3  _startScale2 = new Vector3(1920.0f, 1080.0f, 1.0f);
     private Vector3 _targetScale2 = new Vector3(3640.0f, 2160.0f, 1.0f);
-    private Color _startColor2 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-    private Color _targetColor2 = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+    private Color    _startColor2 = new Color(     1.0f,    1.0f, 1.0f, 1.0f);
+    private Color   _targetColor2 = new Color(     1.0f,    1.0f, 1.0f, 0.0f);
 
     // イージング時間
     [SerializeField]
@@ -38,28 +38,26 @@ public class Finish_UI : MonoBehaviour
     void Start()
     {
         // 画像取得
-        _fightImage = GetComponent<Image>();
+        _finishImage = GetComponent<Image>();
 
         // 初期設定
-        _fightImage.rectTransform.sizeDelta = _startScale;
-        _fightImage.color = _startColor;
+        _finishImage.rectTransform.sizeDelta = _startScale;
+        _finishImage.color                   = _startColor;
     }
 
     // Update is called once per frame
     void Update()
     {
         // 演出開始
-        // ※カメラ演出が大体2.5秒で終わるんので
-        // 少し待って(0.25秒)から開始
-        if (Time.time > 2.75f)
+        if (_playEffect)
         {
             if (!_coroutineFlag)
             {
                 StartCoroutine(
-                Scale(_fightImage, _targetScale, _easingTime, Easing.Ease.OutSine));
+                Scale(_finishImage, _targetScale, _easingTime, Easing.Ease.OutSine));
 
                 StartCoroutine(
-                Alpha(_fightImage, _targetColor, _easingTime, Easing.Ease.OutSine));
+                Alpha(_finishImage, _targetColor, _easingTime, Easing.Ease.OutSine));
 
                 _coroutineFlag = true;
             }
@@ -70,10 +68,10 @@ public class Finish_UI : MonoBehaviour
             if (_playEffect2Timer > 1.2f && !_coroutineFlag2)
             {
                 StartCoroutine(
-                Scale(_fightImage, _targetScale2, _easingTime, Easing.Ease.OutSine));
+                Scale(_finishImage, _targetScale2, _easingTime, Easing.Ease.OutSine));
 
                 StartCoroutine(
-                Alpha(_fightImage, _targetColor2, _easingTime, Easing.Ease.OutSine));
+                Alpha(_finishImage, _targetColor2, _easingTime, Easing.Ease.OutSine));
 
                 _coroutineFlag2 = true;
             }
@@ -134,6 +132,9 @@ public class Finish_UI : MonoBehaviour
         }
     }
 
+
+    // 演出開始フラグを設定する関数
+    public void SetPlayEffect() { _playEffect = true; }
 
     // FIGHT演出の"2番目"が開始されたかのフラグを取得する関数
     public bool GetCoroutineFlag2() { return _coroutineFlag2; }

@@ -26,7 +26,9 @@ public class NetWorkIdle : MonoBehaviourPunCallbacks
         if (startButton != null)
         {
             startButton.gameObject.SetActive(false); // ボタンを非表示に
-            startButton.onClick.AddListener(OnStartButtonClicked); // ボタンクリックイベント登録
+
+            // ボタンクリックイベント登録
+            startButton.onClick.AddListener(OnStartButtonClicked);
         }
     }
 
@@ -83,8 +85,7 @@ public class NetWorkIdle : MonoBehaviourPunCallbacks
     // スタートボタンを押したときの処理
     private void OnStartButtonClicked()
     {
-        Debug.Log("スタートボタンが押されました！ゲームを開始します。");
-        
+        Debug.Log("スタートボタンが押されました！ゲームを開始します。");  
     }
 
     // Update is called once per frame
