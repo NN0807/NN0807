@@ -72,6 +72,12 @@ public class CustomizeSceneManager : MonoBehaviour
         inputActions.Enable();
     }
 
+    private void Start()
+    {
+        // カスタマイズBGM
+        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.CustomizeBGM, 0.004f, 0f, 1f, true));
+    }
+
     private void Update()
     {
         // 決定・戻る処理
@@ -119,6 +125,9 @@ public class CustomizeSceneManager : MonoBehaviour
         // 移動中は処理しない
         if (isMoving) return;
 
+        // 決定音
+        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+
         // デバッグ
         Debug.Log("ひとつ前に戻る");
 
@@ -153,6 +162,9 @@ public class CustomizeSceneManager : MonoBehaviour
     {
         // 移動中は処理しない
         if (isMoving) return;
+
+        // 決定音
+        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
 
         // デバッグ表示
         Debug.Log("決定");

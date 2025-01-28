@@ -30,6 +30,9 @@ public class ModeSelectController : MonoBehaviour
     {
         // ボタン配列を初期化
         buttons = new Button[] { battleModeButton, onlineModeButton, tutorialModeButton };
+
+        // モードセレクトBGM
+        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.ModeSelectBGM, 0.004f, 0f, 1f, true));
     }
 
     // Update is called once per frame
@@ -110,6 +113,9 @@ public class ModeSelectController : MonoBehaviour
 
         // 新しいボタンを選択
         SelectButton(newIndex);
+
+        // 選択
+        AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
     }
 
     // 各ボタンの機能
@@ -117,6 +123,9 @@ public class ModeSelectController : MonoBehaviour
     {
         // 現在選択されているボタンをクリック
         ExecuteEvents.Execute(buttons[selectedIndex].gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+
+        // 決定音
+        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
 
         // シーン遷移
         switch (selectedIndex)

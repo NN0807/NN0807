@@ -128,6 +128,9 @@ public class SlotManager : MonoBehaviour
 			// 入力があったら
 			if (inputActions.UI.Move.ReadValue<Vector2>().y > 0.5f)
 			{
+				// リール回転音
+				AudioManager.instance.Play(SEPath.SlotRotation, 0.004f);
+
 				// 上へ移動
 				selectSlot.Upflg = true;
 				// 矢印を光らせる
@@ -135,6 +138,9 @@ public class SlotManager : MonoBehaviour
 			}
 			if (inputActions.UI.Move.ReadValue<Vector2>().y < -0.5f)
 			{
+				// リール回転音
+				AudioManager.instance.Play(SEPath.SlotRotation, 0.004f);
+
 				// 下へ移動
 				selectSlot.Downflg = true;
 				// 矢印を光らせる

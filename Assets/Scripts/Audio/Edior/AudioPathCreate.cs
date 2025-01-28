@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -157,3 +159,5 @@ public class AudioPathCreate : AssetPostprocessor
         UnityEditor.AssetDatabase.Refresh();
     }
 }
+
+#endif

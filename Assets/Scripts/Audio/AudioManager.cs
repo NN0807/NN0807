@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
+using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     /// <summary>
@@ -68,7 +69,24 @@ public class AudioManager : MonoBehaviour
             seAudioSource.loop = false;
             seAudioSources.Add(seAudioSource);
         }
+
+        // シーン遷移後の処理
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; // オブジェクトが破棄されるときに解除
+    }
+
+    // シーンがロードされた後に処理される
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // オーディオを全停止
+        StopAllBGM();
+        StopAllSE();
+    }
+
 
     /// <summary>
     /// 再生
@@ -97,12 +115,12 @@ public class AudioManager : MonoBehaviour
             {
                 availableSource.clip = seClip;          // 再生するクリップを設定
                 availableSource.clip = seClip;          // 再生するクリップを設定
-                availableSource.volume *= volumeRate;   // 音量を設定
+                availableSource.volume =  volumeRate;   // 音量を設定
                 availableSource.pitch = pitch;          // ピッチ
                 availableSource.loop = isLoop;          // ループ設定
                 availableSource.PlayDelayed(delay);     // 再生開始
             }
-        }
+        }   
         else if(BGMClipDict.TryGetValue(key, out AudioClip bgmClip))
         {
             // 再生中でないAudioSourceを検索
@@ -111,7 +129,58 @@ public class AudioManager : MonoBehaviour
             {
                 availableSource.clip = bgmClip;         // 再生するクリップを設定
                 availableSource.clip = bgmClip;         // 再生するクリップを設定
-                availableSource.volume *= volumeRate;   // 音量を設定
+                availableSource.volume = volumeRate;    // 音量を設定
+                availableSource.pitch = pitch;          // ピッチ
+                availableSource.loop = isLoop;          // ループ設定
+                availableSource.PlayDelayed(delay);     // 再生開始
+            }
+        }
+    }
+
+    /// <summary>
+    /// 再生(Start関数用)
+    /// </summary>
+    /// <param name="audioPath">オーディオのパス</param>
+    /// <param name="volumeRate">音量の倍率</param>
+    /// <param name="delay">再生されるまでの時間</param>
+    /// <param name="pitch">ピッチ</param>
+    /// <param name="isLoop">ループ再生指せるか</param>
+    public IEnumerator StartFuncPlay(
+        string audioPath,
+        float volumeRate = 1f,
+        float delay = 0f,
+        float pitch = 1f,
+        bool isLoop = false)
+    {
+        yield return null; // 1フレーム待つ
+
+        // キーを取得
+        string key = Path.GetFileNameWithoutExtension(audioPath);
+
+        // SE辞書に該当するキーがあれば
+        if (SEClipDict.TryGetValue(key, out AudioClip seClip))
+        {
+            // 再生中でないAudioSourceを検索
+            AudioSource availableSource = seAudioSources.Find(source => !source.isPlaying);
+            if (availableSource != null)
+            {
+                availableSource.clip = seClip;          // 再生するクリップを設定
+                availableSource.clip = seClip;          // 再生するクリップを設定
+                availableSource.volume =  volumeRate;   // 音量を設定
+                availableSource.pitch = pitch;          // ピッチ
+                availableSource.loop = isLoop;          // ループ設定
+                availableSource.PlayDelayed(delay);     // 再生開始
+            }
+        }   
+        else if(BGMClipDict.TryGetValue(key, out AudioClip bgmClip))
+        {
+            // 再生中でないAudioSourceを検索
+            AudioSource availableSource = bgmAudioSources.Find(source => !source.isPlaying);
+            if (availableSource != null)
+            {
+                availableSource.clip = bgmClip;         // 再生するクリップを設定
+                availableSource.clip = bgmClip;         // 再生するクリップを設定
+                availableSource.volume = volumeRate;    // 音量を設定
                 availableSource.pitch = pitch;          // ピッチ
                 availableSource.loop = isLoop;          // ループ設定
                 availableSource.PlayDelayed(delay);     // 再生開始
