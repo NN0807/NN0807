@@ -26,6 +26,9 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
     [SerializeField]
     public bool _gameStartFlag = false;
 
+
+    public bool R = false;
+
     private void Start()
     {
         // 送受信接続再開
@@ -50,6 +53,8 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
         // シーン遷移時の白画像の透明値設定
         _whiteBackAlpha = 0.0f;
         _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
+
+        R = false;
     }
 
     // 準備完了状態を設定
@@ -131,9 +136,10 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
             if (_whiteBackAlpha < 1.0f) _whiteBackAlpha += Time.deltaTime;
             if (_whiteBackAlpha >= 1.0f) _whiteBackAlpha = 1.0f;
 
-            if (_whiteBackAlpha >= 1.0f) 
+            if (_whiteBackAlpha >= 1.0f && !R)  
             {
                 PhotonNetwork.LoadLevel("NetWork_FireStage_Scene"); // 次のシーンに遷移
+                R = true;
                 //WhiteLoading_Scene.SetNextScene("NetWork_FireStage_Scene");
                 //SceneManager.LoadScene("WhiteLoading_Scene");
             }
