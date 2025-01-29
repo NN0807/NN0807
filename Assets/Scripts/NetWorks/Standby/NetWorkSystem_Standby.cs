@@ -138,6 +138,9 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
 
             if (_whiteBackAlpha >= 1.0f && !R)  
             {
+
+                // 送受信接続再開
+                PhotonNetwork.IsMessageQueueRunning = false;
                 PhotonNetwork.LoadLevel("NetWork_FireStage_Scene"); // 次のシーンに遷移
                 R = true;
                 //WhiteLoading_Scene.SetNextScene("NetWork_FireStage_Scene");
