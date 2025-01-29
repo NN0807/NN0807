@@ -250,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 298237146}
   - component: {fileID: 298237147}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlueCubeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 440212188}
   - component: {fileID: 440212189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CubeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1843,7 +1843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291180434}
   - component: {fileID: 1291180433}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RedCubeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,7 +2266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614769901}
   - component: {fileID: 1614769900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenCubeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2378,7 +2378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920449989}
   - component: {fileID: 1920449988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: YellowCubeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
