@@ -17,6 +17,8 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
     {
         // 待機画面でプレイヤーリストを初期化
         UpdatePlayerList();
+
+        _playerCount = 0;
     }
 
     // プレイヤーリストを更新
@@ -25,6 +27,7 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
         // オブジェクトをクリア
         for (int Index = 0; Index < 4; Index++) 
         {
+            // 
             _idle_Character_Manager[Index].ModelDestory();
         }
 
@@ -36,7 +39,7 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
 
             int _bodyPart = player.CustomProperties.ContainsKey("BodyPart") ? (int)player.CustomProperties["BodyPart"] : 0;
             int _legPart  = player.CustomProperties.ContainsKey("LegPart")  ? (int)player.CustomProperties["LegPart"]  : 0;
-
+            Debug.Log($"[DEBUG] {PhotonNetwork.LocalPlayer.NickName} が待機画面を開きました");
             // プレイヤー情報の表示用オブジェクトを生成;
             if (player.ActorNumber != _playerCount) 
             {

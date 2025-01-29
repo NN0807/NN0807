@@ -100,7 +100,7 @@ public class NetWorkSlotManager : MonoBehaviourPunCallbacks
 
 	private void Awake()
 	{
-		NetWorkCustomizeSceneManager.Instance.isCharacterCustomize = true;
+		NetWork_CustomizeSceneManager.Instance.isCharacterCustomize = true;
 
 		// 入力処理初期化
 		inputActions = new CustomizeSceneController();
@@ -122,7 +122,7 @@ public class NetWorkSlotManager : MonoBehaviourPunCallbacks
 	private void Update()
 	{
 		// 選択遷移中は処理しない
-		if (NetWorkCustomizeSceneManager.Instance.isMoving) return;
+		if (NetWork_CustomizeSceneManager.Instance.isMoving) return;
 
 		// 上下移動中ではなく
 		if (!selectSlot.Upflg && !selectSlot.Downflg)

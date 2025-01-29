@@ -28,7 +28,7 @@ public class NetWorkSystem : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = false;
 
         // シーン遷移
-        SceneManager.LoadSceneAsync("Standby_Scene", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("NetWork_CustomizeScene", LoadSceneMode.Single);
 
         //if (PhotonNetwork.IsMasterClient)
         //{

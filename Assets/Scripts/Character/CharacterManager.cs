@@ -43,13 +43,14 @@ public class CharacterManager : MonoBehaviour
     void Awake()
     {
         // キャラクター番号から初期生成位置を設定する
+        // ※なんかフレームレートが重かったらと変な位置に生成されるから
+        // 念押しの10回ループ！！！！
         for (int Index = 0; Index < 10; Index++)
         {
-
+            GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
+            this.transform.position = _mt.Position;
+            this.transform.rotation = _mt.Rotation;
         }
-        GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
-        this.transform.position = _mt.Position;
-        this.transform.rotation = _mt.Rotation;
 
         // 操作スクリプトを設定
         TryGetComponent(out _characterOperation);

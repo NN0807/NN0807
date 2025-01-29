@@ -5,7 +5,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
+public class NetWork_CustomizeSceneManager : MonoBehaviourPunCallbacks
 {
     /// <summary>
     /// キャラクターカスタマイズ中か
@@ -56,7 +56,7 @@ public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
 
     // 静的インスタンス
     [HideInInspector]
-    public static NetWorkCustomizeSceneManager Instance { get; private set; }
+    public static NetWork_CustomizeSceneManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -173,10 +173,10 @@ public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
         else if (isStgaeSelect)
         {
             // 選択ステージ点滅
-            StartCoroutine(SpriteFlash(selectStageManager.GetComponent<SelectStageManager>().stageSpr[0].GetComponent<SpriteRenderer>(), 3, 10f));
+            StartCoroutine(SpriteFlash(selectStageManager.GetComponent<NetWork_SelectStageManager>().stageSpr[0].GetComponent<SpriteRenderer>(), 3, 10f));
 
             // ステージデータ保存
-            PlayerPrefs.SetInt("stageIngex", selectStageManager.GetComponent<SelectStageManager>().selectStageNum);
+            PlayerPrefs.SetInt("stageIngex", selectStageManager.GetComponent<NetWork_SelectStageManager>().selectStageNum);
 
             // シーン遷移
             Debug.Log("シーン遷移");
@@ -185,7 +185,7 @@ public class NetWorkCustomizeSceneManager : MonoBehaviourPunCallbacks
             PhotonNetwork.IsMessageQueueRunning = false;
 
             // 待機画面へ
-            SceneManager.LoadSceneAsync("Idle", LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync("Standby_Scene", LoadSceneMode.Single);
         }
     }
 

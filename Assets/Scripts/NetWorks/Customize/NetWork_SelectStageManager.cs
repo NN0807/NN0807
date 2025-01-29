@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectStageManager : MonoBehaviour
+public class NetWork_SelectStageManager : MonoBehaviour
 {
     ///<summary>
     /// 画像オブジェクト
@@ -87,9 +87,6 @@ public class SelectStageManager : MonoBehaviour
     // 右回転
     public void RightRotation()
     {
-        // ステージ回転音
-        AudioManager.instance.Play(SEPath.StageSelectRotate, 0.004f);
-
         for (int i = 0; i < stageSpr.Length; i++)
         {
             int targetPosNum = i - 1;
@@ -104,9 +101,6 @@ public class SelectStageManager : MonoBehaviour
     // 左回転
     public void LefRotation()
     {
-        // ステージ回転音
-        AudioManager.instance.Play(SEPath.StageSelectRotate, 0.004f);
-
         for (int i = 0; i < stageSpr.Length; i++)
         {
             int targetPosNum = i + 1;
@@ -239,7 +233,7 @@ public class SelectStageManager : MonoBehaviour
     private IEnumerator RouletteAnimation()
     {
         // 実行フラグをリセット
-        rouletteMoveFlg = false; 
+        rouletteMoveFlg = false;
 
         // ランダムで次のステージ番号を選択
         int randomStageNum = Random.Range(0, stageSpr.Length);
@@ -274,7 +268,7 @@ public class SelectStageManager : MonoBehaviour
             elapsedTime += speedFactor;
 
             // 現在のステージを右回転
-            RightRotation(); 
+            RightRotation();
             // 選択ステージ番号設定
             selectStageNum = (selectStageNum + 1) % stageSpr.Length;
 
@@ -295,6 +289,7 @@ public class SelectStageManager : MonoBehaviour
         Debug.Log($"ランダムルーレット終了: 選択されたステージ番号 {selectStageNum}");
 
         // 自動で決定する
-        CustomizeSceneManager.Instance.SelectComplete();
+        //CustomizeSceneManager.Instance.SelectComplete();
+        NetWork_CustomizeSceneManager.Instance.SelectComplete();
     }
 }
