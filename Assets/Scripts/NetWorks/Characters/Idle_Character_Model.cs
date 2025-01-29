@@ -38,6 +38,9 @@ public class Idle_Character_Model : MonoBehaviour
         _generateFlag = true;
     }
 
+    // モデル削除
+    public void ModelDestory() { _generateFlag = false; }
+
     // Update is called once per frame
     void Update()
     {

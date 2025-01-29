@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class WhiteLoading_Scene : MonoBehaviour
 {
+    // 遷移先のシーン名を保持する変数
+    public static string NextSceneName;
+
     public void Start()
     {
         StartCoroutine(LoadScene());
@@ -12,7 +15,13 @@ public class WhiteLoading_Scene : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync("ModeSelect");
+        if (string.IsNullOrEmpty(NextSceneName))
+        {
+            Debug.LogError("NextSceneName が設定されていません！");
+            yield break;
+        }
+
+        AsyncOperation async = SceneManager.LoadSceneAsync(NextSceneName);
         // 自動遷移を無効化
         async.allowSceneActivation = false; 
         while (!async.isDone)
@@ -28,5 +37,11 @@ public class WhiteLoading_Scene : MonoBehaviour
             // 次のフレームを待機
             yield return null; 
         }
+    }
+
+    // 遷移先シーンを設定する静的メソッド
+    public static void SetNextScene(string sceneName)
+    {
+        NextSceneName = sceneName;
     }
 }

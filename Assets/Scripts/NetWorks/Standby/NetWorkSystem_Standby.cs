@@ -7,17 +7,32 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // MonoBehaviourPunCallbacksを継承して、photonViewプロパティを使えるようにする
-public class NetWorkIdle : MonoBehaviourPunCallbacks
+public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
 {
     // カスタムプロパティのキー
     private const string ReadyKey = "IsReady";
     bool allReady = true;
     public Button startButton; // スタートボタン（ホストのみ有効化）
 
+    public Image _localIdle; 
+
+    // シーン遷移時の白画像
+    [SerializeField]
+    public Image _whiteBack;
+    // シーン遷移時の白画像の透明値
+    private float _whiteBackAlpha = 0.0f;
+
+    // ゲーム開始フラグ
+    [SerializeField]
+    public bool _gameStartFlag = false;
+
     private void Start()
     {
         // 送受信接続再開
         PhotonNetwork.IsMessageQueueRunning = true;
+
+        // シーン遷移を同期するために設定
+        PhotonNetwork.AutomaticallySyncScene = true;
 
         // シーンがロードされたら準備完了を自動設定
         SetReadyState(true);
@@ -25,11 +40,16 @@ public class NetWorkIdle : MonoBehaviourPunCallbacks
         // スタートボタン初期設定
         if (startButton != null)
         {
-            startButton.gameObject.SetActive(false); // ボタンを非表示に
-
+            // ボタンを非表示に
+            startButton.gameObject.SetActive(false); 
+          
             // ボタンクリックイベント登録
             startButton.onClick.AddListener(OnStartButtonClicked);
         }
+
+        // シーン遷移時の白画像の透明値設定
+        _whiteBackAlpha = 0.0f;
+        _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
     }
 
     // 準備完了状態を設定
@@ -65,7 +85,14 @@ public class NetWorkIdle : MonoBehaviourPunCallbacks
         {
             Debug.Log("全員準備完了！ホストがスタートボタンを押せます。");
             // ボタンを表示
-            startButton.gameObject.SetActive(true); 
+            startButton.gameObject.SetActive(true);
+            _localIdle.gameObject.SetActive(false);
+        }
+        else
+        {
+            // ボタンを表示
+            startButton.gameObject.SetActive(false);
+            _localIdle.gameObject.SetActive(true);
         }
     }
 
@@ -85,12 +112,33 @@ public class NetWorkIdle : MonoBehaviourPunCallbacks
     // スタートボタンを押したときの処理
     private void OnStartButtonClicked()
     {
-        Debug.Log("スタートボタンが押されました！ゲームを開始します。");  
+        Debug.Log("スタートボタンが押されました！ゲームを開始します。");
+
+        // ゲーム開始！！！
+        _gameStartFlag = true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if(_gameStartFlag)
+        {
+            // シーン遷移時の白画像の透明値を更新
+            _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
+
+            // シーン遷移時の白画像の透明値を"1.0"になるまで制限しつつ徐々に増加
+            if (_whiteBackAlpha < 1.0f) _whiteBackAlpha += Time.deltaTime;
+            if (_whiteBackAlpha >= 1.0f) _whiteBackAlpha = 1.0f;
+
+            if (_whiteBackAlpha >= 1.0f) 
+            {
+                PhotonNetwork.LoadLevel("NetWork_FireStage_Scene"); // 次のシーンに遷移
+                //WhiteLoading_Scene.SetNextScene("NetWork_FireStage_Scene");
+                //SceneManager.LoadScene("WhiteLoading_Scene");
+            }
+        }
+
+        
     }
 }

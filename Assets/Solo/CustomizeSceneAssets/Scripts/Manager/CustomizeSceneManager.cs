@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomizeSceneManager : MonoBehaviour
 {
@@ -189,6 +190,10 @@ public class CustomizeSceneManager : MonoBehaviour
 
             // シーン遷移
             Debug.Log("シーン遷移");
+
+            // ※仮
+            WhiteLoading_Scene.SetNextScene("Fire_Stage_Scene");
+            SceneManager.LoadScene("WhiteLoading_Scene");
         }
     }
 

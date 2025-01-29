@@ -43,6 +43,10 @@ public class CharacterManager : MonoBehaviour
     void Awake()
     {
         // キャラクター番号から初期生成位置を設定する
+        for (int Index = 0; Index < 10; Index++)
+        {
+
+        }
         GenerateTransform _mt = TransformInfo._generateTransforms[_characterNumber];
         this.transform.position = _mt.Position;
         this.transform.rotation = _mt.Rotation;

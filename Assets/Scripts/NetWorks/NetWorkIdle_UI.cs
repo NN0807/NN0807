@@ -18,7 +18,7 @@ public class NetWorkIdle_UI : MonoBehaviourPunCallbacks
     // "ホストを待っています"画像
     public Image _idleHost;
     // "ゲストを待っています"画像
-    public Image _idleLocal;
+    //public Image _idleLocal;
 
     private void Start()
     {
@@ -29,6 +29,11 @@ public class NetWorkIdle_UI : MonoBehaviourPunCallbacks
             _youImages[index].gameObject.SetActive(false);
             _loadingImages[index].gameObject.SetActive(true);
         }
+
+        // "ホストを待っています"画像を非表示
+        _idleHost.gameObject.SetActive(false);
+        // "ゲストを待っています"画像を非表示
+        //_idleLocal.gameObject.SetActive(false);
     }
 
 
@@ -42,7 +47,9 @@ public class NetWorkIdle_UI : MonoBehaviourPunCallbacks
 
             // 画像の表示非表示設定
             _idleHost.gameObject.SetActive(false);
-            _idleLocal.gameObject.SetActive(true);
+            //_idleLocal.gameObject.SetActive(true);
+
+            // ここでずっと表示されてる
         }
         else
         {
@@ -50,7 +57,7 @@ public class NetWorkIdle_UI : MonoBehaviourPunCallbacks
 
             // 画像の表示非表示設定
             _idleHost.gameObject.SetActive(true);
-            _idleLocal.gameObject.SetActive(false);
+            //_idleLocal.gameObject.SetActive(false);
         }
 
 

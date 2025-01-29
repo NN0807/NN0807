@@ -7,13 +7,11 @@ using UnityEngine.UI;
 
 public class Idle_Character_Master : MonoBehaviourPunCallbacks
 {
-    // プレイヤーリスト表示用の親オブジェクト
-    public Transform playerListParent;
     // プレイヤー情報を表示するCharacterManager
-    public Idle_Character_Manager _idle_Character_Manager1P;
-    public Idle_Character_Manager _idle_Character_Manager2P;
-    public Idle_Character_Manager _idle_Character_Manager3P;
-    public Idle_Character_Manager _idle_Character_Manager4P;
+    public Idle_Character_Manager[] _idle_Character_Manager = new Idle_Character_Manager[4];
+
+    [SerializeField]
+    public int _playerCount = 0;
 
     private void Start()
     {
@@ -24,20 +22,26 @@ public class Idle_Character_Master : MonoBehaviourPunCallbacks
     // プレイヤーリストを更新
     private void UpdatePlayerList()
     {
-        // 子オブジェクトをクリア
-        foreach (Transform child in playerListParent)
+        // オブジェクトをクリア
+        for (int Index = 0; Index < 4; Index++) 
         {
-            Destroy(child.gameObject);
+            _idle_Character_Manager[Index].ModelDestory();
         }
 
         // 各プレイヤーのデータを取得して表示
         foreach (var player in PhotonNetwork.PlayerList)
         {
+            // プレイヤーカウント
+            _playerCount++;
+
             int _bodyPart = player.CustomProperties.ContainsKey("BodyPart") ? (int)player.CustomProperties["BodyPart"] : 0;
             int _legPart  = player.CustomProperties.ContainsKey("LegPart")  ? (int)player.CustomProperties["LegPart"]  : 0;
 
-            // プレイヤー情報の表示用オブジェクトを生成
-            //var playerItem = Instantiate(playerListItemPrefab, playerListParent);
+            // プレイヤー情報の表示用オブジェクトを生成;
+            if (player.ActorNumber != _playerCount) 
+            {
+                _idle_Character_Manager[player.ActorNumber - 1].ModelGenerate(_legPart, _bodyPart);
+            }   
         }
     }
 

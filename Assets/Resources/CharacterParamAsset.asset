@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Temp
   MoveSpeed: 1
-  RotateSpeed: 20
+  RotateSpeed: 5
   Attack: 50
   Acceleration: 10
   MaxDashSpeed: 2

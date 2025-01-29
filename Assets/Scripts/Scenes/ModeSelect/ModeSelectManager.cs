@@ -8,7 +8,7 @@ public class ModeSelectManager : MonoBehaviour
 
     public void LoadBattleMode()
     {
-        // SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene("CustomizeScene");
     }
 
     public void LoadOnlineMode()

@@ -227,6 +227,7 @@ public class StartButton_UI : MonoBehaviour
 
             if (_gameStartTimer >= 2.0f)
             {
+                WhiteLoading_Scene.SetNextScene("ModeSelect");
                 SceneManager.LoadScene("WhiteLoading_Scene");
             }
         }

@@ -41,12 +41,12 @@ public class CharacterModel : MonoBehaviour
         // キー名「body,leg,punch」の値をロードする。データが存在しない場合「0」を返す
         // ※セーブ処理　SlotManager.cs 284行目
         // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
-        //var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
-        var _bodyNumber   = Random.Range(0, 8);
-        //var _legNumber    = PlayerPrefs.GetInt("leg",   0);
-        var _legNumber    = Random.Range(0, 8);
-        //var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
-        var _weaponNumber = Random.Range(0, 8);
+        var _bodyNumber   = PlayerPrefs.GetInt("body",  0);
+        //var _bodyNumber   = Random.Range(0, 8);
+        var _legNumber    = PlayerPrefs.GetInt("leg",   0);
+        //var _legNumber    = Random.Range(0, 8);
+        var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
+        //var _weaponNumber = Random.Range(0, 8);
 
 
         // 脚部、体部、武器を 生成 & 登録

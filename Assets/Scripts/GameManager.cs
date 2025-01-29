@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public CharacterManager[] characterManagers = new CharacterManager[CharacterConst.CHARACTER_NUM];
 
-    // 死亡したキャラクターをカウント
+    /// <summary> 死亡したキャラクターをカウント </summary>
     [SerializeField]
     public int _deadCharacterCount = 0;
 
-    // FINISH画像
+    /// <summary> "FINISH"画像 </summary>
     public Finish_UI _finish_UI;
 
 
