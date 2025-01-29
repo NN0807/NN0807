@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CustomizeSceneManager : MonoBehaviour
 {
@@ -46,6 +47,39 @@ public class CustomizeSceneManager : MonoBehaviour
     private GameObject partsNameUI = default;
 
     /// <summary>
+    /// インプットマネージャー
+    /// </summary>
+    [SerializeField]
+    private InputManager inputManager = default;
+
+    /// <summary>
+    /// 決定ボタンテキストイメージ
+    /// </summary>
+    [SerializeField]
+    private Image decisionButtonTextImage = default;
+    /// <summary>
+    /// 戻るボタンテキストイメージ
+    /// </summary>
+    [SerializeField]
+    private Image backButtonTextImage = default; 
+
+    /// <summary>
+    /// 決定ボタンテキスト
+    /// ０番がキーボード＆マウス用
+    /// １番がコントローラー用
+    /// </summary>
+    [SerializeField]
+    private Sprite[] decisionButtonText = new Sprite[2];
+
+    /// <summary>
+    /// 戻るボタンテキスト
+    /// ０番がキーボード＆マウス用
+    /// １番がコントローラー用
+    /// </summary>
+    [SerializeField]
+    private Sprite[] backButtonText = new Sprite[2];
+
+    /// <summary>
     /// 移動フラグ
     /// スロットとキャラクターが動いている時はtrue,そうでなければfalse
     /// </summary>
@@ -81,6 +115,22 @@ public class CustomizeSceneManager : MonoBehaviour
 
     private void Update()
     {
+        // 現在の入力デバイスがゲームパッドであれば
+        if (inputManager.GetCurrentInputDevice() == "Gamepad")
+        {
+            decisionButtonTextImage.sprite = decisionButtonText[1];
+            backButtonTextImage.sprite = backButtonText[1];
+            decisionButtonTextImage.SetNativeSize();
+            backButtonTextImage.SetNativeSize();
+        }
+        else if (inputManager.GetCurrentInputDevice() == "Keyboard/Mouse")
+        {
+            decisionButtonTextImage.sprite = decisionButtonText[0];
+            backButtonTextImage.sprite = backButtonText[0];
+            backButtonTextImage.SetNativeSize();
+            decisionButtonTextImage.SetNativeSize();
+        }
+
         // 決定・戻る処理
         if (inputActions.UI.Decision.triggered)
         {
@@ -126,8 +176,8 @@ public class CustomizeSceneManager : MonoBehaviour
         // 移動中は処理しない
         if (isMoving) return;
 
-        // 決定音
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        // 戻る音
+        AudioManager.instance.Play(SEPath.Back, 0.004f);
 
         // デバッグ
         Debug.Log("ひとつ前に戻る");

@@ -235,6 +235,9 @@ public class SlotManager : MonoBehaviour
 		// 一番左のリール選択中なら処理しない
 		if (selectSlotNum == 0) return;
 
+		// スロット横移動音
+		AudioManager.instance.Play(SEPath.SlotSideMove, 0.004f);
+
 		selectSlotNum--;
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
 	}
@@ -244,6 +247,9 @@ public class SlotManager : MonoBehaviour
 	{
 		// 一番右のリール選択中なら処理しない
 		if (selectSlotNum == 2) return;
+
+		// スロット横移動音
+		AudioManager.instance.Play(SEPath.SlotSideMove, 0.004f);
 
 		selectSlotNum++;
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();

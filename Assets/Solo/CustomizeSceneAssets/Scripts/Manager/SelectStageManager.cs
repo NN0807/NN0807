@@ -87,6 +87,9 @@ public class SelectStageManager : MonoBehaviour
     // 右回転
     public void RightRotation()
     {
+        // ステージ回転音
+        AudioManager.instance.Play(SEPath.StageSelectRotate, 0.004f);
+
         for (int i = 0; i < stageSpr.Length; i++)
         {
             int targetPosNum = i - 1;
@@ -101,6 +104,9 @@ public class SelectStageManager : MonoBehaviour
     // 左回転
     public void LefRotation()
     {
+        // ステージ回転音
+        AudioManager.instance.Play(SEPath.StageSelectRotate, 0.004f);
+
         for (int i = 0; i < stageSpr.Length; i++)
         {
             int targetPosNum = i + 1;
