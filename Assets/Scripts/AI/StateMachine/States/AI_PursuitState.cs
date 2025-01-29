@@ -15,7 +15,7 @@ public class AI_PursuitState : AIBaseState
 	Transform targetTransform = null;
 
 	// ステートに入った時
-	public override void Enter() 
+	public override void Enter()
 	{
 		// キャラクターAI取得
 		CharacterAI characterAI = stateMachine.characterAI;
@@ -43,6 +43,14 @@ public class AI_PursuitState : AIBaseState
 	{
 		// キャラクターAI取得
 		CharacterAI characterAI = stateMachine.characterAI;
+
+		// もし追跡中のキャラが死亡していたら
+		if(targetTransform == null)
+        {
+			// 待機ステートへ
+			stateMachine.ChangeState(new AI_IdleState(0.1f));
+			return;
+        }
 
 		// NavMeshAgentに目標地点を設定
 		characterAI.agent.SetDestination(targetTransform.position);

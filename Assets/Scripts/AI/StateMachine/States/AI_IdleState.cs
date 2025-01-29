@@ -41,8 +41,17 @@ public class AI_IdleState : AIBaseState
 			// 攻撃的かで分岐
 			if (characterAI.ConductLottery(characterAI.aIParam.Aggressiveness))
 			{
-				// 追跡ステートへ
-				stateMachine.ChangeState(new AI_PursuitState());
+				// 敵キャラがステージ上に存在するなら
+				if (characterAI.otherCharcterObjects.Count > 0)
+				{
+					// 追跡ステートへ
+					stateMachine.ChangeState(new AI_PursuitState());
+				}
+				else
+                {
+					// 徘徊ステートへ
+					stateMachine.ChangeState(new Ai_TerritoryWanderState());
+				}
 			}
 			else
             {

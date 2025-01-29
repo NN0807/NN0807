@@ -133,6 +133,16 @@ public class CharacterAI : MonoBehaviour
 	}
 	void Update()
 	{
+		// 相手キャラクターの情報更新
+		for (int i = otherCharcterObjects.Count - 1; i >= 0; i--)
+		{
+			// 相手が死亡していたら
+			if (otherCharcterObjects[i] == null)
+			{
+				// リストから削除
+				otherCharcterObjects.RemoveAt(i); 
+			}
+		}
 		if (stateMachine != null)
 		{
 			// ステートマシン更新処理
