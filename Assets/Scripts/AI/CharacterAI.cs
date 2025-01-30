@@ -133,6 +133,10 @@ public class CharacterAI : MonoBehaviour
 	}
 	void Update()
 	{
+		// ゲーム開始まで終了後は処理しない
+		if (GameManager.Instance._gameStartFLg == false) return;
+		if (GameManager.Instance._gameFinishFLg == true) return;
+
 		// 相手キャラクターの情報更新
 		for (int i = otherCharcterObjects.Count - 1; i >= 0; i--)
 		{

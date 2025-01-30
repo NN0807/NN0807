@@ -17,7 +17,7 @@ public class Title_Manager : MonoBehaviour
     {
         StartCoroutine(CallChildStarts());
         // タイトルBGM(初期化が間に合わないのでコルーチンで１フレーム遅延)
-        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.TitleBGM, 0.004f, 0f, 1f, true));
+        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.TitleBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
     }
 
     private IEnumerator CallChildStarts()

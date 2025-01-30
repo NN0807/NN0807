@@ -9,7 +9,7 @@ public class ModeSelectManager : MonoBehaviour
     public void LoadBattleMode()
     {
         // 決定音
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         SceneManager.LoadScene("CustomizeScene");
     }
@@ -17,7 +17,7 @@ public class ModeSelectManager : MonoBehaviour
     public void LoadOnlineMode()
     {
         // 決定音
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // SceneManager.LoadScene("OnlineMode");
     }
@@ -25,7 +25,7 @@ public class ModeSelectManager : MonoBehaviour
     public void LoadTutorialMode()
     {
         // 決定音
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // SceneManager.LoadScene("TutorialScene");
     }

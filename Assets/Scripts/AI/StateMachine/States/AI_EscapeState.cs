@@ -18,6 +18,14 @@ public class AI_EscapeState : AIBaseState
         // 歩きアニメーション
         characterAI.characterManager.SetAnimations(Common.AnimationType.Walk);
 
+        // 例外処理追加
+        if (characterAI.agent == null)
+        {
+            // 待機ステートへ
+            stateMachine.ChangeState(new AI_IdleState(0.1f));
+            return;
+        }
+
         // 逃げ先算出
         escapPos = CalcEscapePosition();
         // 目標地点(逃げ先)を設定
@@ -74,6 +82,14 @@ public class AI_EscapeState : AIBaseState
 
         // エージェント取得
         var agent = stateMachine.characterAI.agent;
+
+        // 例外処理追加
+        if (agent == null)
+        {
+            // 待機ステートへ
+            stateMachine.ChangeState(new AI_IdleState(0.1f));
+            return;
+        }
 
         // エージェントが目標地点に到着したかを確認
         if (agent.remainingDistance <= agent.radius * 4f)

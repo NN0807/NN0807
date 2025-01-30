@@ -199,7 +199,7 @@ public class Result_UI : MonoBehaviour
                 if (!_coroutineFlags[0])
                 {
                     // カーソル移動音
-                    AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
+                    AudioManager.instance.Play(SEPath.MoveCursor, AudioManager.ALL_VOLUME_VALUE);
 
                     StartCoroutine(
                     Scale(_images[0], _targetScale, _easingTime, Easing.Ease.OutSine));
@@ -231,7 +231,7 @@ public class Result_UI : MonoBehaviour
                 if (!_coroutineFlags[1])
                 {
                     // カーソル移動音
-                    AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
+                    AudioManager.instance.Play(SEPath.MoveCursor, AudioManager.ALL_VOLUME_VALUE);
 
                     StartCoroutine(
                     Scale(_images[1], _targetScale, _easingTime, Easing.Ease.OutSine));
@@ -263,7 +263,7 @@ public class Result_UI : MonoBehaviour
                 if (!_coroutineFlags[2])
                 {
                     // カーソル移動音
-                    AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
+                    AudioManager.instance.Play(SEPath.MoveCursor, AudioManager.ALL_VOLUME_VALUE);
 
                     StartCoroutine(
                     Scale(_images[2], _targetScale, _easingTime, Easing.Ease.OutSine));
@@ -373,7 +373,7 @@ public class Result_UI : MonoBehaviour
     {
         Debug.Log("リトライボタンがクリックされました！");
 
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // リトライフラグ"ON"
         _resultFlags[0] = true;
@@ -384,7 +384,7 @@ public class Result_UI : MonoBehaviour
     {
         Debug.Log("モード選択ボタンがクリックされました！");
 
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // モード選択フラグ"ON"
         _resultFlags[1] = true;
@@ -395,7 +395,7 @@ public class Result_UI : MonoBehaviour
     {
         Debug.Log("タイトルへボタンがクリックされました！");
 
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // タイトルへフラグ"ON"
         _resultFlags[2] = true;

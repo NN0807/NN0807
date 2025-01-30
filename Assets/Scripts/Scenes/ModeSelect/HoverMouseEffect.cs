@@ -47,7 +47,7 @@ public class HoverMouseEffect : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         targetScale = originalScale * scaleMultiplier;
 
         // カーソル移動音
-        AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
+        AudioManager.instance.Play(SEPath.MoveCursor, AudioManager.ALL_VOLUME_VALUE);
     }
 
     public void OnPointerExit(PointerEventData eventData)

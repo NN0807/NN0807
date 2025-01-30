@@ -12,12 +12,28 @@ public class StageManager : MonoBehaviour
         // ステージ番号保存
         var _stageNumber = PlayerPrefs.GetInt("stageIngex", 0);
 
-        // ※敢えて設定しない事で同じシーンに遷移可能
-        //var NextSceneName = _stageNumber == 0 ? "Gimmick_Stage_Scene" :
-        //                    _stageNumber == 1 ? "Ice_Stage_Scene" :
-        //                    _stageNumber == 2 ? "Fire_Stage_Scene" :
-        //                    _stageNumber == 3 ? "Random" :
-        //                    _stageNumber == 4 ? "Normal_Stage_Scene" : "Water_Stage_Scene";
+        // ステージに応じたBGM再生処理
+        switch(_stageNumber)
+        {
+            case 0:     // 積み木
+                StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.GimmickStageBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
+                break;
+            case 1:     // アイス
+                StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.IceStageBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
+                break;
+            case 2:     // ファイア
+                StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.FireStageBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
+                break;
+            case 3:     // ランダム
+                // 何もしない
+                break;
+            case 4:     // 闘技場
+                StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.NormalStageBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
+                break;
+            case 5:     // 水
+                StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.WaterStageBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
+                break;
+        }
     }
 
     // Start is called before the first frame update

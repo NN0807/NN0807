@@ -160,6 +160,10 @@ public class GameManager : MonoBehaviour
             // イージング
             if (!_coroutineFlag)
             {
+                // リザルトBGMを再生
+                AudioManager.instance.StopAllBGM();
+                AudioManager.instance.Play(BGMPath.ResultBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true);
+
                 StartCoroutine(
                 Scale(_rankingNumberImage[_myRanking - 1], _targetScale, _easingTime, Easing.Ease.OutQuad));
 

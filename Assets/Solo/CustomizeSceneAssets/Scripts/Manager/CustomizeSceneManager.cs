@@ -47,6 +47,26 @@ public class CustomizeSceneManager : MonoBehaviour
     private GameObject partsNameUI = default;
 
     /// <summary>
+    /// フェードアウトするための白画像
+    /// </summary>
+    public Image whiteImage;
+
+    /// <summary>
+    /// 白画像透過用
+    /// </summary>
+    private Color whiteColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+
+    /// <summary>
+    /// フェードアウトタイマー
+    /// </summary>
+    private float fadeOutTimer = 0f;
+
+    /// <summary>
+    /// フェードアウトフラグ
+    /// </summary>
+    private bool StartfadeOutFlg = false;
+
+    /// <summary>
     /// インプットマネージャー
     /// </summary>
     [SerializeField]
@@ -110,7 +130,7 @@ public class CustomizeSceneManager : MonoBehaviour
     private void Start()
     {
         // カスタマイズBGM
-        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.CustomizeBGM, 0.004f, 0f, 1f, true));
+        StartCoroutine(AudioManager.instance.StartFuncPlay(BGMPath.CustomizeBGM, AudioManager.ALL_VOLUME_VALUE, 0f, 1f, true));
     }
 
     private void Update()
@@ -139,6 +159,33 @@ public class CustomizeSceneManager : MonoBehaviour
         if (inputActions.UI.Back.triggered)
         {
             BackScene();
+        }
+
+        if (StartfadeOutFlg)
+        {
+            fadeOutTimer += Time.deltaTime;
+            if (fadeOutTimer >= 1.0f)
+            {
+                if (whiteColor.a < 1.0f) whiteColor.a += Time.deltaTime;
+            }
+
+            whiteImage.color = whiteColor;
+
+            if (fadeOutTimer >= 2.0f)
+            {
+                // ステージ番号保存
+                var _stageNumber = PlayerPrefs.GetInt("stageIngex", 0);
+
+                var NextSceneName = _stageNumber == 0 ? "Gimmick_Stage_Scene" :
+                                    _stageNumber == 1 ? "Ice_Stage_Scene" :
+                                    _stageNumber == 2 ? "Fire_Stage_Scene" :
+                                    _stageNumber == 3 ? "Random" :
+                                    _stageNumber == 4 ? "Normal_Stage_Scene" : "Water_Stage_Scene";
+
+                // ※仮
+                WhiteLoading_Scene.SetNextScene(NextSceneName);
+                SceneManager.LoadScene("WhiteLoading_Scene");
+            }
         }
     }
 
@@ -177,7 +224,7 @@ public class CustomizeSceneManager : MonoBehaviour
         if (isMoving) return;
 
         // 戻る音
-        AudioManager.instance.Play(SEPath.Back, 0.004f);
+        AudioManager.instance.Play(SEPath.Back, AudioManager.ALL_VOLUME_VALUE);
 
         // デバッグ
         Debug.Log("ひとつ前に戻る");
@@ -215,7 +262,7 @@ public class CustomizeSceneManager : MonoBehaviour
         if (isMoving) return;
 
         // 決定音
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         // デバッグ表示
         Debug.Log("決定");
@@ -240,19 +287,7 @@ public class CustomizeSceneManager : MonoBehaviour
 
             // シーン遷移
             Debug.Log("シーン遷移");
-
-            // ステージ番号保存
-            var _stageNumber = PlayerPrefs.GetInt("stageIngex", 0);
-
-            var NextSceneName = _stageNumber == 0 ? "Gimmick_Stage_Scene" :
-                                _stageNumber == 1 ? "Ice_Stage_Scene"     :
-                                _stageNumber == 2 ? "Fire_Stage_Scene"    :
-                                _stageNumber == 3 ? "Random"              :
-                                _stageNumber == 4 ? "Normal_Stage_Scene"  : "Water_Stage_Scene";
-
-            // ※仮
-            WhiteLoading_Scene.SetNextScene(NextSceneName);
-            SceneManager.LoadScene("WhiteLoading_Scene");
+            StartfadeOutFlg = true;
         }
     }
 

@@ -134,7 +134,7 @@ public class StartButton_UI : MonoBehaviour
                 if (!_coroutineFlag)
                 {
                     // カーソル移動音
-                    AudioManager.instance.Play(SEPath.MoveCursor, 0.004f);
+                    AudioManager.instance.Play(SEPath.MoveCursor, AudioManager.ALL_VOLUME_VALUE);
 
                     StartCoroutine(
                     Scale(_image, _targetScale, _easingTime, Easing.Ease.OutSine));
@@ -185,7 +185,7 @@ public class StartButton_UI : MonoBehaviour
         Debug.Log("スタートボタンがクリックされました！");
 
 
-        AudioManager.instance.Play(SEPath.AllDecisions, 0.004f);
+        AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
 
         _gameStart = true;
     }

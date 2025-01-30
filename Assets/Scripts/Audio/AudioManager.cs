@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     /// <summary>
+    /// 全体のボリューム値
+    /// </summary>
+    public const float ALL_VOLUME_VALUE = 0.015f;
+
+    /// <summary>
     /// 最大同時再生可能なオーディオソースの数
     /// </summary>
     public const int maxSEAudioSources = 30;
@@ -86,7 +91,6 @@ public class AudioManager : MonoBehaviour
         StopAllBGM();
         StopAllSE();
     }
-
 
     /// <summary>
     /// 再生

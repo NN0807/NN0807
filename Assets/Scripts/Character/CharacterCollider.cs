@@ -280,6 +280,9 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
                         // クリティカルポイントにヒットした場合
                         Debug.Log("弱点に衝突しました");
 
+                        // クリティカル音
+                        AudioManager.instance.Play(SEPath.CriticalPunch, AudioManager.ALL_VOLUME_VALUE);
+
                         // 衝突した場所（hitPoint）にクリティカルヒットエフェクトを再生させる
                         EffectManager.Instance.PlayEffect("CriticalHitEffect", _hitPoint);
 
@@ -302,6 +305,9 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
                     {
                         // クリティカルポイントにヒットしなかった場合、通常の衝突処理
                         Debug.Log("攻撃が衝突しました");
+
+                        // ヒット音
+                        AudioManager.instance.Play(SEPath.Punch, AudioManager.ALL_VOLUME_VALUE);
 
                         // 衝突した場所（hitPoint）にヒットエフェクトを再生させる
                         EffectManager.Instance.PlayEffect("NormalHitEffect", _hitPoint);

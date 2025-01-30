@@ -129,7 +129,7 @@ public class SlotManager : MonoBehaviour
 			if (inputActions.UI.Move.ReadValue<Vector2>().y > 0.5f)
 			{
 				// リール回転音
-				AudioManager.instance.Play(SEPath.SlotRotation, 0.004f);
+				AudioManager.instance.Play(SEPath.SlotRotation, AudioManager.ALL_VOLUME_VALUE);
 
 				// 上へ移動
 				selectSlot.Upflg = true;
@@ -139,7 +139,7 @@ public class SlotManager : MonoBehaviour
 			if (inputActions.UI.Move.ReadValue<Vector2>().y < -0.5f)
 			{
 				// リール回転音
-				AudioManager.instance.Play(SEPath.SlotRotation, 0.004f);
+				AudioManager.instance.Play(SEPath.SlotRotation, AudioManager.ALL_VOLUME_VALUE);
 
 				// 下へ移動
 				selectSlot.Downflg = true;
@@ -236,7 +236,7 @@ public class SlotManager : MonoBehaviour
 		if (selectSlotNum == 0) return;
 
 		// スロット横移動音
-		AudioManager.instance.Play(SEPath.SlotSideMove, 0.004f);
+		AudioManager.instance.Play(SEPath.SlotSideMove, AudioManager.ALL_VOLUME_VALUE);
 
 		selectSlotNum--;
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
@@ -249,7 +249,7 @@ public class SlotManager : MonoBehaviour
 		if (selectSlotNum == 2) return;
 
 		// スロット横移動音
-		AudioManager.instance.Play(SEPath.SlotSideMove, 0.004f);
+		AudioManager.instance.Play(SEPath.SlotSideMove, AudioManager.ALL_VOLUME_VALUE);
 
 		selectSlotNum++;
 		selectSlot = transform.Find("Slots").GetChild(selectSlotNum).GetComponent<SelectSlot>();
