@@ -62,7 +62,7 @@ public class CharacterMove : MonoBehaviour,ICharacterPart
         Debug.Log("CharacterMove　更新処理");
 
         // 攻撃中は移動も旋回も出来なくする
-        if (!manager.IsCurrentlyAttacking() && manager._characterNumber == 0 &&
+        if (!manager.IsCurrentlyAttacking() &&
             (GameManager.Instance.GetGameStartFLg() && !GameManager.Instance.GetGameFinishFLg()))      
         {
             // 移動
