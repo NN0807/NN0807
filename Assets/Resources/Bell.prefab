@@ -95,6 +95,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5308044258956488923}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5fa868237cb76864baa82bbce0ec52bd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 467327681027151144}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5fa868237cb76864baa82bbce0ec52bd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8786167216363035436}
     - targetCorrespondingSourceObject: {fileID: -1235127227229183719, guid: 5fa868237cb76864baa82bbce0ec52bd,
         type: 3}
       insertIndex: -1
@@ -148,6 +156,45 @@ MonoBehaviour:
   _activateDashAnimationSpeed: 0
   _hitStopTime: 0.3
   _hitStopTimer: 0
+--- !u!114 &467327681027151144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525014639315721097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8786167216363035436}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8786167216363035436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525014639315721097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &6689691880319436737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1235127227229183719, guid: 5fa868237cb76864baa82bbce0ec52bd,

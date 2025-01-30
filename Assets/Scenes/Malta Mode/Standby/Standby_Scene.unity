@@ -779,6 +779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666597303}
+  - component: {fileID: 666597304}
   - component: {fileID: 666597302}
   m_Layer: 0
   m_Name: NetWorkSystem
@@ -803,6 +804,7 @@ MonoBehaviour:
   _localIdle: {fileID: 1808022053}
   _whiteBack: {fileID: 1109006017}
   _gameStartFlag: 0
+  R: 0
 --- !u!4 &666597303
 Transform:
   m_ObjectHideFlags: 0
@@ -818,6 +820,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666597304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666597301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &879804178
 GameObject:
   m_ObjectHideFlags: 0

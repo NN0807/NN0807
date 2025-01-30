@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class NetWork_CharacterMove : MonoBehaviour, NetWork_ICharacterPart
+public class NetWork_CharacterMove : MonoBehaviourPunCallbacks, NetWork_ICharacterPart
 {
     // データアセット
     public CharacterParamAsset characterParamAsset;
@@ -51,9 +53,9 @@ public class NetWork_CharacterMove : MonoBehaviour, NetWork_ICharacterPart
         characterParamAsset = Resources.Load<CharacterParamAsset>("CharacterParamAsset");
 
         // 変数初期化
-        MoveForward = Vector3.zero;
-        _walkSpeed = 0.0f;
-        _dashSpeed = 0.0f;
+        MoveForward  = Vector3.zero;
+        _walkSpeed   = 0.0f;
+        _dashSpeed   = 0.0f;
         _impulseTime = 0.0f;
     }
 

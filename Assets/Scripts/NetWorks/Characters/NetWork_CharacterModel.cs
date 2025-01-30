@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 using Common;
 
-public class NetWork_CharacterModel : MonoBehaviour
+// MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
+public class NetWork_CharacterModel : MonoBehaviourPunCallbacks
 {
     // 全脚部パーツ
     [SerializeField]
@@ -19,14 +20,14 @@ public class NetWork_CharacterModel : MonoBehaviour
     public GameObject[] WeaponModels = new GameObject[CharacterConst.CONST_MODEL_NUM];
 
     // 各パーツオブジェクト変数
-    private GameObject Leg = default;
-    private GameObject Body = default;
+    private GameObject Leg    = default;
+    private GameObject Body   = default;
     private GameObject Weapon = default;
 
     // 各ジョイントの検索結果を保存しておく変数
-    private GameObject LegJoint = default;
-    private GameObject BodyJoint1 = default;
-    private GameObject BodyJoint2 = default;
+    private GameObject LegJoint    = default;
+    private GameObject BodyJoint1  = default;
+    private GameObject BodyJoint2  = default;
     private GameObject WeaponJoint = default;
 
     // GameObjectを引数に取り、生成イベントを処理するためのデリゲート
@@ -37,33 +38,40 @@ public class NetWork_CharacterModel : MonoBehaviour
     // 各部位を生成し、初期化
     public void GenerateAndRegisterParts(NetWork_CharacterManager manager, int characterNumber)
     {
-        // カスタマイズシーンで選択した各パーツ番号を読み込む
-        // キー名「body,leg,punch」の値をロードする。データが存在しない場合「0」を返す
-        // ※セーブ処理　SlotManager.cs 284行目
-        // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
-        var _bodyNumber = PlayerPrefs.GetInt("body", 0);
-        //var _bodyNumber   = Random.Range(0, 8);
-        var _legNumber = PlayerPrefs.GetInt("leg", 0);
-        //var _legNumber    = Random.Range(0, 8);
-        var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
-        //var _weaponNumber = Random.Range(0, 8);
+        // 自身が生成したネットワークオブジェクトのみ
+        if (photonView.IsMine)
+        {
+            // カスタマイズシーンで選択した各パーツ番号を読み込む
+            // キー名「body,leg,punch」の値をロードする。データが存在しない場合「0」を返す
+            // ※セーブ処理　SlotManager.cs 284行目
+            // キー名の後で指定しているのは、データが存在しなかった場合のデフォルト値
+            var _bodyNumber = PlayerPrefs.GetInt("body", 0);
+            var _legNumber = PlayerPrefs.GetInt("leg", 0);
+            var _weaponNumber = PlayerPrefs.GetInt("punch", 0);
 
 
-        // 脚部、体部、武器を 生成 & 登録
-        GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
-        Leg = Instantiate(LegModels[_legNumber], this.transform);
-        Body = Instantiate(BodyModels[_bodyNumber], this.transform);
-        Weapon = Instantiate(WeaponModels[_weaponNumber], this.transform);
-        Leg.transform.localScale = _mt.Scale;
-        Body.transform.localScale = _mt.Scale;
-        // 武器は体部に格納しておく為、拡縮値を"0"にしておく
-        Weapon.transform.localScale = Initialize.Vector3;
-        manager.RegisterPart(Leg);
-        manager.RegisterPart(Body);
-        manager.RegisterPart(Weapon);
+            // 脚部、体部、武器を 生成 & 登録
+            GenerateTransform _mt = TransformInfo._generateTransforms[characterNumber];
+            Leg = PhotonNetwork.Instantiate(LegModels[_legNumber].name, this.transform.position, Quaternion.identity);
+            Body = PhotonNetwork.Instantiate(BodyModels[_bodyNumber].name, this.transform.position, Quaternion.identity);
+            Weapon = PhotonNetwork.Instantiate(WeaponModels[_weaponNumber].name, this.transform.position, Quaternion.identity);
+            Leg.transform.localScale = _mt.Scale;
+            Body.transform.localScale = _mt.Scale;
+            // 親オブジェクトを設定（子オブジェクトにする）
+            Leg.transform.SetParent(this.transform);
+            Body.transform.SetParent(this.transform);
+            Weapon.transform.SetParent(this.transform);
+            // 武器は体部に格納しておく為、拡縮値を"0"にしておく
+            Weapon.transform.localScale = Initialize.Vector3;
+            manager.RegisterPart(Leg);
+            manager.RegisterPart(Body);
+            manager.RegisterPart(Weapon);
 
-        // イベントで通知
-        OnObjectCreated?.Invoke(Leg);
+            // イベントで通知
+            OnObjectCreated?.Invoke(Leg);
+        }
+
+        
     }
 
     public void ModelUpdate(NetWork_CharacterManager manager, int _characterNumber)

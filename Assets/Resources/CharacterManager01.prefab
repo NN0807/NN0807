@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8613254569078609480}
   - component: {fileID: 569476225752310886}
   - component: {fileID: 1956963270366154754}
-  - component: {fileID: 7353286669313166327}
+  - component: {fileID: -1515224419304488082}
   m_Layer: 0
   m_Name: CharacterManager01
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MonoBehaviour:
   _vibrationFlag: 0
   _attackFlag: 0
   _pauseManager: {fileID: 0}
---- !u!114 &7353286669313166327
+--- !u!114 &-1515224419304488082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []

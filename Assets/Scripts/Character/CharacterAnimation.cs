@@ -127,7 +127,7 @@ public class CharacterAnimation : MonoBehaviour,ICharacterPart
     // 攻撃アニメーションフラグ取得関数                                                                                                    
     public bool GetAttackAnimationFlag()   { return _attackAnimationFlag; }
 
-    // 攻撃アニメーションフラグ取得設定関数                                                                                                
+    // 攻撃アニメーションフラグ設定設定関数                                                                                                
     public void AttackAnimationTrueEvent()  { _attackAnimationFlag = true;  }
     public void AttackAnimationFalseEvent() { _attackAnimationFlag = false; }
 

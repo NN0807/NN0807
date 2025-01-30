@@ -35,8 +35,8 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
 
         // シーン遷移を同期するために設定
-        PhotonNetwork.AutomaticallySyncScene = true;
-
+        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.ConnectUsingSettings();       // Photonに接続
         // シーンがロードされたら準備完了を自動設定
         SetReadyState(true);
 
@@ -121,8 +121,16 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
 
         // ゲーム開始！！！
         _gameStartFlag = true;
-    }
 
+        // **全プレイヤーにゲーム開始を通知**
+        photonView.RPC(nameof(RPC_StartGame), RpcTarget.All);
+    }
+    // **全プレイヤーの _gameStartFlag を true にするRPC**
+    [PunRPC]
+    private void RPC_StartGame()
+    {
+        _gameStartFlag = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -140,14 +148,25 @@ public class NetWorkSystem_Standby : MonoBehaviourPunCallbacks
             {
 
                 // 送受信接続再開
-                PhotonNetwork.IsMessageQueueRunning = false;
-                PhotonNetwork.LoadLevel("NetWork_FireStage_Scene"); // 次のシーンに遷移
-                R = true;
+                //PhotonNetwork.IsMessageQueueRunning = false;
+                //PhotonNetwork.LoadLevel("NetWork_FireStage_Scene"); // 次のシーンに遷移
+                // R = true;
                 //WhiteLoading_Scene.SetNextScene("NetWork_FireStage_Scene");
                 //SceneManager.LoadScene("WhiteLoading_Scene");
+                SceneManager.LoadSceneAsync("NetWork_FireStage_Scene", LoadSceneMode.Single);
+                //StartCoroutine(LoadSceneIndividually()); // **個別にシーン遷移**
+                R = true;
             }
         }
 
         
+    }
+
+    // **各自でシーン遷移するコルーチン**
+    private IEnumerator LoadSceneIndividually()
+    {
+        yield return new WaitForSeconds(0.5f); // ちょっと待って同期ズレを防ぐ
+        PhotonNetwork.IsMessageQueueRunning = false;
+        SceneManager.LoadScene("NetWork_FireStage_Scene"); // **個別にシーン遷移**
     }
 }
