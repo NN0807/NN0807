@@ -241,8 +241,17 @@ public class CustomizeSceneManager : MonoBehaviour
             // シーン遷移
             Debug.Log("シーン遷移");
 
+            // ステージ番号保存
+            var _stageNumber = PlayerPrefs.GetInt("stageIngex", 0);
+
+            var NextSceneName = _stageNumber == 0 ? "Gimmick_Stage_Scene" :
+                                _stageNumber == 1 ? "Ice_Stage_Scene"     :
+                                _stageNumber == 2 ? "Fire_Stage_Scene"    :
+                                _stageNumber == 3 ? "Random"              :
+                                _stageNumber == 4 ? "Normal_Stage_Scene"  : "Water_Stage_Scene";
+
             // ※仮
-            WhiteLoading_Scene.SetNextScene("Fire_Stage_Scene");
+            WhiteLoading_Scene.SetNextScene(NextSceneName);
             SceneManager.LoadScene("WhiteLoading_Scene");
         }
     }

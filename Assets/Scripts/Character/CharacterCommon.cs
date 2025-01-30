@@ -59,9 +59,9 @@ namespace Common
         public static readonly GenerateTransform[] _generateTransforms = new GenerateTransform[]
         {
             new GenerateTransform(new Vector3( 0.0f, 4.5f,  2.2f), Quaternion.Euler(0.0f, -180.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3( 0.0f, 4.5f,  0.0f), Quaternion.Euler(0.0f,    0.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3(-2.2f, 4.5f,  0.0f), Quaternion.Euler(0.0f,  -90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
-            new GenerateTransform(new Vector3( 2.2f, 4.5f,  0.0f), Quaternion.Euler(0.0f,   90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f))
+            new GenerateTransform(new Vector3( 0.0f, 4.5f, -2.0f), Quaternion.Euler(0.0f,    0.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
+            new GenerateTransform(new Vector3(-2.2f, 4.5f,  0.0f), Quaternion.Euler(0.0f,   90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f)),
+            new GenerateTransform(new Vector3( 2.2f, 4.5f,  0.0f), Quaternion.Euler(0.0f,  -90.0f, 0.0f), new Vector3(1.5f, 1.5f, 1.5f))
         };
     }
 }

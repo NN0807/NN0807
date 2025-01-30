@@ -13,16 +13,6 @@ public class StartButton_UI : MonoBehaviour
     // アタッチするボタン
     public Button _startButton;
 
-    // ポストエフェクト
-    [SerializeField]
-    public Volume _volume;
-
-    // ブルーム
-    private Bloom _bloom;
-
-    // ブルーム拡縮値変更フラグ
-    private bool _bloomScatterChangeFlag = false;
-
     // キーマウ用のボタン画像
     public Sprite _startButtonSprite;
 
@@ -81,13 +71,6 @@ public class StartButton_UI : MonoBehaviour
         {
             _startButton.onClick.AddListener(OnStartButtonClick);
         }
-
-        // ポストエフェクト設定
-        _volume.profile.TryGet(out _bloom);
-        if (_bloom == null) 
-        {
-            Debug.Log("ブルームがありません！！！");
-        }
     }
 
     // Update is called once per frame
@@ -115,24 +98,6 @@ public class StartButton_UI : MonoBehaviour
 
                     _coroutineFlag  = true;
                     _coroutineFlag2 = false;
-                }
-
-                // ブルーム拡縮値を増やす
-                if (_bloomScatterChangeFlag)
-                {
-                    // Time.deltaTime / 2.0fの間隔で"0.6"まで
-                    //if (_bloom.scatter.value <= 0.6f) _bloom.scatter.value += Time.deltaTime;
-                    // "0.6"まで到達したらフラグをfalseに
-                    //if (_bloom.scatter.value >= 0.6f) _bloomScatterChangeFlag = false;
-
-                }
-                // ブルーム拡縮値を減らす
-                if (!_bloomScatterChangeFlag)
-                {
-                    // ↑と同様に減らす
-                    //if (_bloom.scatter.value >= 0.3f) _bloom.scatter.value -= Time.deltaTime;
-                    //if (_bloom.scatter.value <= 0.3f) _bloomScatterChangeFlag = true;
-
                 }
             }
             else
@@ -176,27 +141,6 @@ public class StartButton_UI : MonoBehaviour
 
                     _coroutineFlag  = true;
                     _coroutineFlag2 = false;
-                }
-
-                // シェーダーに色を渡す
-                //_material.SetColor("_Color", Color.white * 1.3f);
-
-                // ブルーム拡縮値を増やす
-                if (_bloomScatterChangeFlag)
-                {
-                    // Time.deltaTime / 2.0fの間隔で"0.6"まで
-                    //if (_bloom.scatter.value <= 0.6f) _bloom.scatter.value += Time.deltaTime;
-                    // "0.6"まで到達したらフラグをfalseに
-                    //if (_bloom.scatter.value >= 0.6f) _bloomScatterChangeFlag = false;
-
-                }
-                // ブルーム拡縮値を減らす
-                if (!_bloomScatterChangeFlag)
-                {
-                    // ↑と同様に減らす
-                    //if (_bloom.scatter.value >= 0.3f) _bloom.scatter.value -= Time.deltaTime;
-                    //if (_bloom.scatter.value <= 0.3f) _bloomScatterChangeFlag = true;
-
                 }
             }
             // スタートボタンが選ばれていなければ

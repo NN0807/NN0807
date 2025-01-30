@@ -6,15 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Malta Mode/Lobby/Lobby_Scene.unity
-    guid: 9e6b032019dee7e468ceaf17605771d5
+    path: Assets/Scenes/Solo Mode/Title/Title_Scene.unity
+    guid: d394d2bef3d3a624db647fa5a70d9283
   - enabled: 1
-    path: Assets/Scenes/Malta Mode/Customize/NetWork_CustomizeScene.unity
-    guid: e56c1926f221bb54e9d7960f9a805815
+    path: Assets/Scenes/Solo Mode/Loading/WhiteLoading_Scene.unity
+    guid: 009f13fa3216d1e418829251dda3e380
+  - enabled: 1
+    path: Assets/Scenes/Solo Mode/ModeSelect/ModeSelect.unity
+    guid: ba9b5eb90eba1c643b7afe879444863a
+  - enabled: 1
+    path: Assets/Scenes/Solo Mode/Customize/CustomizeScene.unity
+    guid: d812cf4291d411c489021609b1f90e43
+  - enabled: 1
+    path: Assets/Scenes/Solo Mode/Fire/Fire_Stage_Scene.unity
+    guid: 0f904ca0e0b3b7f4091170dc4cd68a61
+  - enabled: 1
+    path: Assets/Scenes/Malta Mode/Fire/NetWork_FireStage_Scene.unity
+    guid: 2755ea77d846baa48bec8c2872cb6922
   - enabled: 1
     path: Assets/Scenes/Malta Mode/Standby/Standby_Scene.unity
     guid: 65d88e3be2e86af4695ea53d380c189b
   - enabled: 1
-    path: Assets/Scenes/Malta Mode/Fire/NetWork_FireStage_Scene.unity
-    guid: 2755ea77d846baa48bec8c2872cb6922
+    path: Assets/Scenes/Malta Mode/Customize/NetWork_CustomizeScene.unity
+    guid: e56c1926f221bb54e9d7960f9a805815
+  - enabled: 1
+    path: Assets/Scenes/Malta Mode/Lobby/Lobby_Scene.unity
+    guid: 9e6b032019dee7e468ceaf17605771d5
   m_configObjects: {}
