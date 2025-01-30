@@ -27,6 +27,14 @@ public class WhiteLoading_Scene : MonoBehaviour
                             _randomStageNum == 2 ? "Fire_Stage_Scene"    :
                             _randomStageNum == 3 ? "Normal_Stage_Scene"  : "Water_Stage_Scene";
 
+            var _setStageNum = NextSceneName == "Gimmick_Stage_Scene"  ? 0 :
+                               NextSceneName == "Ice_Stage_Scene"      ? 1 :
+                               NextSceneName == "Fire_Stage_Scene"     ? 2 :
+                               NextSceneName == "Normal_Stage_Scene"   ? 4 : 5;
+
+            // ステージデータ保存
+            PlayerPrefs.SetInt("stageIngex", _setStageNum);
+
             // フラグ"ON"
             _randomFlag = true;
         }
