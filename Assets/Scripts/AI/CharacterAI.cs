@@ -149,6 +149,9 @@ public class CharacterAI : MonoBehaviour
 		}
 		if (stateMachine != null)
 		{
+			// 敵との距離を常に測り、近すぎたら攻撃する
+			ExtraEscape();
+
 			// ステートマシン更新処理
 			stateMachine.Update();
 
@@ -220,6 +223,37 @@ public class CharacterAI : MonoBehaviour
 	public void ResetSpeed()
     {
 		agent.speed = characterParamAsset.MoveSpeed;
+    }
+
+	/// <summary>
+	/// 敵との距離を常に測り、近すぎたら逃げる
+	/// </summary>
+	private void ExtraEscape()
+    {
+		// 生存している敵の数ループ
+		foreach(GameObject otherCharcter in otherCharcterObjects)
+        {
+			// 敵の位置取得
+			Vector3 EnemyPos = otherCharcter.GetComponent<CharacterManager>()._legObject.transform.position;
+
+			// 自分の位置
+			Vector3 myPos = characterManager._legObject.transform.position;
+
+			// Y軸を無くす
+			EnemyPos.y = 0f;
+			myPos.y = 0f;
+
+			// 自分から敵までの距離
+			float distance = Vector3.Distance(EnemyPos, myPos);
+
+			// 距離がエージェントの半径より小さかったら攻撃
+			if(distance < agent.radius)
+            {
+				// 攻撃していなければ攻撃
+				if(characterManager.IsCurrentlyAttacking() == false)
+					stateMachine.ChangeState(new AI_AttackState());
+            }
+        }
     }
 
 	private void OnDrawGizmos()

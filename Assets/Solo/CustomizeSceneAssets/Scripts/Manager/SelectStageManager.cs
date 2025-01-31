@@ -67,6 +67,8 @@ public class SelectStageManager : MonoBehaviour
 
         // 入力制御
         if (isMoving) return;
+        if (CustomizeSceneManager.Instance.StartfadeOutFlg) return;
+
         // 左に移動
         if (inputActions.UI.Move.ReadValue<Vector2>().x > 0.5f)
         {
@@ -166,6 +168,7 @@ public class SelectStageManager : MonoBehaviour
     public IEnumerator Move(Transform transform, Vector3 destinationPos, float seconds, Easing.Ease easing, bool absolute)
     {
         isMoving = true;
+        CustomizeSceneManager.Instance.isMoving = true;
 
         // イージング関数の取得
         var Ease = Easing.GetEasingMethod(easing);
@@ -181,6 +184,7 @@ public class SelectStageManager : MonoBehaviour
         while (true)
         {
             isMoving = true;
+            CustomizeSceneManager.Instance.isMoving = true;
             yield return null;
             e += Time.deltaTime / seconds;
             if (e >= 1.0f)
@@ -193,6 +197,7 @@ public class SelectStageManager : MonoBehaviour
         }
 
         isMoving = false;
+        CustomizeSceneManager.Instance.isMoving = false;
     }
 
 

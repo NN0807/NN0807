@@ -182,8 +182,12 @@ public class SlotManager : MonoBehaviour
 		// 移動が完了している場合
 		else
 		{
-			// 選択
-			Select();
+			// Y軸の入力がない場合のみスロット移動可能に
+			if (!(Mathf.Abs(inputActions.UI.Move.ReadValue<Vector2>().y) > 0.5f))
+			{
+				// 選択
+				Select();
+			}
 		}
 	}
 
