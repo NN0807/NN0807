@@ -64,7 +64,7 @@ public class CustomizeSceneManager : MonoBehaviour
     /// <summary>
     /// フェードアウトフラグ
     /// </summary>
-    private bool StartfadeOutFlg = false;
+    public bool StartfadeOutFlg = false;
 
     /// <summary>
     /// インプットマネージャー
@@ -222,6 +222,9 @@ public class CustomizeSceneManager : MonoBehaviour
     {
         // 移動中は処理しない
         if (isMoving) return;
+        // 
+        // 遷移処理が走った場合は処理しない
+        if (StartfadeOutFlg) return;
 
         // 戻る音
         AudioManager.instance.Play(SEPath.Back, AudioManager.ALL_VOLUME_VALUE);
@@ -260,6 +263,9 @@ public class CustomizeSceneManager : MonoBehaviour
     {
         // 移動中は処理しない
         if (isMoving) return;
+
+        // 遷移処理が走った場合は処理しない
+        if (StartfadeOutFlg) return;
 
         // 決定音
         AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
@@ -306,6 +312,9 @@ public class CustomizeSceneManager : MonoBehaviour
             // フラグ制御
             isCharacterCustomize = true;
             isStgaeSelect = false;
+
+            // ステージ選択を非アクティブ化
+            selectStageManager.SetActive(false);
         }
         else if (isCharacterCustomize)
         {
