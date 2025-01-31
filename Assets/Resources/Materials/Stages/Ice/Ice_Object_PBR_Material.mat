@@ -104,7 +104,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _AlphaLevel: 0
+    - _AlphaLevel: 1
     - _AlphaTestToggle: 0
     - _AlphaToMask: 0
     - _Blend: 0

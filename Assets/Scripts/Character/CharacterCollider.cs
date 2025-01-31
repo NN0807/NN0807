@@ -108,7 +108,7 @@ public class CharacterCollider : MonoBehaviour, ICharacterPart
                     }
 
                     // "脚部を"ふっ飛ばさせる！！！
-                    _hitCharacterManager.GetLegRigidBody().AddForce(_attackDirection * characterParamAsset.Attack * 100.0f, ForceMode.Impulse);
+                    _hitCharacterManager.GetLegRigidBody().AddForce(_attackDirection * characterParamAsset.Attack * 10.0f, ForceMode.Impulse);
                 }
 
                 // フラグをOFF
