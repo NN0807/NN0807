@@ -32,14 +32,6 @@ public class Ai_TerritoryWanderState : AIBaseState
 		// 現在の位置を縄張りの中心に設定
 		territoryCenterPos = new Vector2(characterAI.transform.GetChild(0).position.x, characterAI.transform.GetChild(0).position.z);
 
-		// 例外処理追加
-		if (characterAI.agent == null)
-		{
-			// 待機ステートへ
-			stateMachine.ChangeState(new AI_IdleState(0.1f));
-			return;
-		}
-
 		// 目標地点設定
 		SetRandomtarget();
 	}
@@ -49,14 +41,6 @@ public class Ai_TerritoryWanderState : AIBaseState
 	{
 		// エージェント取得
 		var agent = stateMachine.characterAI.agent;
-
-		// 例外処理追加
-		if (agent == null)
-		{
-			// 待機ステートへ
-			stateMachine.ChangeState(new AI_IdleState(0.1f));
-			return;
-		}
 
 		// 徘徊処理
 		// エージェントが目標地点に到着したかを確認
@@ -92,9 +76,7 @@ public class Ai_TerritoryWanderState : AIBaseState
 	// ギズモ表示
 	public override void DrawGizmos()
 	{
-		// 徘徊先表示
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere(new Vector3(territoryCenterPos.x, 0.25f, territoryCenterPos.y), territoryRadius);
+
 	}
 
 	// ステートから出る時

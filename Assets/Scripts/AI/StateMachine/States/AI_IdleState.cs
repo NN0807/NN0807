@@ -22,6 +22,8 @@ public class AI_IdleState : AIBaseState
 	// ステートに入った時
 	public override void Enter()
 	{
+		if (!stateMachine.isUpdate) return;
+
 		// 待機アニメーション
 		stateMachine.characterAI.characterManager.SetAnimations(Common.AnimationType.Idle);
 	}
@@ -29,6 +31,8 @@ public class AI_IdleState : AIBaseState
 	// ステート更新処理
 	public override void Update()
 	{
+		if (!stateMachine.isUpdate) return;
+
 		// キャラクターAI取得
 		CharacterAI characterAI = stateMachine.characterAI;
 

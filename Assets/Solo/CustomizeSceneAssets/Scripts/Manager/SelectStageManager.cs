@@ -72,17 +72,17 @@ public class SelectStageManager : MonoBehaviour
         // 左に移動
         if (inputActions.UI.Move.ReadValue<Vector2>().x > 0.5f)
         {
-            RightRotation();
-            selectStageNum++;
-            if (selectStageNum > stageSpr.Length - 1) selectStageNum = 0;
+            LefRotation();
+            selectStageNum--;
+            if (selectStageNum < 0) selectStageNum = stageSpr.Length - 1;
         }
 
         // 右に移動
         if (inputActions.UI.Move.ReadValue<Vector2>().x < -0.5f)
         {
-            LefRotation();
-            selectStageNum--;
-            if (selectStageNum < 0) selectStageNum = stageSpr.Length - 1;
+            RightRotation();
+            selectStageNum++;
+            if (selectStageNum > stageSpr.Length - 1) selectStageNum = 0;
         }
     }
 

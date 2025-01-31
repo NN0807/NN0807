@@ -34,7 +34,7 @@ public class AIStateMachine
 	public void Update()
 	{
 		// ステートがあれば更新処理
-		if (currentState != null && isUpdate)
+		if (currentState != null)
 			currentState.Update();	
 	}
 

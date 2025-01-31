@@ -147,7 +147,9 @@ public class CharacterAI : MonoBehaviour
 				otherCharcterObjects.RemoveAt(i); 
 			}
 		}
-		if (stateMachine != null)
+		
+		// ステートマシンが無かったら
+		if (stateMachine.isUpdate)
 		{
 			// 敵との距離を常に測り、近すぎたら攻撃する
 			ExtraEscape();
@@ -156,7 +158,7 @@ public class CharacterAI : MonoBehaviour
 			stateMachine.Update();
 
 			// デバッグ用
-			currentStateName = stateMachine.currentState.ToString();
+			//currentStateName = stateMachine.currentState.ToString();
 		}
 	}
 

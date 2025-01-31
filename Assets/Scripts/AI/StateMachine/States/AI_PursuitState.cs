@@ -23,14 +23,6 @@ public class AI_PursuitState : AIBaseState
 		// 歩きアニメーション
 		characterAI.characterManager.SetAnimations(Common.AnimationType.Walk);
 
-		// 例外処理追加
-		if (characterAI.agent == null)
-		{
-			// 待機ステートへ
-			stateMachine.ChangeState(new AI_IdleState(0.1f));
-			return;
-		}
-
 		// キャラクターオブジェクトを取得
 		targetTransform = characterAI.otherCharcterObjects[Random.Range(0, characterAI.otherCharcterObjects.Count)].transform.GetChild(0).transform;
 		// NavMeshAgentに目標地点を設定
@@ -53,15 +45,7 @@ public class AI_PursuitState : AIBaseState
 		CharacterAI characterAI = stateMachine.characterAI;
 
 		// もし追跡中のキャラが死亡していたら
-		if(targetTransform == null)
-        {
-			// 待機ステートへ
-			stateMachine.ChangeState(new AI_IdleState(0.1f));
-			return;
-        }
-
-		// 例外処理追加
-		if (characterAI.agent == null)
+		if (targetTransform == null)
 		{
 			// 待機ステートへ
 			stateMachine.ChangeState(new AI_IdleState(0.1f));
@@ -119,9 +103,6 @@ public class AI_PursuitState : AIBaseState
 	// ギズモ
 	public override void DrawGizmos() 
 	{
-		// 追跡先表示
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(targetTransform.position, 1f);
 	}
 
 	// ステートから出る時
