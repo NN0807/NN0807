@@ -6,12 +6,18 @@ using UnityEngine.UI;
 public class TutorialManager : MonoBehaviour
 {
     // インスタンス
-    public static TutorialManager Instance;
+    public static TutorialManager Instance { get; private set; }
+
+    public GameObject sandbagModel;
+    public Transform sandbagSpawnPoint;
+    private GameObject activeSandbag;
 
     // プレイヤーの行動許可
     public bool CanMove { get; private set; }
     public bool CanDash { get; private set; }
     public bool CanPunch { get; private set; }
+
+    public bool NowEraser { get; private set; }
 
 
     // イントロUI
@@ -70,6 +76,8 @@ public class TutorialManager : MonoBehaviour
     public float totalMoveTime = 0.0f;
     private float requiredMoveTime = 2.0f;
 
+    public TutorialPlayerController tutorialPlayer;
+
 
     private void Awake()
     {
@@ -84,6 +92,73 @@ public class TutorialManager : MonoBehaviour
         CanPunch = false;
 
         StartCoroutine(TutorialSequence());
+    }
+
+    public void OnDashComplete()
+    {
+        StartCoroutine(DashCompletionSequence());
+
+        //ActivateSandbag();
+
+        //ResetPlayerPosition();
+
+        //CanMove = false;
+        //CanDash = false;
+        //CanPunch = true;
+    }
+
+    private IEnumerator DashCompletionSequence()
+    {
+        // ダッシュのガイドUIを黒板消しで消す
+        yield return StartCoroutine(EraseBlackBoard());
+
+        // 画面暗転処理
+        CanvasGroup fadeCanvas = GameObject.Find("FadeCanvas").GetComponent<CanvasGroup>();
+        yield return StartCoroutine(FadeScreen(fadeCanvas, 0f, 1f, 0.3f));
+
+        // 0.5秒待機
+        yield return new WaitForSeconds(0.5f);
+
+        // プレイヤーの位置をリセット
+        ResetPlayerPosition();
+
+        // サンドバッグ配置
+        ActivateSandbag();
+
+        // 画面を元に戻す
+        yield return StartCoroutine(FadeScreen(fadeCanvas, 1f, 0f, 0.3f));
+
+        // パンチ解禁
+        CanMove = false;
+        CanDash = false;
+        CanPunch = true;
+    }
+
+    private void ActivateSandbag()
+    {
+        if(activeSandbag != null)
+        {
+            Destroy(activeSandbag);
+        }
+
+        if(sandbagModel != null && sandbagSpawnPoint != null)
+        {
+            activeSandbag = Instantiate(sandbagModel, sandbagSpawnPoint.position, Quaternion.identity);
+            activeSandbag.SetActive(true);
+        }
+    }
+
+    private void ResetPlayerPosition()
+    {
+        if (tutorialPlayer != null)
+        {
+            tutorialPlayer.transform.position = new Vector3(0, 0, 2);
+            tutorialPlayer.transform.rotation = Quaternion.Euler(0, 180, 0);
+            tutorialPlayer.ResetActions();
+
+            tutorialPlayer.gameObject.SetActive(true);
+        }
+
     }
 
     IEnumerator TutorialSequence()
@@ -107,6 +182,8 @@ public class TutorialManager : MonoBehaviour
         {
             yield return StartCoroutine(DisplayGuideUI(currentGuideIndex));
 
+            NowEraser = true;
+
             if (currentGuideIndex == 0) CanMove = true;
             if (currentGuideIndex == 1) CanDash = true;
             if (currentGuideIndex == 2) CanPunch = true;
@@ -119,62 +196,12 @@ public class TutorialManager : MonoBehaviour
 
             yield return StartCoroutine(EraseBlackBoard());
 
+            NowEraser = false;
+
             yield return new WaitForSeconds(guideCenterPauseDuration);
 
             currentGuideIndex++;
         }
-
-        //// 1枚目のガイドテキストを表示
-        //guideTextUIs[currentGuideIndex].anchoredPosition = guideCenterPosition;
-        //guideTextUIs[currentGuideIndex].gameObject.SetActive(true);
-
-        //yield return new WaitForSeconds(guideDisplayDelay);
-
-        //CanMove = true;
-
-        ////yield return StartCoroutine(WaitForPlayerAction(currentGuideIndex));
-        //CanMove = false;
-
-        //while (currentGuideIndex < guideTextUIs.Length)
-        //{
-        //    yield return StartCoroutine(WaitForPlayerAction(currentGuideIndex));
-
-        //    CanMove = false;
-
-        //    // 黒板消しでUIを消す
-        //      yield return StartCoroutine(EraseBlackBoard());
-
-        //yield return new WaitForSeconds(guideDisplayDelay);
-
-
-        //currentGuideIndex++;
-
-        //    if (currentGuideIndex < guideTextUIs.Length)
-        //    {
-        //        guideTextUIs[currentGuideIndex].anchoredPosition = guideCenterPosition;
-        //        guideTextUIs[currentGuideIndex].gameObject.SetActive(true);
-
-        //        yield return new WaitForSeconds(guideDisplayDelay);
-        //        CanMove = true;
-        //    }
-        //}
-
-        //yield return StartCoroutine(EraseBlackBoard());
-
-        //// 2枚目以降の処理
-        //for (int i = 1; i < guideTextUIs.Length; i++)
-        //{
-        //    currentGuideIndex = i;
-        //    // 黒板消しを動かす演出
-        //    yield return StartCoroutine(EraseBlackBoard());
-        //    // 次の説明文UIを画面中心に表示
-        //    guideTextUIs[currentGuideIndex].anchoredPosition = guideCenterPosition;
-        //    guideTextUIs[currentGuideIndex].gameObject.SetActive(true);
-        //    // 画面中心で1秒停止
-        //    yield return new WaitForSeconds(guideCenterPauseDuration);
-        //    // 説明文UIを画面左上に移動
-        //    yield return StartCoroutine(MoveUI(guideTextUIs[currentGuideIndex], guideCenterPosition, guideEndPosition, guideMoveDuration));
-        //}
     }
 
     IEnumerator IntroSequence()
@@ -205,6 +232,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 if (totalMoveTime >= requiredMoveTime)
                 {
+                    NowEraser = false;
                     break;
                 }
 
@@ -217,11 +245,13 @@ public class TutorialManager : MonoBehaviour
                 }
                 if (totalMoveTime >= requiredMoveTime)
                 {
+                    NowEraser = false;
+                    OnDashComplete();
                     break;
                 }
 
             }
-            //if (guideIndex == 2 && hasPlayerPunched) break;
+            if (guideIndex == 2 && hasPlayerPunched) break;
 
             yield return null;
         }
@@ -252,7 +282,7 @@ public class TutorialManager : MonoBehaviour
             case "Dash":
                 hasPlayerDashed = true;
                 break;
-            case "Punch":
+            case "Attack":
                 hasPlayerPunched = true;
                 break;
         }
@@ -298,6 +328,19 @@ public class TutorialManager : MonoBehaviour
         currentGuideUI.gameObject.SetActive(false);
         eraserUI.gameObject.SetActive(false);
         eraserMask.gameObject.SetActive(false);
+    }
+
+    // 画面のフェード処理
+    private IEnumerator FadeScreen(CanvasGroup canvasGroup,float startAlpha,float endAlpha,float duration)
+    {
+        float elapsedTime = 0f;
+        while(elapsedTime < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        canvasGroup.alpha = endAlpha;
     }
 
     IEnumerator MoveUI(RectTransform ui, Vector3 from, Vector3 to, float duration, bool useLocalPosition = false)
