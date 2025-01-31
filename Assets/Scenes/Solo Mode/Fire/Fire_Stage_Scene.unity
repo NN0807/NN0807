@@ -495,7 +495,7 @@ Transform:
   m_GameObject: {fileID: 52703253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 45, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 50, y: 5, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9645,7 +9645,7 @@ GameObject:
   - component: {fileID: 1300497787}
   - component: {fileID: 1300497789}
   - component: {fileID: 1300497788}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: RankingCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11404,7 +11404,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

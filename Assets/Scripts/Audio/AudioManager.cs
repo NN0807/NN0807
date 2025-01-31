@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// 全体のボリューム値
     /// </summary>
-    public const float ALL_VOLUME_VALUE = 0.015f;
+    public const float ALL_VOLUME_VALUE = 0.1f;
 
     /// <summary>
     /// 最大同時再生可能なオーディオソースの数
