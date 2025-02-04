@@ -89,7 +89,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8be8a30d5bf04204389ccf571b5e071e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1907163198121401336}
+      addedObject: {fileID: -4224541390557951395}
     - targetCorrespondingSourceObject: {fileID: 6201492985844900399, guid: 8be8a30d5bf04204389ccf571b5e071e,
         type: 3}
       insertIndex: -1
@@ -97,7 +97,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6201492985844900399, guid: 8be8a30d5bf04204389ccf571b5e071e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1074767910712515659}
+      addedObject: {fileID: 2813659569310098861}
   m_SourcePrefab: {fileID: 100100000, guid: 8be8a30d5bf04204389ccf571b5e071e, type: 3}
 --- !u!1 &1420671039792542170 stripped
 GameObject:
@@ -126,7 +126,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1907163198121401336
+--- !u!114 &-4224541390557951395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,13 +135,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1420671039792542170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b651ba68f715504da44aae05d302578, type: 3}
+  m_Script: {fileID: 11500000, guid: 90799fdadf412f24e9405e79d4b55bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 385179547793934083}
   _partsType: 2
   _activateDashAnimationSpeed: 0
-  _hitStopTime: 0.23
+  _hitStopTime: 0.3
   _hitStopTimer: 0
 --- !u!1 &5289042471636266660 stripped
 GameObject:
@@ -170,7 +170,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1074767910712515659
+--- !u!114 &2813659569310098861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +179,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5289042471636266660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed89ddd95886184898e90f5b8a6cdc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 210137d386b08404d94d1656908384cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}
   _criticalHitLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
   _hitCharacterManager: {fileID: 0}
+  _hasWeaponEntered: 0
+  _hasCharacterEntered: 0

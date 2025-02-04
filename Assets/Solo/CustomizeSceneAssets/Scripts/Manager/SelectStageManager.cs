@@ -45,11 +45,6 @@ public class SelectStageManager : MonoBehaviour
 
     private void Update()
     {
-        // 遷移移動中は処理しない
-        if (NetWork_CustomizeSceneManager.Instance != null)
-        {
-            if (NetWork_CustomizeSceneManager.Instance.isMoving) return;
-        }
         if (CustomizeSceneManager.Instance != null)
         {
             if (CustomizeSceneManager.Instance.isMoving) return;

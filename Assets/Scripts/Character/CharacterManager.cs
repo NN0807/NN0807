@@ -39,6 +39,10 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     public GameObject _legObject;
 
+    // 死亡キャラクターリスト
+    [SerializeField]
+    public List<GameObject> _deadList = new List<GameObject>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -98,6 +102,9 @@ public class CharacterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 死亡者リスト全削除
+        _deadList.Clear();
+
         // 更新
         foreach (var part in characterParts)
         {

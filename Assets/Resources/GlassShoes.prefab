@@ -432,7 +432,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ffa7893eca1a7c4e8d1ddfd53481a68,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3937090785373722544}
+      addedObject: {fileID: 2306789676604983778}
   m_SourcePrefab: {fileID: 100100000, guid: 7ffa7893eca1a7c4e8d1ddfd53481a68, type: 3}
 --- !u!4 &7377984044968100017 stripped
 Transform:
@@ -653,7 +653,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3937090785373722544
+--- !u!114 &2306789676604983778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -662,6 +662,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7865551912926616075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621c10287bf23cf40bb9bb63b78d4640, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

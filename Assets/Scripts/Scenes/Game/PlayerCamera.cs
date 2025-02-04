@@ -35,6 +35,8 @@ public class PlayerCamera : MonoBehaviour
     // 白画像の透明値
     public float _whiteBackAlpha;
 
+    public bool CameraSetFlag = false;
+
     void Awake()
     {
         // データ設定
@@ -47,6 +49,8 @@ public class PlayerCamera : MonoBehaviour
         // 画像初期設定
         _whiteBackAlpha  = 1.0f;
         _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
+
+        CameraSetFlag = false;
     }
 
     // ゲーム実行時にこのオブジェクトが存在していたら実行される
@@ -73,14 +77,17 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        // プレイヤーが死亡したら
-        if (_playerTransform == null)
+        if (GameManager.Instance.GetGameStartFLg()) 
         {
-            // デスカメラに切り替える
-            _playerTransform = _playerDeadTargetPos;
-            // 真下を向く
-            Rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
-            _offset.y = 0;
+            // プレイヤーが死亡したら
+            if (_playerTransform == null)
+            {
+                // デスカメラに切り替える
+                _playerTransform = _playerDeadTargetPos;
+                // 真下を向く
+                Rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
+                _offset.y = 0;
+            }
         }
 
         // 演出開始
@@ -99,18 +106,22 @@ public class PlayerCamera : MonoBehaviour
             _whiteBack.color = new Color(1.0f, 1.0f, 1.0f, _whiteBackAlpha);
         }
 
-        // 回転行列を使って目標位置を計算
-        // カメラ位置の更新
-        transform.position = _playerTransform.position + (Rotation * _offset);
+        if (_playerTransform != null)
+        {
+            // 回転行列を使って目標位置を計算
+            // カメラ位置の更新
+            transform.position = _playerTransform.position + (Rotation * _offset);
 
-        // プレイヤーを注視
-        transform.LookAt(_playerTransform);
+            // プレイヤーを注視
+            transform.LookAt(_playerTransform);
+        }
     }
 
     void SetCameraTarget(GameObject target)
     {
         // カメラの視線の先を生成されたオブジェクトに設定
-        _playerTransform = target.transform;
+        if (!CameraSetFlag) _playerTransform = target.transform;
+        CameraSetFlag = true;
     }
 
     private System.Collections.IEnumerator ChangeTransform()

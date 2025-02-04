@@ -233,11 +233,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7052b8795e6cbb48847ee64c61c8766,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4127741579707991018}
+      addedObject: {fileID: 6235597719150817285}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7052b8795e6cbb48847ee64c61c8766,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1886500110237878840}
+      addedObject: {fileID: 7697707884947282592}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7052b8795e6cbb48847ee64c61c8766,
         type: 3}
       insertIndex: -1
@@ -274,7 +274,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4127741579707991018
+--- !u!114 &6235597719150817285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2761141713090984456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b651ba68f715504da44aae05d302578, type: 3}
+  m_Script: {fileID: 11500000, guid: 90799fdadf412f24e9405e79d4b55bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8500264757753209334}
@@ -291,7 +291,7 @@ MonoBehaviour:
   _activateDashAnimationSpeed: 0
   _hitStopTime: 0.3
   _hitStopTimer: 0
---- !u!114 &1886500110237878840
+--- !u!114 &7697707884947282592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2761141713090984456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed89ddd95886184898e90f5b8a6cdc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 210137d386b08404d94d1656908384cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterParamAsset: {fileID: 0}

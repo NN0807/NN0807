@@ -209,6 +209,8 @@ public class EndButton_UI : MonoBehaviour
         
         // 決定音
         AudioManager.instance.Play(SEPath.AllDecisions, AudioManager.ALL_VOLUME_VALUE);
+
+        Application.Quit();//ゲームプレイ終了
     }
 
     public IEnumerator Scale(Image transform, Vector3 destinationScale, float seconds, Easing.Ease easing)

@@ -61,17 +61,17 @@ PrefabInstance:
     - target: {fileID: -8574749286717381955, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -6297254384075483877, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4968855076283218183, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4968855076283218183, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: -4338750110708295896, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
@@ -91,22 +91,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1566771189786699165, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3910486985344541501, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6015845996518117023, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6295566634501453604, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
@@ -116,12 +116,12 @@ PrefabInstance:
     - target: {fileID: 6895972181135373270, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8601303850689819934, guid: f8bca322052d7994190d9be09a3197a3,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -176,3 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5028064389047959927}
+  _partsType: 0
+  _activateDashAnimationSpeed: 0
+  _hitStopTime: 0.3
+  _hitStopTimer: 0

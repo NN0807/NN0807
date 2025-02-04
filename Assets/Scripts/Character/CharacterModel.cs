@@ -59,7 +59,7 @@ public class CharacterModel : MonoBehaviour
         manager.RegisterPart(Weapon);
 
         // イベントで通知
-        OnObjectCreated?.Invoke(Leg);
+        if (manager._characterNumber == 0) OnObjectCreated?.Invoke(Leg);
     }
 
     public void ModelUpdate(CharacterManager manager, int _characterNumber)
